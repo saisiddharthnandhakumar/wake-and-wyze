@@ -81,9 +81,9 @@ function ShaderBackground({ children }: { children: React.ReactNode }) {
         style={{ backgroundColor: "transparent" }}
       />
 
-      {/* Bottom fade — smooth transition to cream Problem section */}
+      {/* Bottom fade — gradual dark-to-cream transition, seamless with next section */}
       <div
-        className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-surface pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-ink/50 to-surface pointer-events-none"
         aria-hidden="true"
       />
 
