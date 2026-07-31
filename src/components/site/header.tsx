@@ -45,9 +45,9 @@ export function Header() {
             <img
               src="/images/ww-logo.png"
               alt="Wake & Wyze"
-              width={72}
-              height={72}
-              className="h-14 w-auto"
+              width={96}
+              height={96}
+              className="h-[4.5rem] w-auto"
             />
             <span className="sr-only">Wake &amp; Wyze</span>
           </a>
@@ -69,7 +69,7 @@ export function Header() {
           <div className="hidden md:block">
             <a href="#preorder">
               <Button variant="primary" size="sm">
-                Pre-Order Now
+                Pre Order Now
               </Button>
             </a>
           </div>
@@ -105,7 +105,7 @@ export function Header() {
           ))}
           <a href="#preorder" className="mt-2" onClick={() => setMobileOpen(false)}>
             <Button variant="primary" className="w-full">
-              Pre-Order Now
+              Pre Order Now
             </Button>
           </a>
         </nav>

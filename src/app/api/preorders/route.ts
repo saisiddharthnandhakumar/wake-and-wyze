@@ -97,7 +97,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Failed to create pre-order:", error);
     return NextResponse.json(
-      { error: "Something went wrong creating your pre-order. Please try again." },
+      { error: "Something went wrong creating your pre order. Please try again." },
       { status: 500 },
     );
   }

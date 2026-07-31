@@ -145,7 +145,7 @@ export function QrPanel({ orderNumber, totalPaise, onConfirm }: QrPanelProps) {
             )}
           </Button>
           <p className="mt-3 text-xs text-ink-muted">
-            We&apos;ll verify your payment and confirm your pre-order shortly.
+            We&apos;ll verify your payment and confirm your pre order shortly.
           </p>
         </div>
       </div>

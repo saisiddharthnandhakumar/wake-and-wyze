@@ -118,7 +118,7 @@ export function CheckoutForm({
           setErrors(data.fieldErrors as FieldErrors);
         }
         setSubmitError(
-          data?.error || "Something went wrong placing your pre-order. Please try again.",
+          data?.error || "Something went wrong placing your pre order. Please try again.",
         );
         return;
       }
@@ -326,17 +326,17 @@ export function CheckoutForm({
           {submitting ? (
             <>
               <Loader2 size={18} className="animate-spin" />
-              Placing your pre-order…
+              Placing your pre order…
             </>
           ) : !canSubmit ? (
             "Add at least one bag to continue"
           ) : (
-            `Place Pre-Order — ${formatINR(totalPaise)}`
+            `Place Pre Order — ${formatINR(totalPaise)}`
           )}
         </Button>
         <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-ink-muted">
           <Lock size={13} className="shrink-0" />
-          Your details are safe. You&apos;ll complete your pre-order payment in the next step.
+          Your details are safe. You&apos;ll complete your pre order payment in the next step.
         </p>
       </div>
     </form>

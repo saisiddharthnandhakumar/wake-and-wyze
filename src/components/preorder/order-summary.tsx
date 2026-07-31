@@ -98,11 +98,11 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
       <div className="mt-6 space-y-2.5 border-t border-border-light pt-5">
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <Truck size={14} className="shrink-0 text-sage" />
-          Free delivery on all pre-orders
+          Free delivery on all pre orders
         </p>
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <ShieldCheck size={14} className="shrink-0 text-sage" />
-          Secure pre-order checkout
+          Secure pre order checkout
         </p>
       </div>
     </Card>

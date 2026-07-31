@@ -115,14 +115,14 @@ export function PreOrderSection() {
         {/* Section heading */}
         <div className="text-center mb-12 lg:mb-16">
           <p className="text-xs tracking-wider uppercase text-sage-deep font-semibold">
-            Pre-Order
+            Pre Order
           </p>
           <h2 className="mt-2 font-display text-3xl lg:text-4xl font-light text-ink text-balance">
             Build Your Box
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
             Mix and match your favorite flavors. Up to 10 bags per order — free delivery
-            on all pre-orders.
+            on all pre orders.
           </p>
         </div>
 

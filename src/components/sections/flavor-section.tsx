@@ -22,7 +22,7 @@ export function FlavorSection() {
             Four ways to start your day.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-            Every blend small-batch roasted and infused with the same 250–500mg clinical dose of
+            Every blend small batch roasted and infused with the same 250–500mg clinical dose of
             Lion&rsquo;s Mane.
           </p>
         </Reveal>

@@ -9,14 +9,14 @@ export default function PrivacyPage() {
 
         <h2>Information We Collect</h2>
         <p>
-          When you place a pre-order, we collect your name, phone number, email address,
+          When you place a pre order, we collect your name, phone number, email address,
           shipping address, and payment information. We use this information solely to process
           and fulfill your order.
         </p>
 
         <h2>How We Use Your Information</h2>
         <ul>
-          <li>Processing and fulfilling your pre-orders</li>
+          <li>Processing and fulfilling your pre orders</li>
           <li>Sending order confirmations and shipping updates</li>
           <li>Responding to your inquiries and support requests</li>
           <li>Improving our products and services</li>

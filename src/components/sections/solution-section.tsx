@@ -30,7 +30,7 @@ export function SolutionSection() {
           <div className="relative aspect-[16/9] w-full max-w-2xl">
             <Image
               src="/images/all-4-sku.jpeg"
-              alt="Wake & Wyze functional coffee line-up"
+              alt="Wake & Wyze functional coffee line up"
               fill
               sizes="(max-width: 768px) 100vw, 672px"
               className="object-contain"

@@ -15,7 +15,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Wake & Wyze — Premium Functional Coffee | Sustained Energy & Sharper Focus",
   description:
-    "Premium specialty coffee infused with Lion's Mane for sustained energy, sharper focus, and a calmer caffeine experience. 30 servings. ₹1,299. Pre-order now.",
+    "Premium specialty coffee infused with Lion's Mane for sustained energy, sharper focus, and a calmer caffeine experience. 30 servings. ₹1,299. Pre order now.",
   metadataBase: new URL("https://wakeandwyze.com"),
   openGraph: {
     title: "Wake & Wyze — Premium Functional Coffee",

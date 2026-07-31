@@ -50,7 +50,7 @@ export function SuccessCard({ id, orderNumber, totalPaise, items }: SuccessCardP
       </div>
 
       <h3 className="mt-5 font-display text-2xl font-bold text-ink">
-        Pre-Order Confirmed!
+        Pre Order Confirmed!
       </h3>
       <p className="mx-auto mt-2 max-w-sm text-sm text-ink-muted">
         Payment pending verification — we&apos;ll confirm by SMS/email once verified.

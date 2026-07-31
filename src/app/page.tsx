@@ -5,7 +5,6 @@ import { SolutionSection } from "@/components/sections/solution-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
 import { ScienceSection } from "@/components/sections/science-section";
 import { WhyLionsManeSection } from "@/components/sections/why-lions-mane-section";
-import { TasteSection } from "@/components/sections/taste-section";
 import { FlavorSection } from "@/components/sections/flavor-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
@@ -46,7 +45,6 @@ export default function HomePage() {
       <BenefitsSection />
       <ScienceSection />
       <WhyLionsManeSection />
-      <TasteSection />
       <FlavorSection />
       <FaqSection />
       <PreOrderSection />

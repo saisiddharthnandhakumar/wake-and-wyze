@@ -17,7 +17,7 @@ export const HERO = {
   headline: "A smarter cup of coffee.",
   subheadline:
     "Premium specialty coffee infused with Lion's Mane — sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
-  primaryCta: "Pre-Order Now — ₹1,299",
+  primaryCta: "Pre Order Now — ₹1,299",
   secondaryCta: "See the research",
   trustItems: [
     "30 servings / 250g",
@@ -46,7 +46,7 @@ export const PROBLEM = {
     {
       title: "Acid discomfort",
       description:
-        "High-acid roasts that leave your stomach unsettled. Not the morning you planned.",
+        "High acid roasts that leave your stomach unsettled. Not the morning you planned.",
     },
   ],
 };
@@ -74,7 +74,7 @@ export const SOLUTION = {
       number: "03",
       title: "Premium specialty coffee",
       description:
-        "Small-batch roasted for a rich aroma, balanced body, and smooth finish. An 80:20 blend crafted for exceptional taste.",
+        "Small batch roasted for a rich aroma, balanced body, and smooth finish. An 80:20 blend crafted for exceptional taste.",
     },
   ],
 };
@@ -126,7 +126,7 @@ export const SCIENCE = {
       id: 1,
       title: "Improve attention within 60 minutes",
       summary:
-        "A single dose improved performance on cognitive tasks within one hour in a double-blind, placebo-controlled trial.",
+        "A single dose improved performance on cognitive tasks within one hour in a double blind, placebo controlled trial.",
       citation: "Docherty et al., 2023 (n=127)",
     },
     {
@@ -161,18 +161,10 @@ export const WHY_LIONS_MANE = {
   ],
   timeline: [
     { period: "Centuries ago", label: "Traditional Use", description: "Used in Chinese and Japanese medicine for brain and gut health." },
-    { period: "1990s–2010s", label: "Modern Research Begins", description: "Scientists identify hericenones and erinacines as NGF-stimulating compounds." },
-    { period: "2019–2025", label: "Clinical Evidence", description: "Double-blind, placebo-controlled trials demonstrate cognitive and mood benefits in humans." },
-    { period: "Today", label: "Wake & Wyze", description: "Clinical-dose Lion's Mane extract blended into premium specialty coffee — for your daily ritual." },
+    { period: "1990s–2010s", label: "Modern Research Begins", description: "Scientists identify hericenones and erinacines as NGF stimulating compounds." },
+    { period: "2019–2025", label: "Clinical Evidence", description: "Double blind, placebo controlled trials demonstrate cognitive and mood benefits in humans." },
+    { period: "Today", label: "Wake & Wyze", description: "Clinical dose Lion's Mane extract blended into premium specialty coffee — for your daily ritual." },
   ],
-};
-
-// ---- TASTE ----
-export const TASTE = {
-  eyebrow: "Taste",
-  headline: "It tastes like coffee.\nBecause it is coffee.",
-  body: "Lion's Mane extract is neutral in taste. At our formulation levels, it's fully masked within the coffee profile. Bold, smooth coffee with zero mushroom aftertaste.",
-  flavorNotes: ["Dark chocolate", "Toasted hazelnut", "Velvety finish", "Zero mushroom aftertaste"],
 };
 
 // ---- FAQ ----
@@ -182,7 +174,7 @@ export const FAQS = {
   items: [
     {
       question: "Will it taste like mushrooms?",
-      answer: "No. Our coffee is coffee-first. Lion's Mane extract is neutral, and at our formulation it's fully masked within the coffee profile. You'll taste bold, smooth coffee — not mushrooms.",
+      answer: "No. Our coffee is coffee first. Lion's Mane extract is neutral, and at our formulation it's fully masked within the coffee profile. You'll taste bold, smooth coffee — not mushrooms.",
     },
     {
       question: "Does it contain caffeine?",
@@ -194,7 +186,7 @@ export const FAQS = {
     },
     {
       question: "When should I drink it?",
-      answer: "In the morning, like your regular coffee. Effects on attention and cognitive performance have been observed within 60 minutes. For long-term cognitive support, daily use is recommended.",
+      answer: "In the morning, like your regular coffee. Effects on attention and cognitive performance have been observed within 60 minutes. For long term cognitive support, daily use is recommended.",
     },
     {
       question: "How long does one bag last?",
@@ -202,19 +194,11 @@ export const FAQS = {
     },
     {
       question: "Is it vegetarian?",
-      answer: "Yes. Wake & Wyze is 100% plant-based. It contains premium coffee beans and Lion's Mane mushroom extract — nothing else.",
+      answer: "Yes. Wake & Wyze is 100% plant based. It contains premium coffee beans and Lion's Mane mushroom extract — nothing else.",
     },
     {
       question: "Is it safe for daily use?",
       answer: "Lion's Mane is generally regarded as safe and is traditionally consumed as a food mushroom. Clinical trials using 1.8–3g/day reported no serious adverse events. As with any dietary change, consult your healthcare provider if you have mushroom allergies, are pregnant or breastfeeding, or are on medication.",
-    },
-    {
-      question: "Can I cancel my pre-order?",
-      answer: "Yes. You can cancel your pre-order any time before dispatch. Once your order ships, our standard return policy applies. See our Terms page for details.",
-    },
-    {
-      question: "Where do you ship?",
-      answer: "We ship across India. Delivery is free on all pre-orders. Estimated delivery times will be communicated when your batch is ready to ship.",
     },
     {
       question: "Is this 'mushroom coffee'?",
@@ -226,9 +210,9 @@ export const FAQS = {
 // ---- FINAL CTA ----
 export const FINAL_CTA = {
   headline: "Ready for better mornings?",
-  subheadline: "Pre-order now. First batches ship soon.",
-  cta: "Pre-Order Now — ₹1,299",
-  trustLine: "30 servings · Free delivery on all pre-orders",
+  subheadline: "Pre order now. First batches ship soon.",
+  cta: "Pre Order Now — ₹1,299",
+  trustLine: "30 servings · Free delivery on all pre orders",
 };
 
 // ---- FOOTER ----
@@ -238,7 +222,7 @@ export const FOOTER = {
     { label: "The Science", href: "#science" },
     { label: "Flavors", href: "#flavors" },
     { label: "FAQ", href: "#faq" },
-    { label: "Pre-Order", href: "#preorder" },
+    { label: "Pre Order", href: "#preorder" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },

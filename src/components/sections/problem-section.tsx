@@ -16,7 +16,7 @@ export function ProblemSection() {
 
           {/* Energy curve + traps */}
           <Reveal delay={100}>
-            <div className="rounded-2xl bg-sage-mist p-6 sm:p-8">
+            <div className="rounded-2xl bg-surface p-6 sm:p-8">
               <p className="text-sm font-semibold text-ink">Your energy through the day</p>
 
               <svg
