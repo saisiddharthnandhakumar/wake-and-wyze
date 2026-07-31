@@ -14,7 +14,7 @@ const selectButtonClassName =
 
 export function FlavorSection() {
   return (
-    <section id="flavors" className="min-h-screen py-20 lg:py-28">
+    <section id="flavors" className="min-h-dvh flex flex-col justify-center py-14 lg:py-16">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-sage">Flavors</p>
@@ -27,7 +27,7 @@ export function FlavorSection() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {FLAVORS.map((flavor, index) => (
             <Reveal key={flavor.id} delay={index * 100} className="h-full">
               <Card
@@ -36,7 +36,7 @@ export function FlavorSection() {
                   flavor.badge && "border-2 border-bronze",
                 )}
               >
-                <div className="relative aspect-square overflow-hidden bg-sage-mist">
+                <div className="relative aspect-[4/3] overflow-hidden bg-sage-mist">
                   <Image
                     src={flavor.image}
                     alt={flavor.name}
@@ -51,7 +51,7 @@ export function FlavorSection() {
                   )}
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs font-medium text-sage">{flavor.notes}</p>
                   <h3 className="mt-2 font-display text-xl font-bold tracking-tight text-ink">
                     {flavor.name}
@@ -60,7 +60,7 @@ export function FlavorSection() {
                     {flavor.description}
                   </p>
 
-                  <div className="mt-6 flex items-center justify-between gap-4">
+                  <div className="mt-4 flex items-center justify-between gap-4">
                     <span className="font-display text-lg font-bold text-ink">{PRICE}</span>
                     <a
                       href="#preorder"

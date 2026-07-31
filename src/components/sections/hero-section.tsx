@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative overflow-hidden min-h-screen pt-28 pb-20 lg:pt-36 lg:pb-28">
+    <section id="hero" className="relative overflow-hidden min-h-dvh flex flex-col justify-center pt-24 pb-16 lg:pt-28 lg:pb-20">
       <style>{`
         @keyframes hero-float {
           0%, 100% { transform: translateY(0); }
@@ -13,7 +13,7 @@ export function HeroSection() {
       `}</style>
 
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Product image — first on mobile, right on desktop */}
           <div className="order-1 lg:order-2">
             <div

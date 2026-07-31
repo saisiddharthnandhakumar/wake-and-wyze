@@ -19,7 +19,7 @@ const PreOrderSection = dynamic(
 
 function PreOrderFallback() {
   return (
-    <section className="min-h-screen py-20 lg:py-28 bg-sage-mist">
+    <section className="min-h-dvh py-16 lg:py-20 bg-sage-mist">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <div className="animate-pulse">
           <div className="h-8 w-64 bg-border rounded mb-4" />

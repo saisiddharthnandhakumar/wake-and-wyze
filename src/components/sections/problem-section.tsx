@@ -4,9 +4,9 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function ProblemSection() {
   return (
-    <section id="problem" className="min-h-screen py-20 lg:py-28">
+    <section id="problem" className="min-h-dvh flex flex-col justify-center py-16 lg:py-20">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Copy */}
           <Reveal>
             <p className="section-eyebrow">{PROBLEM.eyebrow}</p>
@@ -16,7 +16,7 @@ export function ProblemSection() {
 
           {/* Energy curve + traps */}
           <Reveal delay={100}>
-            <div className="rounded-2xl bg-surface p-6 sm:p-8">
+            <div className="rounded-2xl bg-surface p-5 sm:p-6">
               <p className="text-sm font-semibold text-ink">Your energy through the day</p>
 
               <svg
@@ -50,7 +50,7 @@ export function ProblemSection() {
                 <text x="285" y="120" fontSize="8" className="fill-ink-muted" textAnchor="middle">6 PM</text>
               </svg>
 
-              <div className="mt-6 space-y-4">
+              <div className="mt-5 space-y-3">
                 {PROBLEM.traps.map((trap) => (
                   <Card key={trap.title} className="flex items-start gap-4">
                     <span

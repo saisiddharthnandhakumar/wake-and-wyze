@@ -14,7 +14,7 @@ export function ScienceSection() {
   const next = () => setActive((i) => (i === studies.length - 1 ? 0 : i + 1));
 
   return (
-    <section id="science" className="min-h-screen py-20 lg:py-28">
+    <section id="science" className="min-h-dvh flex flex-col justify-center py-16 lg:py-20">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{SCIENCE.eyebrow}</p>
@@ -22,7 +22,7 @@ export function ScienceSection() {
         </Reveal>
 
         {/* Carousel */}
-        <div className="mt-12 relative max-w-2xl mx-auto">
+        <div className="mt-8 relative max-w-2xl mx-auto">
           <div className="overflow-hidden rounded-2xl">
             <div
               className="flex transition-transform duration-500 ease-out"
@@ -84,7 +84,7 @@ export function ScienceSection() {
           </div>
         </div>
 
-        <Reveal delay={150} className="mt-10">
+        <Reveal delay={150} className="mt-6">
           <p className="max-w-2xl mx-auto text-xs leading-relaxed text-ink-muted text-center">
             {SCIENCE.disclaimer}
           </p>

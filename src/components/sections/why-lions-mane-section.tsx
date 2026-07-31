@@ -6,9 +6,9 @@ export function WhyLionsManeSection() {
   const { timeline } = WHY_LIONS_MANE;
 
   return (
-    <section id="why-lions-mane" className="min-h-screen py-20 lg:py-28">
+    <section id="why-lions-mane" className="min-h-dvh flex flex-col justify-center py-16 lg:py-20">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Left — what it is / isn't */}
           <Reveal>
             <p className="section-eyebrow">{WHY_LIONS_MANE.eyebrow}</p>

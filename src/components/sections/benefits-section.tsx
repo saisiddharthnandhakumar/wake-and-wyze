@@ -13,14 +13,14 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="min-h-screen py-20 lg:py-28">
+    <section id="benefits" className="min-h-dvh flex flex-col justify-center py-14 lg:py-16">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{BENEFITS.eyebrow}</p>
           <h2 className="section-heading">{BENEFITS.headline}</h2>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {BENEFITS.cards.map((card, index) => {
             const Icon = ICON_MAP[card.icon];
             return (

@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function FinalCtaSection() {
   return (
-    <section id="final-cta" className="min-h-screen bg-ink py-20 lg:py-28">
+    <section id="final-cta" className="min-h-dvh flex flex-col justify-center bg-ink py-16 lg:py-20">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="flex flex-col items-center text-center">
           <div className="relative mx-auto aspect-[4/3] w-full max-w-sm">

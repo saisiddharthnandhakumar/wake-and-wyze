@@ -110,10 +110,10 @@ export function PreOrderSection() {
   };
 
   return (
-    <section id="preorder" className="min-h-screen py-20 lg:py-28 bg-sage-mist">
+    <section id="preorder" className="min-h-dvh py-16 lg:py-20 bg-sage-mist">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         {/* Section heading */}
-        <div className="text-center mb-12 lg:mb-16">
+        <div className="text-center mb-8 lg:mb-10">
           <p className="text-xs tracking-wider uppercase text-sage-deep font-semibold">
             Pre Order
           </p>
@@ -126,11 +126,11 @@ export function PreOrderSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-6 lg:gap-8 items-start">
           {/* Left — form flow */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             {stage === "form" && (
-              <Card className="p-6 lg:p-8">
+              <Card className="p-5 lg:p-6">
                 {/* Step 1 — Choose your flavors */}
                 <div>
                   <span className={SECTION_LABEL_CLASS}>
@@ -161,7 +161,7 @@ export function PreOrderSection() {
 
             {/* Stage panels */}
             {stage === "form" && (
-              <Card className="p-6 lg:p-8">
+              <Card className="p-5 lg:p-6">
                 <h3 className="font-display text-lg font-semibold text-ink mb-5">
                   Delivery Details
                 </h3>

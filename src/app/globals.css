@@ -48,13 +48,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     scroll-padding-top: 80px;
   }
 
   section {
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+  }
+
+  #preorder {
+    scroll-snap-align: none;
   }
 
   body {

@@ -4,7 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function SolutionSection() {
   return (
-    <section id="solution" className="min-h-screen py-20 lg:py-28">
+    <section id="solution" className="min-h-dvh flex flex-col justify-center py-14 lg:py-16">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{SOLUTION.eyebrow}</p>
@@ -12,10 +12,10 @@ export function SolutionSection() {
           <p className="mt-5 text-lg leading-relaxed text-ink-muted">{SOLUTION.subheadline}</p>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8">
           {SOLUTION.pillars.map((pillar, index) => (
             <Reveal key={pillar.number} delay={index * 100} className="text-center">
-              <div className="font-display text-5xl font-light text-sage lg:text-6xl">
+              <div className="font-display text-4xl font-light text-sage lg:text-5xl">
                 {pillar.number}
               </div>
               <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink">
@@ -26,8 +26,8 @@ export function SolutionSection() {
           ))}
         </div>
 
-        <Reveal delay={150} className="mt-16 flex justify-center">
-          <div className="relative aspect-[16/9] w-full max-w-2xl">
+        <Reveal delay={150} className="mt-10 flex justify-center">
+          <div className="relative aspect-[16/9] w-full max-w-lg">
             <Image
               src="/images/all-4-sku.jpeg"
               alt="Wake & Wyze functional coffee line up"
