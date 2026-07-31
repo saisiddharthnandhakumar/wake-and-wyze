@@ -9,24 +9,34 @@ import { Reveal } from "@/components/motion/reveal";
 export function ScienceSection() {
   const studies = SCIENCE.studies;
   const [active, setActive] = useState(0);
-  // Touch-swipe tracking for mobile
+  // Touch-swipe tracking for mobile — end refs are seeded from start so a
+  // skipped touchMove (e.g. browser scroll-hijack) never misreads direction.
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
 
   const prev = () => setActive((i) => (i === 0 ? studies.length - 1 : i - 1));
   const next = () => setActive((i) => (i === studies.length - 1 ? 0 : i + 1));
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchEndY.current = e.touches[0].clientY;
   };
   const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.touches[0].clientX;
+    touchEndY.current = e.touches[0].clientY;
   };
   const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    // 50px threshold prevents accidental swipes while scrolling
-    if (diff > 50) next();
-    else if (diff < -50) prev();
+    const dx = touchEndX.current - touchStartX.current;
+    const dy = touchEndY.current - touchStartY.current;
+    // Only horizontal swipes advance the carousel — ignore gestures that are
+    // mostly vertical (page scrolling), and require a 50px threshold.
+    if (Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < -50) next(); // swiped left → next (1 → 2 → 3 → 1)
+    else if (dx > 50) prev(); // swiped right → previous
   };
 
   return (
