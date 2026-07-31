@@ -2,8 +2,6 @@
 
 import { PulsingBorder, MeshGradient } from "@paper-design/shaders-react";
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
 import { HERO } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 
@@ -153,60 +151,6 @@ function PulsingCircle() {
   );
 }
 
-// ── Product Card ─────────────────────────────────────────────────────────────
-
-function ProductCard() {
-  return (
-    <div className="relative mx-auto aspect-[4/3] w-full max-w-lg">
-      <style>{`
-        @keyframes ww-hero-float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
-        }
-      `}</style>
-
-      {/* PulsingBorder frame — decorative animated ring */}
-      <PulsingBorder
-        className="absolute inset-0"
-        colors={["#96552A", "#F6F1E7", "#5C6A4B"]}
-        colorBack="#241811"
-        roundness={0.08}
-        thickness={0.06}
-        softness={0.6}
-        intensity={0.2}
-        bloom={0.3}
-        spots={4}
-        spotSize={0.15}
-        pulse={0.2}
-        smoke={0.3}
-        smokeSize={4}
-        speed={1}
-        fit="contain"
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-      />
-
-      {/* Product image with subtle float animation */}
-      <div
-        className="relative w-full h-full p-4"
-        style={{ animation: "ww-hero-float 6s ease-in-out infinite" }}
-      >
-        <Image
-          src="/images/all-4-sku.jpeg"
-          alt="Wake & Wyze functional coffee, all four flavors"
-          fill
-          preload
-          loading="eager"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-contain"
-        />
-      </div>
-    </div>
-  );
-}
-
 // ── Hero Content ─────────────────────────────────────────────────────────────
 
 function HeroContent() {
@@ -277,17 +221,7 @@ export function HeroSection() {
     >
       <ShaderBackground>
         <div className="relative z-10 mx-auto max-w-[1200px] px-6 lg:px-8 pt-24 pb-16 lg:pt-28 lg:pb-20 min-h-dvh flex flex-col justify-center">
-          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
-            {/* Copy — second on mobile, left on desktop */}
-            <div className="order-2 lg:order-1">
-              <HeroContent />
-            </div>
-
-            {/* Product image — first on mobile, right on desktop */}
-            <div className="order-1 lg:order-2">
-              <ProductCard />
-            </div>
-          </div>
+          <HeroContent />
         </div>
 
         <PulsingCircle />
