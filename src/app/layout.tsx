@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { AnalyticsScripts } from "@/components/site/analytics-scripts";
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content">{children}</main>
         <Footer />
         <AnalyticsScripts />
+        <Analytics />
       </body>
     </html>
   );
