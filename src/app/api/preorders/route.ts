@@ -95,10 +95,9 @@ export async function POST(request: Request) {
       { status: 201 },
     );
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    console.error("Failed to create pre-order:", message, error);
+    console.error("Failed to create pre-order:", error);
     return NextResponse.json(
-      { error: `Something went wrong: ${message}` },
+      { error: "Something went wrong creating your pre order. Please try again." },
       { status: 500 },
     );
   }
