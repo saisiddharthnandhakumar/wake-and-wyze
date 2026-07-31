@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { createClient } from "@libsql/client";
 
 function isTursoConfigured(value) {
   if (!value || value === "undefined" || value === "null") return false;
@@ -12,10 +13,6 @@ function isTursoConfigured(value) {
 }
 
 function readDatabaseUrl() {
-  if (isTursoConfigured(process.env.TURSO_DATABASE_URL)) {
-    console.log("Turso configured — skipping local SQLite setup.");
-    return null;
-  }
   const envPath = path.join(process.cwd(), ".env");
   if (existsSync(envPath)) {
     const env = readFileSync(envPath, "utf8");
@@ -34,14 +31,7 @@ function sqlitePathFromUrl(databaseUrl) {
   return path.resolve(process.cwd(), rawPath);
 }
 
-const databaseUrl = readDatabaseUrl();
-if (databaseUrl === null) process.exit(0);
-
-const databasePath = sqlitePathFromUrl(databaseUrl);
-mkdirSync(path.dirname(databasePath), { recursive: true });
-
-const db = new DatabaseSync(databasePath);
-db.exec(`
+const DDL = `
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS "PreOrder" (
@@ -84,7 +74,36 @@ CREATE TABLE IF NOT EXISTS "PreOrderItem" (
 );
 
 CREATE INDEX IF NOT EXISTS "PreOrderItem_orderId_idx" ON "PreOrderItem"("orderId");
-`);
+`;
 
+// ---- Turso (production) ----
+const tursoUrl = process.env.TURSO_DATABASE_URL ?? "";
+const tursoToken = process.env.TURSO_AUTH_TOKEN ?? "";
+
+if (isTursoConfigured(tursoUrl) && tursoToken && tursoToken !== "undefined" && tursoToken !== "null") {
+  console.log(`Setting up Turso database at ${tursoUrl}...`);
+  const client = createClient({ url: tursoUrl, authToken: tursoToken });
+  try {
+    // Execute each statement individually (libsql client doesn't support multi-statement exec)
+    for (const stmt of DDL.split(";").map(s => s.trim()).filter(Boolean)) {
+      await client.execute(stmt + ";");
+    }
+    console.log("Turso database tables created/verified.");
+  } catch (err) {
+    console.error("Turso setup failed:", err.message ?? err);
+    process.exit(1);
+  } finally {
+    client.close();
+  }
+  process.exit(0);
+}
+
+// ---- Local SQLite (dev) ----
+const databaseUrl = readDatabaseUrl();
+const databasePath = sqlitePathFromUrl(databaseUrl);
+mkdirSync(path.dirname(databasePath), { recursive: true });
+
+const db = new DatabaseSync(databasePath);
+db.exec(DDL);
 db.close();
 console.log(`SQLite database ready at ${databasePath}`);
