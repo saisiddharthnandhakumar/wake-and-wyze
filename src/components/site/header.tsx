@@ -36,18 +36,18 @@ export function Header() {
     >
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo — mix-blend-multiply makes the opaque white background transparent */}
+          {/* Logo */}
           <a
             href="#hero"
             className="flex items-center shrink-0 no-underline"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/wake-wyze-logo.png"
+              src="/images/ww-logo.png"
               alt="Wake & Wyze"
-              width={124}
-              height={64}
-              className="h-9 w-auto mix-blend-multiply"
+              width={60}
+              height={60}
+              className="h-11 w-auto"
             />
             <span className="sr-only">Wake &amp; Wyze</span>
           </a>
