@@ -36,7 +36,7 @@ export const FLAVORS = [
     id: "caramel",
     name: "Caramel",
     notes: "Burnt sugar · Warm butter",
-    description: "Slow-cooked caramel notes folded into arabica. Sweet without a gram of sugar.",
+    description: "Slow-cooked caramel notes folded into robusta. Sweet without a gram of sugar.",
     image: "/images/caramel.png",
     badge: null,
   },

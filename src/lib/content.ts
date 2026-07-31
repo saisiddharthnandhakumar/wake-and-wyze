@@ -16,7 +16,7 @@ export const HERO = {
   eyebrow: "Specialty Coffee × Lion's Mane",
   headline: "A smarter cup of coffee.",
   subheadline:
-    "Premium specialty coffee infused with Lion's Mane, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
+    "Premium specialty coffee infused with Lion's Mane Mushroom Extract, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
   primaryCta: "Pre Order Now: ₹1,299",
   secondaryCta: "See the research",
   pulsingText: "WAKE & WYZE · FOCUS · CALM · SHARP · ",
@@ -57,7 +57,7 @@ export const SOLUTION = {
   eyebrow: "Our Solution",
   headline: "Same ritual. Entirely different day.",
   subheadline:
-    "Specialty coffee meets functional Lion's Mane. No jitters. No crash. Just clarity that lasts.",
+    "Specialty Coffee meets Functionality",
   pillars: [
     {
       number: "01",
@@ -183,11 +183,7 @@ export const FAQS = {
     },
     {
       question: "How much Lion's Mane is in each serving?",
-      answer: "Each serving contains 250–500mg of Lion's Mane extract (100% fruiting body). This dosage aligns with amounts used in published human clinical trials that demonstrated cognitive benefits.",
-    },
-    {
-      question: "When should I drink it?",
-      answer: "In the morning, like your regular coffee. Effects on attention and cognitive performance have been observed within 60 minutes. For long term cognitive support, daily use is recommended.",
+      answer: "Each serving contains 1000mg of Lion's Mane extract (100% fruiting body). This dosage aligns with amounts used in published human clinical trials that demonstrated cognitive benefits.",
     },
     {
       question: "How long does one bag last?",
@@ -195,7 +191,7 @@ export const FAQS = {
     },
     {
       question: "Is it vegetarian?",
-      answer: "Yes. Wake & Wyze is 100% plant based. It contains premium coffee beans and Lion's Mane mushroom extract, nothing else.",
+      answer: "Yes. Wake & Wyze is 100% vegetarian. It contains premium coffee beans and Lion's Mane mushroom extract, nothing else.",
     },
     {
       question: "Is it safe for daily use?",
@@ -230,4 +226,5 @@ export const FOOTER = {
     { label: "Terms of Service", href: "/terms" },
   ],
   copyright: "© 2026 Wake & Wyze. All rights reserved.",
+  contact: "For inquiries contact +91 95587 42935",
 };
