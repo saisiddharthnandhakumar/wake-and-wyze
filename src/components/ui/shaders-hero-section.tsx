@@ -81,9 +81,14 @@ function ShaderBackground({ children }: { children: React.ReactNode }) {
         style={{ backgroundColor: "transparent" }}
       />
 
-      {/* Bottom fade — gradual dark-to-cream transition, seamless with next section */}
+      {/* Bottom fade — very gradual dark-to-light transition over 35% of the viewport,
+          ending at the Pipo gradient base color for a seamless blend */}
       <div
-        className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-ink/50 to-surface pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-[35vh] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(36,24,17,0.25) 40%, rgba(36,24,17,0.1) 70%, #FAF9EF 100%)",
+        }}
         aria-hidden="true"
       />
 
