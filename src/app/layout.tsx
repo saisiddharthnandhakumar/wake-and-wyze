@@ -17,12 +17,12 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Wake & Wyze: Premium Functional Coffee | Sustained Energy & Sharper Focus",
   description:
-    "Premium specialty coffee infused with Lion's Mane for sustained energy, sharper focus, and a calmer caffeine experience. 30 servings. ₹1,299. Pre order now.",
+    "Premium instant specialty coffee infused with Lion's Mane for sustained energy, sharper focus, and a calmer caffeine experience. Just add hot water. 30 servings. ₹1,299. Pre order now.",
   metadataBase: new URL("https://wakeandwyze.com"),
   openGraph: {
     title: "Wake & Wyze: Premium Functional Coffee",
     description:
-      "Premium coffee infused with Lion's Mane. Sustained energy, sharper focus, no afternoon crash.",
+      "Premium instant coffee infused with Lion's Mane. Sustained energy, sharper focus, no afternoon crash.",
     type: "website",
     images: ["/images/all-4-sku.jpeg"],
   },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wake & Wyze: Premium Functional Coffee",
     description:
-      "Premium coffee infused with Lion's Mane. Sustained energy, sharper focus, no afternoon crash.",
+      "Premium instant coffee infused with Lion's Mane. Sustained energy, sharper focus, no afternoon crash.",
   },
   robots: {
     index: true,

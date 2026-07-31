@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { preOrderSchema, validateCoupon } from "@/lib/validators";
 import { computeOrderAmounts, generateOrderNumber, logStatus } from "@/lib/order";
 import { snapshotFlavor, makeCartItem } from "@/lib/cart";
+import { sendOrderConfirmation } from "@/lib/email";
 import type { Cart } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -83,6 +84,16 @@ export async function POST(request: Request) {
       });
 
       return created;
+    });
+
+    // Fire-and-forget order acknowledgement email — never blocks the response.
+    // The email utility swallows its own errors so order creation is unaffected.
+    void sendOrderConfirmation({
+      email: data.email,
+      name: data.name,
+      orderNumber: order.orderNumber,
+      totalPaise: order.totalPaise,
+      items: data.items.map((i) => ({ flavorId: i.flavorId, quantity: i.quantity })),
     });
 
     return NextResponse.json(

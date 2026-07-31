@@ -321,7 +321,7 @@ export function CheckoutForm({
           variant="primary"
           size="lg"
           disabled={submitting || !canSubmit}
-          className="w-full"
+          className="w-full text-sm sm:text-base"
         >
           {submitting ? (
             <>

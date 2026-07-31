@@ -16,7 +16,7 @@ export const HERO = {
   eyebrow: "Specialty Coffee × Lion's Mane",
   headline: "A smarter cup of coffee.",
   subheadline:
-    "Premium specialty coffee infused with Lion's Mane Mushroom Extract, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
+    "Premium instant specialty coffee infused with Lion's Mane Mushroom Extract, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
   primaryCta: "Pre Order Now: ₹1,299",
   secondaryCta: "See the research",
   pulsingText: "WAKE & WYZE · FOCUS · CALM · SHARP · ",
@@ -75,7 +75,7 @@ export const SOLUTION = {
       number: "03",
       title: "Premium specialty coffee",
       description:
-        "Small batch roasted for a rich aroma, balanced body, and smooth finish. Dark roast — 100% Robusta crafted for exceptional taste.",
+        "Small batch roasted and brewed into instant coffee crystals for a rich aroma, balanced body, and smooth finish. Dark roast — 100% Robusta crafted for exceptional taste. Just add hot water.",
     },
   ],
 };
@@ -177,7 +177,7 @@ export const FAQS = {
     },
     {
       question: "Does it contain caffeine?",
-      answer: "Yes. Wake & Wyze is made with real specialty coffee. Each cup contains approximately 80–100mg of caffeine, similar to a standard cup of black coffee. The difference is that Lion's Mane smooths the caffeine curve, so you get energy without the jitters.",
+      answer: "Yes. Wake & Wyze is made with real specialty instant coffee. Each cup contains approximately 80–100mg of caffeine, similar to a standard cup of black coffee. The difference is that Lion's Mane smooths the caffeine curve, so you get energy without the jitters.",
     },
     {
       question: "How much Lion's Mane is in each serving?",
@@ -185,11 +185,11 @@ export const FAQS = {
     },
     {
       question: "How long does one bag last?",
-      answer: "One 250g bag contains 30 servings, about one month for daily drinkers. Each serving is about 8–9 grams.",
+      answer: "One 250g bag contains 30 servings, about one month for daily drinkers. Each serving is about 8–9 grams of instant coffee powder — just add hot water and stir. No brewing equipment needed.",
     },
     {
       question: "Is it vegetarian?",
-      answer: "Yes. Wake & Wyze is 100% vegetarian. It contains premium coffee beans and Lion's Mane mushroom extract, nothing else.",
+      answer: "Yes. Wake & Wyze is 100% vegetarian. It contains premium coffee beans (brewed into instant coffee) and Lion's Mane mushroom extract, nothing else.",
     },
     {
       question: "Is it safe for daily use?",
@@ -208,6 +208,12 @@ export const FINAL_CTA = {
   subheadline: "Pre order now. First batches ship soon.",
   cta: "Pre Order Now: ₹1,299",
   trustLine: "30 servings · Free delivery on all pre orders",
+};
+
+// ---- ORDER NOTICE ----
+export const ORDER_NOTICE = {
+  deliveryMessage:
+    "Since these are pre-orders, delivery may take a little longer than usual as we're preparing our first batch. Expect delivery within 7–10 business days.",
 };
 
 // ---- FOOTER ----

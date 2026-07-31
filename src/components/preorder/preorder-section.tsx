@@ -194,7 +194,7 @@ export function PreOrderSection() {
           </div>
 
           {/* Right — sticky order summary */}
-          <aside className="lg:sticky lg:top-28">
+          <aside className="md:sticky md:top-28">
             <OrderSummary
               items={cart}
               discountPaise={discountPaise}

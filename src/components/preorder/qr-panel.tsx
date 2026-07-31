@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Loader2, QrCode } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { QR_IMAGE_PATH } from "@/lib/constants";
+import { ORDER_NOTICE } from "@/lib/content";
 import { formatINR } from "@/lib/order";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
@@ -104,6 +105,11 @@ export function QrPanel({ orderNumber, totalPaise, onConfirm }: QrPanelProps) {
             </li>
           ))}
         </ol>
+
+        {/* Pre-order delivery notice */}
+        <p className="mt-6 w-full max-w-sm rounded-xl bg-bronze/5 border border-bronze/20 px-4 py-3 text-xs leading-relaxed text-ink-muted">
+          {ORDER_NOTICE.deliveryMessage}
+        </p>
 
         {/* UTR input + confirm */}
         <div className="mt-6 w-full max-w-sm">

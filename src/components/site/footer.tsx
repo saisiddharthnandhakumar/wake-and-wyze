@@ -14,6 +14,7 @@ export function Footer() {
                 alt="Wake & Wyze"
                 width={36}
                 height={36}
+                loading="lazy"
                 className="h-9 w-auto"
               />
               Wake &amp; Wyze

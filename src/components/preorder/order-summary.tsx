@@ -49,6 +49,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
                     alt=""
                     width={32}
                     height={32}
+                    loading="lazy"
                     className="h-8 w-8 rounded-md object-cover border border-border-light shrink-0"
                   />
                 )}

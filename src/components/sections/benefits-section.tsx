@@ -20,7 +20,7 @@ export function BenefitsSection() {
           <h2 className="section-heading">{BENEFITS.headline}</h2>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {BENEFITS.cards.map((card, index) => {
             const Icon = ICON_MAP[card.icon];
             return (

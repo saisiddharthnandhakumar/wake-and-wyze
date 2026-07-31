@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { FLAVORS } from "@/lib/constants";
+import { ORDER_NOTICE } from "@/lib/content";
 import { formatINR } from "@/lib/order";
 import { cartToAnalyticsItems } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
@@ -67,6 +68,10 @@ export function SuccessCard({ id, orderNumber, totalPaise, items }: SuccessCardP
           </div>
         ))}
       </dl>
+
+      <p className="mx-auto mt-6 max-w-sm rounded-xl bg-bronze/5 border border-bronze/20 px-4 py-3 text-xs leading-relaxed text-ink-muted">
+        {ORDER_NOTICE.deliveryMessage}
+      </p>
 
       <a
         href={`/order/${id}`}

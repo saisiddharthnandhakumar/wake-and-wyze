@@ -52,34 +52,55 @@ function ShaderSvgFilters() {
 
 // ── Shader Background ────────────────────────────────────────────────────────
 
-function ShaderBackground({ children }: { children: React.ReactNode }) {
+function ShaderBackground({
+  children,
+  simplified,
+}: {
+  children: React.ReactNode;
+  simplified?: boolean;
+}) {
   return (
     <div className="relative min-h-dvh w-full overflow-hidden bg-ink">
-      <ShaderSvgFilters />
+      {simplified ? (
+        // Reduced-motion / low-power fallback — static gradient instead of
+        // the two animated MeshGradient layers (which are GPU-heavy on mobile).
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(135deg, #241811 0%, #3A2A1D 30%, #96552A 60%, #5C6A4B 100%)",
+          }}
+          aria-hidden="true"
+        />
+      ) : (
+        <>
+          <ShaderSvgFilters />
 
-      {/* Primary MeshGradient — warm espresso / bronze / sage */}
-      <MeshGradient
-        className="absolute inset-0 w-full h-full"
-        colors={[
-          "#241811",
-          "#3A2A1D",
-          "#96552A",
-          "#C1793C",
-          "#5C6A4B",
-          "#8A6A4B",
-          "#2C2018",
-        ]}
-        speed={0.2}
-        style={{ backgroundColor: "#241811" }}
-      />
+          {/* Primary MeshGradient — warm espresso / bronze / sage */}
+          <MeshGradient
+            className="absolute inset-0 w-full h-full"
+            colors={[
+              "#241811",
+              "#3A2A1D",
+              "#96552A",
+              "#C1793C",
+              "#5C6A4B",
+              "#8A6A4B",
+              "#2C2018",
+            ]}
+            speed={0.2}
+            style={{ backgroundColor: "#241811" }}
+          />
 
-      {/* Wireframe overlay — lighter tones for texture */}
-      <MeshGradient
-        className="absolute inset-0 w-full h-full opacity-40"
-        colors={["#241811", "#F6F1E7", "#96552A", "#3A2A1D"]}
-        speed={0.15}
-        style={{ backgroundColor: "transparent" }}
-      />
+          {/* Wireframe overlay — lighter tones for texture */}
+          <MeshGradient
+            className="absolute inset-0 w-full h-full opacity-40"
+            colors={["#241811", "#F6F1E7", "#96552A", "#3A2A1D"]}
+            speed={0.15}
+            style={{ backgroundColor: "transparent" }}
+          />
+        </>
+      )}
 
       {/* Bottom fade — very gradual dark-to-light transition over 35% of the viewport,
           ending at the Pipo gradient base color for a seamless blend */}
@@ -103,8 +124,8 @@ function PulsingCircle() {
   const shouldReduce = useReducedMotion();
 
   return (
-    <div className="absolute bottom-8 right-8 z-30">
-      <div className="relative w-20 h-20 flex items-center justify-center">
+    <div className="absolute bottom-4 right-4 z-30 lg:bottom-8 lg:right-8">
+      <div className="relative w-14 h-14 lg:w-20 lg:h-20 flex items-center justify-center">
         {/* Pulsing Border ring with brand colors */}
         <PulsingBorder
           colors={["#96552A", "#F6F1E7", "#5C6A4B"]}
@@ -219,12 +240,14 @@ function HeroContent() {
 // ── Composed Hero Section ────────────────────────────────────────────────────
 
 export function HeroSection() {
+  const shouldReduce = useReducedMotion();
+
   return (
     <section
       id="hero"
       className="relative overflow-hidden bg-ink min-h-dvh"
     >
-      <ShaderBackground>
+      <ShaderBackground simplified={Boolean(shouldReduce)}>
         <div className="relative z-10 mx-auto max-w-[1200px] px-6 lg:px-8 pt-24 pb-16 lg:pt-28 lg:pb-20 min-h-dvh flex flex-col justify-center">
           <HeroContent />
         </div>

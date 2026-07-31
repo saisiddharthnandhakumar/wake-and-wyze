@@ -52,7 +52,11 @@ export function Header() {
               alt="Wake & Wyze"
               width={96}
               height={96}
-              className={cn("h-20 w-auto", darkOverlay && "invert")}
+              className={cn(
+                "h-20 w-auto",
+                // invert works in modern browsers; -webkit-filter covers older Safari/iOS
+                darkOverlay && "invert [-webkit-filter:invert(100%)]",
+              )}
             />
             <span className="sr-only">Wake &amp; Wyze</span>
           </a>

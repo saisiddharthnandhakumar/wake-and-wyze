@@ -22,8 +22,8 @@ export function FlavorSection() {
             Four ways to start your day.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-            Every blend small batch roasted and infused with the same 250–500mg clinical dose of
-            Lion&rsquo;s Mane.
+            Every blend is small batch roasted, brewed into instant crystals, and infused with the
+            same clinical dose of Lion&rsquo;s Mane.
           </p>
         </Reveal>
 

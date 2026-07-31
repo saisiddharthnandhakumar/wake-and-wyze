@@ -48,16 +48,23 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
     scroll-padding-top: 80px;
   }
 
-  section {
-    scroll-snap-align: start;
-  }
+  /* Scroll-snap only on tall viewports — on short screens sections exceed the
+     viewport height and snapping causes jerky, stuck-feeling scroll. */
+  @media (min-height: 600px) {
+    html {
+      scroll-snap-type: y proximity;
+    }
 
-  #preorder {
-    scroll-snap-align: none;
+    section {
+      scroll-snap-align: start;
+    }
+
+    #preorder {
+      scroll-snap-align: none;
+    }
   }
 
   body {

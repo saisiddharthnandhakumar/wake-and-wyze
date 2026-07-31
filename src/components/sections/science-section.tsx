@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SCIENCE } from "@/lib/content";
 import { Card } from "@/components/ui/card";
@@ -9,9 +9,25 @@ import { Reveal } from "@/components/motion/reveal";
 export function ScienceSection() {
   const studies = SCIENCE.studies;
   const [active, setActive] = useState(0);
+  // Touch-swipe tracking for mobile
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const prev = () => setActive((i) => (i === 0 ? studies.length - 1 : i - 1));
   const next = () => setActive((i) => (i === studies.length - 1 ? 0 : i + 1));
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    // 50px threshold prevents accidental swipes while scrolling
+    if (diff > 50) next();
+    else if (diff < -50) prev();
+  };
 
   return (
     <section id="science" className="min-h-dvh flex flex-col justify-center py-16 lg:py-20">
@@ -22,7 +38,12 @@ export function ScienceSection() {
         </Reveal>
 
         {/* Carousel */}
-        <div className="mt-8 relative max-w-2xl mx-auto">
+        <div
+          className="mt-8 relative max-w-2xl mx-auto"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="overflow-hidden rounded-2xl">
             <div
               className="flex transition-transform duration-500 ease-out"

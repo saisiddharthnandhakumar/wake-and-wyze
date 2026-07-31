@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { formatINR } from "@/lib/order";
 import { FLAVORS } from "@/lib/constants";
+import { ORDER_NOTICE } from "@/lib/content";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, ArrowRight } from "lucide-react";
@@ -113,6 +114,15 @@ export default async function OrderPage({ params }: Props) {
           <div className="mt-6 p-4 bg-bronze/5 border border-bronze/20 rounded-xl text-center">
             <p className="text-bronze text-sm font-medium">
               Payment verification in progress. We&apos;ll confirm by SMS/email within 24 hours.
+            </p>
+          </div>
+        )}
+
+        {(order.paymentStatus === "paid" ||
+          order.paymentStatus === "awaiting_confirmation") && (
+          <div className="mt-4 p-4 bg-sage-mist/50 border border-border rounded-xl text-center">
+            <p className="text-ink-muted text-sm leading-relaxed">
+              {ORDER_NOTICE.deliveryMessage}
             </p>
           </div>
         )}
