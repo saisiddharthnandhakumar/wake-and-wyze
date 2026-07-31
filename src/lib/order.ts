@@ -19,14 +19,18 @@ export function formatINR(paise: number): string {
   }).format(paise / 100);
 }
 
-export function computeOrderAmounts(quantity: number, couponCode?: string | null) {
+/**
+ * Compute order amounts from total quantity (sum of all cart items).
+ * All items share the same unit price; the coupon applies to the total.
+ */
+export function computeOrderAmounts(totalQuantity: number, couponCode?: string | null) {
   const unitPricePaise = PRICE_PAISE;
-  const subtotalPaise = unitPricePaise * quantity;
+  const subtotalPaise = unitPricePaise * totalQuantity;
   let discountPaise = 0;
 
   if (couponCode) {
     const coupon = COUPONS[couponCode.toUpperCase()];
-    if (coupon && quantity >= coupon.minQuantity) {
+    if (coupon && totalQuantity >= coupon.minQuantity) {
       discountPaise = Math.round(subtotalPaise * (coupon.discountPercent / 100));
     }
   }

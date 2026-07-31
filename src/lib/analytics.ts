@@ -1,7 +1,8 @@
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
-type EventParams = Record<string, string | number | undefined>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type EventParams = Record<string, any>;
 
 export function trackEvent(name: string, params?: EventParams) {
   if (typeof window === "undefined") return;

@@ -63,7 +63,7 @@ export function FlavorSection() {
                   <div className="mt-6 flex items-center justify-between gap-4">
                     <span className="font-display text-lg font-bold text-ink">{PRICE}</span>
                     <a
-                      href={`#preorder?flavor=${flavor.id}`}
+                      href="#preorder"
                       className={selectButtonClassName}
                     >
                       Select

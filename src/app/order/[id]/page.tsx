@@ -34,10 +34,27 @@ function StatusBadge({ status }: { status: string }) {
 export default async function OrderPage({ params }: Props) {
   const { id } = await params;
 
-  const order = await prisma.preOrder.findUnique({ where: { id } });
+  const order = await prisma.preOrder.findUnique({
+    where: { id },
+    include: { items: true },
+  });
   if (!order) notFound();
 
-  const flavor = FLAVORS.find((f) => f.id === order.flavor);
+  // Render from items relation when available, fall back to denormalised columns
+  const lineItems =
+    order.items && order.items.length > 0
+      ? order.items.map((item) => ({
+          flavorId: item.flavor,
+          name: FLAVORS.find((f) => f.id === item.flavor)?.name ?? item.flavor,
+          quantity: item.quantity,
+        }))
+      : [
+          {
+            flavorId: order.flavor,
+            name: FLAVORS.find((f) => f.id === order.flavor)?.name ?? order.flavor,
+            quantity: order.quantity,
+          },
+        ];
 
   return (
     <div className="min-h-[80vh] py-20">
@@ -52,20 +69,27 @@ export default async function OrderPage({ params }: Props) {
           <StatusBadge status={order.paymentStatus} />
         </div>
 
-        <div className="bg-surface-raised border border-border rounded-2xl p-6 space-y-4">
-          <div className="flex justify-between py-2 border-b border-border-light">
-            <span className="text-ink-muted">Flavor</span>
-            <span className="font-medium">{flavor?.name ?? order.flavor}</span>
-          </div>
-          <div className="flex justify-between py-2 border-b border-border-light">
-            <span className="text-ink-muted">Quantity</span>
-            <span className="font-medium">{order.quantity} bag{order.quantity > 1 ? "s" : ""}</span>
-          </div>
-          <div className="flex justify-between py-2 border-b border-border-light">
+        <div className="bg-surface-raised border border-border rounded-xl p-6 space-y-4">
+          {lineItems.map((item) => (
+            <div
+              key={item.flavorId}
+              className="flex justify-between py-2 border-b border-border-light last:border-b-0"
+            >
+              <span className="text-ink-muted">{item.name}</span>
+              <span className="font-medium">
+                {item.quantity} bag{item.quantity > 1 ? "s" : ""}
+              </span>
+            </div>
+          ))}
+
+          <div className="flex justify-between py-2 border-t border-border-light">
             <span className="text-ink-muted">Amount Paid</span>
-            <span className="font-display font-bold text-lg">{formatINR(order.totalPaise)}</span>
+            <span className="font-display font-bold text-lg">
+              {formatINR(order.totalPaise)}
+            </span>
           </div>
-          <div className="flex justify-between py-2">
+
+          <div className="flex justify-between py-2 border-t border-border-light">
             <span className="text-ink-muted">Ordered On</span>
             <span className="font-medium">
               {new Date(order.createdAt).toLocaleDateString("en-IN", {

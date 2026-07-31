@@ -72,6 +72,18 @@ CREATE TABLE IF NOT EXISTS "PreOrder" (
 CREATE INDEX IF NOT EXISTS "PreOrder_paymentStatus_idx" ON "PreOrder"("paymentStatus");
 CREATE INDEX IF NOT EXISTS "PreOrder_createdAt_idx" ON "PreOrder"("createdAt");
 CREATE INDEX IF NOT EXISTS "PreOrder_phone_idx" ON "PreOrder"("phone");
+
+CREATE TABLE IF NOT EXISTS "PreOrderItem" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "orderId" TEXT NOT NULL,
+  "flavor" TEXT NOT NULL,
+  "quantity" INTEGER NOT NULL,
+  "unitPricePaise" INTEGER NOT NULL DEFAULT 129900,
+  "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY ("orderId") REFERENCES "PreOrder"("id") ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS "PreOrderItem_orderId_idx" ON "PreOrderItem"("orderId");
 `);
 
 db.close();

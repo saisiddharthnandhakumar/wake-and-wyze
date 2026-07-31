@@ -7,21 +7,29 @@ import { cn } from "@/lib/utils";
 import { INDIAN_STATES } from "@/lib/constants";
 import { preOrderSchema } from "@/lib/validators";
 import { formatINR } from "@/lib/order";
+import { cartToAnalyticsItems, cartTotalQuantity } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import type { Cart } from "@/lib/types";
 
 interface CheckoutFormProps {
-  flavor: string;
-  quantity: number;
+  items: Cart;
   totalPaise: number;
   discountPaise: number;
   couponCode: string;
-  onSuccess: (result: { id: string; orderNumber: string; totalPaise: number }) => void;
+  onSuccess: (result: {
+    id: string;
+    orderNumber: string;
+    totalPaise: number;
+    items: Cart;
+  }) => void;
 }
 
-type FieldErrors = Partial<Record<keyof z.infer<typeof preOrderSchema>, string>>;
+type FieldErrors = Partial<
+  Record<keyof z.infer<typeof preOrderSchema>, string>
+>;
 
 const LABEL_CLASS = "block text-xs tracking-wider uppercase text-ink-muted mb-1.5";
 
@@ -31,8 +39,7 @@ function FieldError({ message }: { message?: string }) {
 }
 
 export function CheckoutForm({
-  flavor,
-  quantity,
+  items,
   totalPaise,
   discountPaise,
   couponCode,
@@ -50,13 +57,13 @@ export function CheckoutForm({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const checkoutStartedRef = useRef(false);
+  const totalQuantity = cartTotalQuantity(items);
 
   const handleFirstFocus = () => {
     if (checkoutStartedRef.current) return;
     checkoutStartedRef.current = true;
     trackEvent(AnalyticsEvents.BEGIN_CHECKOUT, {
-      flavor,
-      quantity,
+      items: cartToAnalyticsItems(items),
       value: totalPaise,
       currency: "INR",
     });
@@ -78,8 +85,7 @@ export function CheckoutForm({
     setSubmitError(null);
 
     const result = preOrderSchema.safeParse({
-      flavor,
-      quantity,
+      items: items.map((i) => ({ flavorId: i.flavorId, quantity: i.quantity })),
       name,
       phone,
       email,
@@ -111,13 +117,14 @@ export function CheckoutForm({
         if (data?.fieldErrors && typeof data.fieldErrors === "object") {
           setErrors(data.fieldErrors as FieldErrors);
         }
-        setSubmitError(data?.error || "Something went wrong placing your pre-order. Please try again.");
+        setSubmitError(
+          data?.error || "Something went wrong placing your pre-order. Please try again.",
+        );
         return;
       }
 
       trackEvent(AnalyticsEvents.ORDER_SUBMITTED, {
-        flavor,
-        quantity,
+        items: cartToAnalyticsItems(items),
         value: data?.totalPaise ?? totalPaise,
         discountPaise,
         currency: "INR",
@@ -128,6 +135,7 @@ export function CheckoutForm({
         id: data.id,
         orderNumber: data.orderNumber,
         totalPaise: data.totalPaise,
+        items: data.items ?? items,
       });
     } catch {
       setSubmitError("Network error. Please check your connection and try again.");
@@ -135,6 +143,8 @@ export function CheckoutForm({
       setSubmitting(false);
     }
   };
+
+  const canSubmit = totalQuantity > 0;
 
   return (
     <form
@@ -286,7 +296,17 @@ export function CheckoutForm({
         <FieldError message={errors.pincode} />
       </div>
 
-      {submitError && (
+      {/* Items validation error */}
+      {errors.items && (
+        <p
+          role="alert"
+          className="md:col-span-2 rounded-xl border border-red-600/30 bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
+          {errors.items}
+        </p>
+      )}
+
+      {submitError && !errors.items && (
         <p
           role="alert"
           className="md:col-span-2 rounded-xl border border-red-600/30 bg-red-50 px-4 py-3 text-sm text-red-700"
@@ -300,7 +320,7 @@ export function CheckoutForm({
           type="submit"
           variant="primary"
           size="lg"
-          disabled={submitting}
+          disabled={submitting || !canSubmit}
           className="w-full"
         >
           {submitting ? (
@@ -308,6 +328,8 @@ export function CheckoutForm({
               <Loader2 size={18} className="animate-spin" />
               Placing your pre-order…
             </>
+          ) : !canSubmit ? (
+            "Add at least one bag to continue"
           ) : (
             `Place Pre-Order — ${formatINR(totalPaise)}`
           )}

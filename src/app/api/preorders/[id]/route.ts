@@ -6,6 +6,11 @@ export const runtime = "nodejs";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
+interface PreOrderItemRow {
+  flavor: string;
+  quantity: number;
+}
+
 function toSafeOrder(order: {
   id: string;
   orderNumber: string;
@@ -15,7 +20,14 @@ function toSafeOrder(order: {
   paymentStatus: string;
   createdAt: Date;
   paidAt: Date | null;
+  items?: PreOrderItemRow[];
 }) {
+  // Use items relation when available, fall back to legacy denormalised columns
+  const items =
+    order.items && order.items.length > 0
+      ? order.items.map((i) => ({ flavor: i.flavor, quantity: i.quantity }))
+      : [{ flavor: order.flavor, quantity: order.quantity }];
+
   return {
     id: order.id,
     orderNumber: order.orderNumber,
@@ -25,6 +37,7 @@ function toSafeOrder(order: {
     paymentStatus: order.paymentStatus,
     createdAt: order.createdAt,
     paidAt: order.paidAt,
+    items,
   };
 }
 
@@ -32,7 +45,10 @@ export async function GET(_request: Request, context: RouteContext) {
   try {
     const { id } = await context.params;
 
-    const order = await prisma.preOrder.findUnique({ where: { id } });
+    const order = await prisma.preOrder.findUnique({
+      where: { id },
+      include: { items: { select: { flavor: true, quantity: true } } },
+    });
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }

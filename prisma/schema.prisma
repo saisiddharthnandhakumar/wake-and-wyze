@@ -7,13 +7,13 @@ datasource db {
 }
 
 model PreOrder {
-  id             String   @id @default(cuid())
-  orderNumber    String   @unique
+  id             String          @id @default(cuid())
+  orderNumber    String          @unique
   flavor         String
   quantity       Int
-  unitPricePaise Int      @default(129900)
+  unitPricePaise Int             @default(129900)
   subtotalPaise  Int
-  discountPaise  Int      @default(0)
+  discountPaise  Int             @default(0)
   totalPaise     Int
   couponCode     String?
   name           String
@@ -23,14 +23,27 @@ model PreOrder {
   city           String
   state          String
   pincode        String
-  paymentStatus  String   @default("pending")
+  paymentStatus  String          @default("pending")
   utrReference   String?
   statusLogJson  String?
-  createdAt      DateTime @default(now())
+  createdAt      DateTime        @default(now())
   paidAt         DateTime?
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime        @updatedAt
+  items          PreOrderItem[]
 
   @@index([paymentStatus])
   @@index([createdAt])
   @@index([phone])
+}
+
+model PreOrderItem {
+  id             String   @id @default(cuid())
+  orderId        String
+  flavor         String
+  quantity       Int
+  unitPricePaise Int      @default(129900)
+  createdAt      DateTime @default(now())
+  order          PreOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
 }

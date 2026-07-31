@@ -12,13 +12,13 @@ import { Input } from "@/components/ui/input";
 interface CouponInputProps {
   couponCode: string;
   onChange: (code: string) => void;
-  quantity: number;
+  totalQuantity: number;
   onApplied: (valid: boolean) => void;
 }
 
 type CouponStatus = "idle" | "success" | "error";
 
-export function CouponInput({ couponCode, onChange, quantity, onApplied }: CouponInputProps) {
+export function CouponInput({ couponCode, onChange, totalQuantity, onApplied }: CouponInputProps) {
   const [status, setStatus] = useState<CouponStatus>("idle");
   const [lastApplied, setLastApplied] = useState<string | null>(null);
 
@@ -36,7 +36,7 @@ export function CouponInput({ couponCode, onChange, quantity, onApplied }: Coupo
     const code = couponCode.trim();
     if (!code) return;
 
-    const valid = validateCoupon(code, quantity);
+    const valid = validateCoupon(code, totalQuantity);
     setStatus(valid ? "success" : "error");
 
     if (valid) {

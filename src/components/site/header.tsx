@@ -39,12 +39,19 @@ export function Header() {
           {/* Logo */}
           <a
             href="#hero"
-            className="flex items-center gap-2.5 font-display font-bold text-xl text-ink no-underline shrink-0"
+            className="flex items-center gap-2.5 shrink-0 no-underline"
           >
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-ink text-surface text-sm font-bold">
-              W&amp;
+            <span className="flex items-center justify-center rounded-lg bg-white p-1 ring-1 ring-border shadow-sm overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/wake-wyze-logo.png"
+                alt="Wake & Wyze"
+                width={62}
+                height={32}
+                className="h-8 w-auto"
+              />
             </span>
-            Wake &amp; Wyze
+            <span className="sr-only">Wake &amp; Wyze</span>
           </a>
 
           {/* Desktop nav */}
