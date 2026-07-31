@@ -84,11 +84,6 @@ export function ScienceSection() {
           </div>
         </div>
 
-        <Reveal delay={150} className="mt-6">
-          <p className="max-w-2xl mx-auto text-xs leading-relaxed text-ink-muted text-center">
-            {SCIENCE.disclaimer}
-          </p>
-        </Reveal>
       </div>
     </section>
   );

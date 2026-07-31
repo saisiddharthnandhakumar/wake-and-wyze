@@ -75,7 +75,7 @@ export const SOLUTION = {
       number: "03",
       title: "Premium specialty coffee",
       description:
-        "Small batch roasted for a rich aroma, balanced body, and smooth finish. An 80:20 blend crafted for exceptional taste.",
+        "Small batch roasted for a rich aroma, balanced body, and smooth finish. Dark roast — 100% Robusta crafted for exceptional taste.",
     },
   ],
 };
@@ -145,8 +145,6 @@ export const SCIENCE = {
       citation: "Contato et al., 2025 (PMC/NIH review)",
     },
   ],
-  disclaimer:
-    "These statements have not been evaluated by FSSAI. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.",
 };
 
 // ---- WHY LION'S MANE ----
