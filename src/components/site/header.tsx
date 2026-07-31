@@ -47,7 +47,7 @@ export function Header() {
               alt="Wake & Wyze"
               width={96}
               height={96}
-              className="h-[4.5rem] w-auto"
+              className="h-20 w-auto"
             />
             <span className="sr-only">Wake &amp; Wyze</span>
           </a>

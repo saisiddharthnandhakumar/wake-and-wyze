@@ -14,7 +14,7 @@ export function ScienceSection() {
   const next = () => setActive((i) => (i === studies.length - 1 ? 0 : i + 1));
 
   return (
-    <section id="science" className="py-20 lg:py-28">
+    <section id="science" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{SCIENCE.eyebrow}</p>

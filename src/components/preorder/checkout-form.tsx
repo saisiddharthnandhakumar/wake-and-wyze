@@ -331,7 +331,7 @@ export function CheckoutForm({
           ) : !canSubmit ? (
             "Add at least one bag to continue"
           ) : (
-            `Place Pre Order — ${formatINR(totalPaise)}`
+            `Place Pre Order: ${formatINR(totalPaise)}`
           )}
         </Button>
         <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-ink-muted">

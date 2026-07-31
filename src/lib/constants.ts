@@ -12,7 +12,7 @@ export const FLAVORS = [
     id: "original",
     name: "Original Blend",
     notes: "Dark cocoa · Toasted oak",
-    description: "Our signature pour. Deep, clean, and balanced — the everyday ritual perfected.",
+    description: "Our signature pour. Deep, clean, and balanced, the everyday ritual perfected.",
     image: "/images/original-blend.png",
     badge: null,
   },

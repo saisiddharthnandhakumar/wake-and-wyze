@@ -13,7 +13,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="py-20 lg:py-28">
+    <section id="benefits" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{BENEFITS.eyebrow}</p>

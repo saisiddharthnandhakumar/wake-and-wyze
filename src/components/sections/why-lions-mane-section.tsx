@@ -6,7 +6,7 @@ export function WhyLionsManeSection() {
   const { timeline } = WHY_LIONS_MANE;
 
   return (
-    <section id="why-lions-mane" className="py-20 lg:py-28">
+    <section id="why-lions-mane" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — what it is / isn't */}

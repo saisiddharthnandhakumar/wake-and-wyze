@@ -16,8 +16,8 @@ export const HERO = {
   eyebrow: null,
   headline: "A smarter cup of coffee.",
   subheadline:
-    "Premium specialty coffee infused with Lion's Mane — sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
-  primaryCta: "Pre Order Now — ₹1,299",
+    "Premium specialty coffee infused with Lion's Mane, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
+  primaryCta: "Pre Order Now: ₹1,299",
   secondaryCta: "See the research",
   trustItems: [
     "30 servings / 250g",
@@ -31,7 +31,7 @@ export const HERO = {
 export const PROBLEM = {
   eyebrow: "The Problem",
   headline: "Coffee isn't the problem.\nThe crash is.",
-  body: "Most coffee gives you a sharp spike that fades by 2 PM — leaving jitters, brain fog, and the afternoon slump. There's a better way to do mornings.",
+  body: "Most coffee gives you a sharp spike that fades by 2 PM, leaving jitters, brain fog, and the afternoon slump. There's a better way to do mornings.",
   traps: [
     {
       title: "Jitters & anxiety",
@@ -62,7 +62,7 @@ export const SOLUTION = {
       number: "01",
       title: "Functional mushroom extract",
       description:
-        "Pure Lion's Mane made from 100% fruiting bodies — preserving the bioactive compounds that support focus and mental clarity.",
+        "Pure Lion's Mane made from 100% fruiting bodies, preserving the bioactive compounds that support focus and mental clarity.",
     },
     {
       number: "02",
@@ -88,7 +88,7 @@ export const BENEFITS = {
       icon: "Zap",
       title: "Sustained Energy",
       description:
-        "Steady release that powers your workday — not just the first two hours.",
+        "Steady release that powers your workday, not just the first two hours.",
     },
     {
       icon: "Brain",
@@ -157,13 +157,13 @@ export const WHY_LIONS_MANE = {
   whatItIsNot: [
     "It is NOT psychedelic or psychoactive.",
     "It is NOT a stimulant or synthetic nootropic.",
-    "It is NOT untested — decades of research back it.",
+    "It is NOT untested: decades of research back it.",
   ],
   timeline: [
     { period: "Centuries ago", label: "Traditional Use", description: "Used in Chinese and Japanese medicine for brain and gut health." },
     { period: "1990s–2010s", label: "Modern Research Begins", description: "Scientists identify hericenones and erinacines as NGF stimulating compounds." },
     { period: "2019–2025", label: "Clinical Evidence", description: "Double blind, placebo controlled trials demonstrate cognitive and mood benefits in humans." },
-    { period: "Today", label: "Wake & Wyze", description: "Clinical dose Lion's Mane extract blended into premium specialty coffee — for your daily ritual." },
+    { period: "Today", label: "Wake & Wyze", description: "Clinical dose Lion's Mane extract blended into premium specialty coffee, for your daily ritual." },
   ],
 };
 
@@ -174,11 +174,11 @@ export const FAQS = {
   items: [
     {
       question: "Will it taste like mushrooms?",
-      answer: "No. Our coffee is coffee first. Lion's Mane extract is neutral, and at our formulation it's fully masked within the coffee profile. You'll taste bold, smooth coffee — not mushrooms.",
+      answer: "No. Our coffee is coffee first. Lion's Mane extract is neutral, and at our formulation it's fully masked within the coffee profile. You'll taste bold, smooth coffee, not mushrooms.",
     },
     {
       question: "Does it contain caffeine?",
-      answer: "Yes. Wake & Wyze is made with real specialty coffee. Each cup contains approximately 80–100mg of caffeine — similar to a standard cup of black coffee. The difference is that Lion's Mane smooths the caffeine curve, so you get energy without the jitters.",
+      answer: "Yes. Wake & Wyze is made with real specialty coffee. Each cup contains approximately 80–100mg of caffeine, similar to a standard cup of black coffee. The difference is that Lion's Mane smooths the caffeine curve, so you get energy without the jitters.",
     },
     {
       question: "How much Lion's Mane is in each serving?",
@@ -190,11 +190,11 @@ export const FAQS = {
     },
     {
       question: "How long does one bag last?",
-      answer: "One 250g bag contains 30 servings — about one month for daily drinkers. Each serving is about 8–9 grams.",
+      answer: "One 250g bag contains 30 servings, about one month for daily drinkers. Each serving is about 8–9 grams.",
     },
     {
       question: "Is it vegetarian?",
-      answer: "Yes. Wake & Wyze is 100% plant based. It contains premium coffee beans and Lion's Mane mushroom extract — nothing else.",
+      answer: "Yes. Wake & Wyze is 100% plant based. It contains premium coffee beans and Lion's Mane mushroom extract, nothing else.",
     },
     {
       question: "Is it safe for daily use?",
@@ -202,7 +202,7 @@ export const FAQS = {
     },
     {
       question: "Is this 'mushroom coffee'?",
-      answer: "We prefer 'functional coffee.' Wake & Wyze is specialty coffee first — crafted for taste and your morning ritual. Lion's Mane is the functional ingredient that makes it better than regular coffee. It's coffee, upgraded.",
+      answer: "We prefer 'functional coffee.' Wake & Wyze is specialty coffee first, crafted for taste and your morning ritual. Lion's Mane is the functional ingredient that makes it better than regular coffee. It's coffee, upgraded.",
     },
   ],
 };
@@ -211,7 +211,7 @@ export const FAQS = {
 export const FINAL_CTA = {
   headline: "Ready for better mornings?",
   subheadline: "Pre order now. First batches ship soon.",
-  cta: "Pre Order Now — ₹1,299",
+  cta: "Pre Order Now: ₹1,299",
   trustLine: "30 servings · Free delivery on all pre orders",
 };
 

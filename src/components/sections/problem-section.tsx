@@ -4,7 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function ProblemSection() {
   return (
-    <section id="problem" className="py-20 lg:py-28">
+    <section id="problem" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Copy */}
@@ -45,8 +45,8 @@ export function ProblemSection() {
                 <circle cx="195" cy="90" r="3" className="fill-bronze" />
                 {/* time labels */}
                 <text x="15" y="120" fontSize="8" className="fill-ink-muted" textAnchor="middle">6 AM</text>
-                <text x="85" y="12" fontSize="8" fontWeight="600" className="fill-sage" textAnchor="middle">9 AM — Peak</text>
-                <text x="195" y="120" fontSize="8" fontWeight="600" className="fill-bronze" textAnchor="middle">2 PM — Crash</text>
+                <text x="85" y="12" fontSize="8" fontWeight="600" className="fill-sage" textAnchor="middle">9 AM: Peak</text>
+                <text x="195" y="120" fontSize="8" fontWeight="600" className="fill-bronze" textAnchor="middle">2 PM: Crash</text>
                 <text x="285" y="120" fontSize="8" className="fill-ink-muted" textAnchor="middle">6 PM</text>
               </svg>
 

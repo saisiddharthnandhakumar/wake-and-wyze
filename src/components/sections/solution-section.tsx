@@ -4,7 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function SolutionSection() {
   return (
-    <section id="solution" className="py-20 lg:py-28">
+    <section id="solution" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{SOLUTION.eyebrow}</p>

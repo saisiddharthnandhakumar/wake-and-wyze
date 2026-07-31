@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-28">
+    <section id="hero" className="relative overflow-hidden min-h-screen pt-28 pb-20 lg:pt-36 lg:pb-28">
       <style>{`
         @keyframes hero-float {
           0%, 100% { transform: translateY(0); }
@@ -22,7 +22,7 @@ export function HeroSection() {
             >
               <Image
                 src="/images/all-4-sku.jpeg"
-                alt="Wake & Wyze functional coffee — all four flavors"
+                alt="Wake & Wyze functional coffee, all four flavors"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"

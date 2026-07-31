@@ -36,11 +36,11 @@ function createClient(): PrismaClient {
     }
   }
 
-  // Local SQLite file — URL is configured in prisma.config.ts
-  if (!process.env.DATABASE_URL) {
-    process.env.DATABASE_URL = "file:./wakewyze-dev.db";
-  }
-  return new PrismaClient();
+  // Local SQLite file — uses libsql adapter (wire-compatible with SQLite)
+  const localUrl = process.env.DATABASE_URL ?? "file:./wakewyze-dev.db";
+  return new PrismaClient({
+    adapter: new PrismaLibSql({ url: localUrl }),
+  });
 }
 
 function getClient(): PrismaClient {

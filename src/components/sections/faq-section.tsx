@@ -10,7 +10,7 @@ export function FaqSection() {
   }));
 
   return (
-    <section id="faq" className="py-20 lg:py-28">
+    <section id="faq" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <Reveal className="text-center">

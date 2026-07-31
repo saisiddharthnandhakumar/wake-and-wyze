@@ -104,7 +104,7 @@ export default async function OrderPage({ params }: Props) {
         {order.paymentStatus === "paid" && (
           <div className="mt-6 p-4 bg-success-soft border border-success/20 rounded-xl text-center">
             <p className="text-success text-sm font-medium">
-              Payment confirmed — your order is being processed. We&apos;ll notify you when it ships.
+              Payment confirmed, your order is being processed. We&apos;ll notify you when it ships.
             </p>
           </div>
         )}

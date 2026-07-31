@@ -110,7 +110,7 @@ export function PreOrderSection() {
   };
 
   return (
-    <section id="preorder" className="py-20 lg:py-28 bg-sage-mist">
+    <section id="preorder" className="min-h-screen py-20 lg:py-28 bg-sage-mist">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center mb-12 lg:mb-16">
@@ -121,7 +121,7 @@ export function PreOrderSection() {
             Build Your Box
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
-            Mix and match your favorite flavors. Up to 10 bags per order — free delivery
+            Mix and match your favorite flavors. Up to 10 bags per order, free delivery
             on all pre orders.
           </p>
         </div>
@@ -134,12 +134,12 @@ export function PreOrderSection() {
                 {/* Step 1 — Choose your flavors */}
                 <div>
                   <span className={SECTION_LABEL_CLASS}>
-                    Step 1 — Choose Your Flavors
+                    Step 1: Choose Your Flavors
                   </span>
                   <FlavorPicker cart={cart} onChange={handleUpdateCart} />
                   <p className="mt-3 text-xs text-ink-muted">
                     {totalQuantity > 0
-                      ? `${totalQuantity} of 10 bag${totalQuantity !== 1 ? "s" : ""} selected — each bag = 30 servings`
+                      ? `${totalQuantity} of 10 bag${totalQuantity !== 1 ? "s" : ""} selected, each bag = 30 servings`
                       : "Select at least one flavor to continue"}
                   </p>
                 </div>

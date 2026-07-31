@@ -14,7 +14,7 @@ const selectButtonClassName =
 
 export function FlavorSection() {
   return (
-    <section id="flavors" className="py-20 lg:py-28">
+    <section id="flavors" className="min-h-screen py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-sage">Flavors</p>
