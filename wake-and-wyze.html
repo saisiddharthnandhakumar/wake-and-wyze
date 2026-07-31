@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wake &amp; Wyze — Functional Mushroom Coffee for Clean Focus</title>
+<meta name="description" content="Organic Lion's Mane blended with single-origin arabica. Clean energy, sharper focus, no jitters or crash. 250g pouch, 30 servings, ₹1,299.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f4ede0;
+    --cream-2:#eee3d0;
+    --ink:#241811;
+    --ink-soft:#4a3c30;
+    --copper:#a8551f;
+    --copper-deep:#7c3d15;
+    --sage:#5f6e4e;
+    --sage-soft:#e4e8d9;
+    --line:rgba(36,24,17,0.14);
+    --card-radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--copper-deep);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* NAV */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,237,224,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 0;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:20px;}
+  .logo .mark{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--cream);font-size:15px;font-weight:700;
+  }
+  nav.links{display:flex;gap:28px;font-size:14px;}
+  nav.links a{opacity:0.82;transition:opacity .15s;}
+  nav.links a:hover{opacity:1;}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    font-size:14px;background:none;border:1px solid var(--line);
+    padding:8px 14px;border-radius:999px;cursor:pointer;font-family:'Inter';
+    color:var(--ink);
+  }
+  .cart-count{
+    background:var(--copper);color:#fff;font-size:11px;
+    width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--ink);color:var(--cream);
+    padding:13px 26px;border-radius:999px;font-size:14px;font-weight:600;
+    border:none;cursor:pointer;transition:transform .15s, background .15s;
+    font-family:'Inter';
+  }
+  .btn:hover{background:var(--copper-deep);transform:translateY(-1px);}
+  .btn.ghost{
+    background:transparent;color:var(--ink);border:1px solid var(--ink);
+  }
+  .btn.ghost:hover{background:var(--ink);color:var(--cream);}
+  .btn.small{padding:9px 18px;font-size:13px;width:100%;}
+  .menu-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink);}
+  @media(max-width:860px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  /* HERO */
+  .hero{padding:80px 0 60px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:44px;}}
+  .hero h1{font-size:clamp(38px,5.4vw,64px);line-height:1.04;margin:14px 0 20px;}
+  .hero h1 em{font-style:italic;color:var(--copper);}
+  .hero p.lead{font-size:18px;line-height:1.6;color:var(--ink-soft);max-width:520px;margin-bottom:30px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;}
+  .stat-row{display:flex;gap:40px;flex-wrap:wrap;}
+  .stat b{font-family:'Fraunces',serif;font-size:30px;display:block;}
+  .stat span{font-size:13px;color:var(--ink-soft);}
+
+  .hero-card{
+    background:var(--cream-2);border:1px solid var(--line);
+    border-radius:20px;padding:28px;position:relative;
+  }
+  .hero-card .tag{
+    position:absolute;top:22px;left:22px;
+    background:var(--ink);color:var(--cream);
+    font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+    padding:5px 11px;border-radius:999px;font-family:'JetBrains Mono';
+  }
+  .hero-card img{border-radius:14px;margin-bottom:18px;aspect-ratio:1/1.05;object-fit:cover;width:100%;}
+  .hero-card h3{font-size:22px;margin-bottom:4px;}
+  .hero-card .meta{font-size:13px;color:var(--ink-soft);margin-bottom:14px;}
+  .hero-card .price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .hero-card .price{font-family:'Fraunces',serif;font-size:24px;}
+
+  section{padding:90px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,4vw,42px);margin-top:12px;line-height:1.1;}
+  .section-head p{margin-top:14px;font-size:16px;color:var(--ink-soft);line-height:1.6;}
+
+  /* WHY US */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;}
+  @media(max-width:800px){.why-grid{grid-template-columns:1fr;}}
+  .why-col{padding:38px;}
+  .why-col.trap{background:#efe4d3;}
+  .why-col.way{background:var(--ink);color:var(--cream);}
+  .why-col h3{font-size:20px;margin-bottom:24px;font-family:'JetBrains Mono';font-weight:500;letter-spacing:.02em;text-transform:uppercase;font-size:13px;opacity:.7;}
+  .why-item{padding:18px 0;border-top:1px solid rgba(0,0,0,0.08);}
+  .why-col.way .why-item{border-top:1px solid rgba(244,237,224,0.14);}
+  .why-item:first-of-type{border-top:none;}
+  .why-item h4{font-family:'Inter';font-weight:600;font-size:16px;margin-bottom:6px;display:flex;gap:10px;align-items:center;}
+  .why-item p{font-size:14.5px;line-height:1.55;opacity:.82;}
+  .why-item h4 .dot{width:7px;height:7px;border-radius:50%;background:var(--copper);flex:none;}
+  .why-col.way .why-item h4 .dot{background:var(--sage-soft);}
+
+  /* COMPARISON TABLE */
+  table.compare{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--cream-2);}
+  table.compare th,table.compare td{padding:18px 20px;text-align:center;border-bottom:1px solid var(--line);font-size:14px;}
+  table.compare th{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;background:var(--ink);color:var(--cream);}
+  table.compare th:first-child,table.compare td:first-child{text-align:left;font-family:'Inter';font-weight:600;font-size:14.5px;}
+  table.compare tr:last-child td{border-bottom:none;}
+  .yes{color:var(--sage);font-weight:700;font-size:17px;}
+  .no{color:#b3392a;font-weight:700;font-size:17px;}
+  .mid{color:#b98a2e;font-weight:700;font-size:17px;}
+
+  /* SCIENCE */
+  .science-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:860px){.science-grid{grid-template-columns:1fr;}}
+  .science-card{background:var(--cream-2);border:1px solid var(--line);border-radius:18px;padding:32px;}
+  .science-card .num{font-family:'JetBrains Mono';font-size:12px;color:var(--copper-deep);margin-bottom:16px;display:block;}
+  .science-card h3{font-size:20px;margin-bottom:12px;}
+  .science-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
+
+  /* WHO IT'S FOR */
+  .icp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:860px){.icp-grid{grid-template-columns:1fr;}}
+  .icp-card{border:1px solid var(--line);border-radius:18px;padding:32px;background:transparent;}
+  .icp-card h3{font-size:19px;margin-bottom:12px;}
+  .icp-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
+  .icp-card .icon{
+    width:44px;height:44px;border-radius:50%;background:var(--sage-soft);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--sage);font-size:18px;
+  }
+
+  /* PRODUCTS */
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  @media(max-width:980px){.prod-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.prod-grid{grid-template-columns:1fr;}}
+  .prod-card{
+    background:var(--cream-2);border:1px solid var(--line);border-radius:18px;
+    padding:18px;display:flex;flex-direction:column;
+  }
+  .prod-card .img-wrap{position:relative;margin-bottom:16px;}
+  .prod-card .img-wrap img{border-radius:12px;aspect-ratio:1/1;object-fit:cover;width:100%;}
+  .prod-card .badge{
+    position:absolute;top:10px;left:10px;background:var(--ink);color:var(--cream);
+    font-size:10.5px;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em;font-family:'JetBrains Mono';
+  }
+  .prod-card .notes{font-family:'JetBrains Mono';font-size:11.5px;color:var(--copper-deep);letter-spacing:.02em;margin-bottom:6px;}
+  .prod-card h3{font-size:20px;margin-bottom:8px;}
+  .prod-card .desc{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:16px;flex-grow:1;}
+  .prod-card .price-line{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;}
+  .prod-card .price-line .price{font-family:'Fraunces',serif;font-size:21px;}
+  .prod-card .meta{font-size:12px;color:var(--ink-soft);margin-bottom:14px;}
+
+  /* PREORDER */
+  .preorder{background:var(--ink);color:var(--cream);border-radius:28px;padding:56px;}
+  @media(max-width:640px){.preorder{padding:34px 24px;border-radius:20px;}}
+  .preorder-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;}
+  @media(max-width:860px){.preorder-grid{grid-template-columns:1fr;}}
+  .preorder h2{font-size:clamp(26px,3.6vw,36px);margin-bottom:18px;}
+  .preorder ul{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:14px;}
+  .preorder li{font-size:14.5px;opacity:.85;display:flex;gap:10px;align-items:flex-start;}
+  .preorder li:before{content:"✓";color:var(--sage-soft);font-weight:700;flex:none;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:520px){.form-grid{grid-template-columns:1fr;}}
+  .form-grid .full{grid-column:1/-1;}
+  input,select{
+    width:100%;padding:13px 16px;border-radius:10px;border:1px solid rgba(244,237,224,0.22);
+    background:rgba(244,237,224,0.07);color:var(--cream);font-family:'Inter';font-size:14px;
+  }
+  input::placeholder{color:rgba(244,237,224,0.45);}
+  select{color:rgba(244,237,224,0.85);}
+  select option{color:var(--ink);}
+  label{font-size:12.5px;opacity:.7;display:block;margin-bottom:6px;font-family:'JetBrains Mono';letter-spacing:.02em;}
+  .preorder-note{font-size:12.5px;opacity:.6;margin-top:14px;text-align:center;}
+  .preorder .btn{width:100%;background:var(--copper);margin-top:6px;}
+  .preorder .btn:hover{background:var(--sage);}
+
+  /* FOOTER */
+  footer{padding:60px 0 40px;text-align:center;}
+  footer .logo{justify-content:center;margin-bottom:20px;}
+  .social{display:flex;justify-content:center;gap:22px;margin-bottom:24px;font-size:13px;}
+  .social a{opacity:.7;}
+  .social a:hover{opacity:1;}
+  footer .copy{font-size:12.5px;color:var(--ink-soft);}
+
+  /* CART DRAWER */
+  .overlay{
+    position:fixed;inset:0;background:rgba(36,24,17,0.5);
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:90;
+  }
+  .overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:400px;max-width:92vw;
+    background:var(--cream);z-index:100;
+    transform:translateX(100%);transition:transform .3s ease;
+    display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,0.15);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--line);}
+  .drawer-head h3{font-size:19px;}
+  .drawer-head button{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink);}
+  .drawer-body{flex:1;overflow-y:auto;padding:24px;}
+  .drawer-empty{text-align:center;color:var(--ink-soft);font-size:14px;padding:40px 0;}
+  .drawer-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center;}
+  .drawer-item img{width:56px;height:56px;object-fit:cover;border-radius:8px;}
+  .drawer-item .info{flex:1;}
+  .drawer-item .info h4{font-size:14.5px;margin-bottom:2px;font-family:'Inter';font-weight:600;}
+  .drawer-item .info span{font-size:12.5px;color:var(--ink-soft);}
+  .qty-ctrl{display:flex;align-items:center;gap:10px;}
+  .qty-ctrl button{
+    width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:var(--cream-2);
+    cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;
+  }
+  .drawer-foot{border-top:1px solid var(--line);padding:22px 24px;}
+  .subtotal-row{display:flex;justify-content:space-between;font-size:15px;margin-bottom:6px;font-family:'Fraunces',serif;font-weight:600;}
+  .drawer-foot .ship-note{font-size:12px;color:var(--ink-soft);margin-bottom:16px;}
+
+  ::selection{background:var(--copper);color:#fff;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">
+      <span class="mark">W&amp;</span>
+      Wake &amp; Wyze
+    </a>
+    <nav class="links">
+      <a href="#problem">Why Us</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#usp">The Science</a>
+      <a href="#icp">Who It's For</a>
+      <a href="#products">Products</a>
+      <a href="#pre-order">Pre-Order</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartOpenBtn">
+        Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <a href="#products" class="btn" style="display:none" id="orderNowDesktop">Order Now</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Functional Mushroom Coffee</span>
+        <h1>Elevate Your <em>Morning</em> Routine.</h1>
+        <p class="lead">Clean energy without the jitters, anxiety, or mid-day crash. Powered by organic Lion's Mane and premium arabica beans.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn">Explore Blends</a>
+          <a href="#usp" class="btn ghost">Read Research</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>100%</b><span>Organic fruiting body</span></div>
+          <div class="stat"><b>0g</b><span>Added sugar</span></div>
+          <div class="stat"><b>30</b><span>Servings per pouch</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <span class="tag">Bestseller</span>
+        <img src="https://wakewyze.lovable.app/assets/pouch-original-DSzcIOuL.jpg" alt="Wake & Wyze Original Blend mushroom coffee pouch, 250g">
+        <h3>Original Pouch</h3>
+        <p class="meta">250g | 30 Servings</p>
+        <div class="price-row">
+          <span class="price">₹1,299</span>
+        </div>
+        <button class="btn small add-to-cart" data-name="Original Pouch" data-price="1299" data-img="https://wakewyze.lovable.app/assets/pouch-original-DSzcIOuL.jpg">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why Us</span>
+        <h2>Same ritual. Entirely different afternoon.</h2>
+        <p>Most people don't have a coffee problem — they have a coffee formulation problem.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-col trap">
+          <h3>The Regular Coffee Trap</h3>
+          <div class="why-item">
+            <h4><span class="dot"></span>Jitters &amp; anxiety</h4>
+            <p>A 200mg caffeine spike with nothing to buffer it.</p>
+          </div>
+          <div class="why-item">
+            <h4><span class="dot"></span>The 2 PM crash</h4>
+            <p>Adenosine floods back and your afternoon disappears.</p>
+          </div>
+          <div class="why-item">
+            <h4><span class="dot"></span>Acid discomfort</h4>
+            <p>High-acid roasts that leave your gut unsettled by noon.</p>
+          </div>
+        </div>
+        <div class="why-col way">
+          <h3>The Wake &amp; Wyze Way</h3>
+          <div class="why-item">
+            <h4><span class="dot"></span>Focus, not fog</h4>
+            <p>Lion's Mane supports NGF and sustained cognitive clarity.</p>
+          </div>
+          <div class="why-item">
+            <h4><span class="dot"></span>Sustained energy</h4>
+            <p>A 30/220 blend ratio smooths the caffeine curve into a long, level lift.</p>
+          </div>
+          <div class="why-item">
+            <h4><span class="dot"></span>Adaptogenic balance</h4>
+            <p>Low-acid arabica and adaptogens your gut can live with.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="comparison">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Comparison</span>
+        <h2>How it stacks up.</h2>
+        <p>Four parameters that decide how your day actually goes.</p>
+      </div>
+      <table class="compare">
+        <tr>
+          <th>Parameter</th>
+          <th>Wake &amp; Wyze</th>
+          <th>Regular Coffee</th>
+          <th>Energy Drinks</th>
+        </tr>
+        <tr>
+          <td>Sustained Energy</td>
+          <td class="yes">✓</td>
+          <td class="no">✕</td>
+          <td class="mid">~</td>
+        </tr>
+        <tr>
+          <td>Cognitive Focus</td>
+          <td class="yes">✓</td>
+          <td class="mid">~</td>
+          <td class="no">✕</td>
+        </tr>
+        <tr>
+          <td>Gut Friendliness</td>
+          <td class="yes">✓</td>
+          <td class="no">✕</td>
+          <td class="no">✕</td>
+        </tr>
+        <tr>
+          <td>Adaptogenic Benefits</td>
+          <td class="yes">✓</td>
+          <td class="no">✕</td>
+          <td class="no">✕</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SCIENCE -->
+  <section id="usp">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The Science</span>
+        <h2>Formulated on evidence, not marketing.</h2>
+        <p>Every gram in the pouch earns its place. Nothing else makes it in.</p>
+      </div>
+      <div class="science-grid">
+        <div class="science-card">
+          <span class="num">01</span>
+          <h3>Dual-Extract Mushrooms</h3>
+          <p>100% organic fruiting body extract — hot water and alcohol dual-extracted so both beta-glucans and triterpenes survive the cup.</p>
+        </div>
+        <div class="science-card">
+          <span class="num">02</span>
+          <h3>Zero Sugar &amp; Low Calories</h3>
+          <p>Under 10 calories per serving with no sweeteners, fillers or grain starch. Guilt-free gourmet taste, every morning.</p>
+        </div>
+        <div class="science-card">
+          <span class="num">03</span>
+          <h3>Micro-Batched Arabica</h3>
+          <p>Ethically sourced single-origin dark roast, roasted in small batches and low in acidity for a smoother, rounder finish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section id="icp">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Who It's For</span>
+        <h2>Crafted For High Performers</h2>
+        <p>Built for people whose output depends on how their brain feels at hour nine.</p>
+      </div>
+      <div class="icp-grid">
+        <div class="icp-card">
+          <div class="icon">01</div>
+          <h3>Founders &amp; Executives</h3>
+          <p>Back-to-back decisions from 7 AM. You need a level head at 4 PM, not a second wind you have to chase.</p>
+        </div>
+        <div class="icp-card">
+          <div class="icon">02</div>
+          <h3>Developers &amp; Creatives</h3>
+          <p>Deep work runs on uninterrupted attention. Lion's Mane holds the thread through long build sessions.</p>
+        </div>
+        <div class="icp-card">
+          <div class="icon">03</div>
+          <h3>Fitness &amp; Biohackers</h3>
+          <p>Clean pre-training stimulant with adaptogenic recovery support and zero sugar to track around.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Products</span>
+        <h2>Four blends. One standard.</h2>
+        <p>Every pouch is 250g — thirty mornings of dual-extract mushroom coffee.</p>
+      </div>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <div class="img-wrap">
+            <span class="badge">Bestseller</span>
+            <img src="https://wakewyze.lovable.app/assets/pouch-original-DSzcIOuL.jpg" alt="Original Blend mushroom coffee pouch">
+          </div>
+          <div class="notes">Dark cocoa · Toasted oak</div>
+          <h3>Original Blend</h3>
+          <p class="desc">Our signature dual-extract pour. Deep, earthy and clean — the everyday ritual.</p>
+          <div class="price-line"><span class="price">₹1,299</span></div>
+          <div class="meta">250g / 30 Servings</div>
+          <button class="btn small add-to-cart" data-name="Original Blend" data-price="1299" data-img="https://wakewyze.lovable.app/assets/pouch-original-DSzcIOuL.jpg">Add to Cart</button>
+        </div>
+
+        <div class="prod-card">
+          <div class="img-wrap">
+            <span class="badge">Popular</span>
+            <img src="https://wakewyze.lovable.app/assets/pouch-caramel-BYW0C-ZT.jpg" alt="Caramel mushroom coffee pouch">
+          </div>
+          <div class="notes">Burnt sugar · Warm butter</div>
+          <h3>Caramel</h3>
+          <p class="desc">Slow-cooked caramel notes folded into arabica. Sweet without a gram of sugar.</p>
+          <div class="price-line"><span class="price">₹1,299</span></div>
+          <div class="meta">250g / 30 Servings</div>
+          <button class="btn small add-to-cart" data-name="Caramel" data-price="1299" data-img="https://wakewyze.lovable.app/assets/pouch-caramel-BYW0C-ZT.jpg">Add to Cart</button>
+        </div>
+
+        <div class="prod-card">
+          <div class="img-wrap">
+            <span class="badge">New</span>
+            <img src="https://wakewyze.lovable.app/assets/pouch-vanilla-BgBJpK3K.jpg" alt="Vanilla mushroom coffee pouch">
+          </div>
+          <div class="notes">Bourbon vanilla · Cream</div>
+          <h3>Vanilla</h3>
+          <p class="desc">Soft, rounded and aromatic. A gentler cup for long, quiet mornings.</p>
+          <div class="price-line"><span class="price">₹1,299</span></div>
+          <div class="meta">250g / 30 Servings</div>
+          <button class="btn small add-to-cart" data-name="Vanilla" data-price="1299" data-img="https://wakewyze.lovable.app/assets/pouch-vanilla-BgBJpK3K.jpg">Add to Cart</button>
+        </div>
+
+        <div class="prod-card">
+          <div class="img-wrap">
+            <span class="badge">Classic</span>
+            <img src="https://wakewyze.lovable.app/assets/pouch-hazelnut-CCPdXlVY.jpg" alt="Roasted Hazelnut mushroom coffee pouch">
+          </div>
+          <div class="notes">Roasted nut · Bitter cacao</div>
+          <h3>Roasted Hazelnut</h3>
+          <p class="desc">Bold roast with a nutty finish. Built for people who take it black.</p>
+          <div class="price-line"><span class="price">₹1,299</span></div>
+          <div class="meta">250g / 30 Servings</div>
+          <button class="btn small add-to-cart" data-name="Roasted Hazelnut" data-price="1299" data-img="https://wakewyze.lovable.app/assets/pouch-hazelnut-CCPdXlVY.jpg">Add to Cart</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRE-ORDER -->
+  <section id="pre-order">
+    <div class="wrap">
+      <div class="preorder">
+        <div class="preorder-grid">
+          <div>
+            <span class="eyebrow" style="color:var(--sage-soft)">Pre-Order</span>
+            <h2>Reserve the first batch.</h2>
+            <p style="opacity:.8;font-size:15px;line-height:1.6;">Micro-batched roasting means limited pouches. Sign up and we'll hold yours before it goes live.</p>
+            <ul>
+              <li>No payment until your batch ships</li>
+              <li>First access to new blends</li>
+              <li>Founding-customer pricing locked in</li>
+            </ul>
+          </div>
+          <form id="preorderForm">
+            <div class="form-grid">
+              <div class="full">
+                <label>Full name</label>
+                <input type="text" placeholder="Your name" required>
+              </div>
+              <div>
+                <label>Phone number</label>
+                <input type="tel" placeholder="+91" required>
+              </div>
+              <div>
+                <label>Email</label>
+                <input type="email" placeholder="you@email.com" required>
+              </div>
+              <div>
+                <label>Age</label>
+                <input type="number" placeholder="Age" min="1">
+              </div>
+              <div>
+                <label>City</label>
+                <input type="text" placeholder="City" required>
+              </div>
+              <div class="full">
+                <label>Blend you're interested in*</label>
+                <select required>
+                  <option value="">Select a blend</option>
+                  <option>Original Blend</option>
+                  <option>Caramel</option>
+                  <option>Vanilla</option>
+                  <option>Roasted Hazelnut</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn">Reserve My Pouch</button>
+            <p class="preorder-note">No payment now. We'll reach out before the first batch ships.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo">
+      <span class="mark">W&amp;</span>
+      Wake &amp; Wyze
+    </a>
+    <div class="social">
+      <a href="#top">Instagram</a>
+      <a href="#top">X</a>
+      <a href="#top">LinkedIn</a>
+    </div>
+    <p class="copy">© 2026 Wake &amp; Wyze. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 id="drawerTitle">0 items</h3>
+    <button id="drawerClose">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <p class="drawer-empty">Your cart is empty. Pick a blend to begin.</p>
+  </div>
+  <div class="drawer-foot">
+    <div class="subtotal-row"><span>Subtotal</span><span id="subtotalVal">₹0</span></div>
+    <p class="ship-note">Free shipping across India · Ships in 24 hours</p>
+    <button class="btn small">Proceed to Checkout</button>
+  </div>
+</div>
+
+<script>
+  const cart = {}; // name -> {price, img, qty}
+
+  const cartCountEl = document.getElementById('cartCount');
+  const drawerBody = document.getElementById('drawerBody');
+  const drawerTitle = document.getElementById('drawerTitle');
+  const subtotalVal = document.getElementById('subtotalVal');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+
+  function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); }
+  function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); }
+
+  document.getElementById('cartOpenBtn').addEventListener('click', openDrawer);
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.name;
+      const price = parseFloat(btn.dataset.price);
+      const img = btn.dataset.img;
+      if(!cart[name]) cart[name] = {price, img, qty:0};
+      cart[name].qty += 1;
+      render();
+      openDrawer();
+    });
+  });
+
+  function render(){
+    const names = Object.keys(cart).filter(n => cart[n].qty > 0);
+    const totalQty = names.reduce((s,n) => s + cart[n].qty, 0);
+    cartCountEl.textContent = totalQty;
+    drawerTitle.textContent = totalQty + (totalQty === 1 ? ' item' : ' items');
+
+    if(names.length === 0){
+      drawerBody.innerHTML = '<p class="drawer-empty">Your cart is empty. Pick a blend to begin.</p>';
+      subtotalVal.textContent = '₹0';
+      return;
+    }
+
+    let subtotal = 0;
+    drawerBody.innerHTML = names.map(name => {
+      const item = cart[name];
+      subtotal += item.price * item.qty;
+      return `
+        <div class="drawer-item" data-name="${name}">
+          <img src="${item.img}" alt="${name}">
+          <div class="info">
+            <h4>${name}</h4>
+            <span>₹${item.price.toLocaleString('en-IN')}</span>
+          </div>
+          <div class="qty-ctrl">
+            <button class="dec">−</button>
+            <span>${item.qty}</span>
+            <button class="inc">+</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+    subtotalVal.textContent = '₹' + subtotal.toLocaleString('en-IN');
+
+    drawerBody.querySelectorAll('.drawer-item').forEach(row => {
+      const name = row.dataset.name;
+      row.querySelector('.inc').addEventListener('click', () => { cart[name].qty += 1; render(); });
+      row.querySelector('.dec').addEventListener('click', () => {
+        cart[name].qty -= 1;
+        if(cart[name].qty <= 0) delete cart[name];
+        render();
+      });
+    });
+  }
+
+  document.getElementById('preorderForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thanks — your pouch is reserved. We\\'ll be in touch before the first batch ships.');
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>

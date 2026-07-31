@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "src/app/api/preorders/route.ts": {
+      "maxDuration": 15,
+      "memory": 256
+    },
+    "src/app/api/preorders/[id]/route.ts": {
+      "maxDuration": 15,
+      "memory": 256
+    }
+  }
+}

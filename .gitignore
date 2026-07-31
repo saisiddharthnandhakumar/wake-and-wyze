@@ -36,6 +36,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# database
+*.db
+*.db-journal
+
+# project files (not needed in production)
+*.pdf
+Product Images/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
