@@ -1,14 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isHome = pathname === "/";
+  const darkOverlay = isHome && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8);
@@ -47,7 +52,7 @@ export function Header() {
               alt="Wake & Wyze"
               width={96}
               height={96}
-              className="h-20 w-auto"
+              className={cn("h-20 w-auto", darkOverlay && "invert")}
             />
             <span className="sr-only">Wake &amp; Wyze</span>
           </a>
@@ -58,7 +63,12 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-ink-muted hover:text-ink transition-colors"
+                className={cn(
+                  "text-sm transition-colors",
+                  darkOverlay
+                    ? "text-surface/70 hover:text-surface"
+                    : "text-ink-muted hover:text-ink",
+                )}
               >
                 {link.label}
               </a>
@@ -68,7 +78,10 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <a href="#preorder">
-              <Button variant="primary" size="sm">
+              <Button
+                variant={darkOverlay ? "hero-outline" : "primary"}
+                size="sm"
+              >
                 Pre Order Now
               </Button>
             </a>
@@ -76,11 +89,15 @@ export function Header() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 text-ink cursor-pointer"
+            className="md:hidden p-2 cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? (
+              <X size={22} className="text-ink" />
+            ) : (
+              <Menu size={22} className={darkOverlay ? "text-surface" : "text-ink"} />
+            )}
           </button>
         </div>
       </div>

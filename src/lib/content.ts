@@ -13,12 +13,13 @@ export const NAV_LINKS = [
 
 // ---- HERO ----
 export const HERO = {
-  eyebrow: null,
+  eyebrow: "Specialty Coffee × Lion's Mane",
   headline: "A smarter cup of coffee.",
   subheadline:
     "Premium specialty coffee infused with Lion's Mane, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
   primaryCta: "Pre Order Now: ₹1,299",
   secondaryCta: "See the research",
+  pulsingText: "WAKE & WYZE · FOCUS · CALM · SHARP · ",
   trustItems: [
     "30 servings / 250g",
     "No added sugar",

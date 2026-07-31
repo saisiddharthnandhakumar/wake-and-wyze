@@ -14,6 +14,10 @@ const buttonVariants = cva(
         ghost: "bg-transparent text-ink-muted hover:text-ink hover:bg-sage-mist",
         sage: "bg-sage text-white hover:bg-sage-deep hover:translate-y-[-1px] shadow-sm hover:shadow-md",
         bronze: "bg-bronze text-white hover:opacity-90",
+        "hero-filled":
+          "bg-surface text-ink hover:bg-white hover:translate-y-[-1px] shadow-md",
+        "hero-outline":
+          "bg-transparent text-surface border border-surface/40 hover:bg-surface hover:text-ink",
       },
       size: {
         sm: "px-4 py-2 text-sm",
