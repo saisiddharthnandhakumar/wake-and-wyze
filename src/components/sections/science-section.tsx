@@ -31,7 +31,9 @@ export function ScienceSection() {
 
   return (
     <section id="science" className="min-h-dvh flex flex-col justify-center py-16 lg:py-20">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+      {/* w-full + min-w-0 gives this flex item a definite width so the
+          carousel track's min-content can't force horizontal overflow */}
+      <div className="mx-auto w-full min-w-0 max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="section-eyebrow">{SCIENCE.eyebrow}</p>
           <h2 className="section-heading whitespace-pre-line">{SCIENCE.headline}</h2>
@@ -39,7 +41,7 @@ export function ScienceSection() {
 
         {/* Carousel */}
         <div
-          className="mt-8 relative max-w-2xl mx-auto"
+          className="mt-8 relative max-w-2xl mx-auto w-full min-w-0"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
