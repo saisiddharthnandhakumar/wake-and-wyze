@@ -1,7 +1,6 @@
 "use client";
 
 import { ShieldCheck, Truck } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { FLAVORS, PRICE_PAISE } from "@/lib/constants";
 import { formatINR } from "@/lib/order";
 import { cartTotalQuantity } from "@/lib/cart";
@@ -77,8 +76,8 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
 
             {discountPaise > 0 && (
               <div className="flex items-center justify-between gap-4">
-                <dt className="text-sm text-green-700">Discount</dt>
-                <dd className="text-sm font-medium text-green-700 tabular-nums">
+                <dt className="text-sm text-success">Discount</dt>
+                <dd className="text-sm font-medium text-success tabular-nums">
                   − {formatINR(discountPaise)}
                 </dd>
               </div>
@@ -103,7 +102,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
         </p>
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <ShieldCheck size={14} className="shrink-0 text-sage" />
-          Pay securely by UPI
+          Secure pre-order checkout
         </p>
       </div>
     </Card>

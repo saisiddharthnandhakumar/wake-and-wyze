@@ -45,8 +45,8 @@ export function SuccessCard({ id, orderNumber, totalPaise, items }: SuccessCardP
 
   return (
     <Card className="p-8 lg:p-10 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-        <CheckCircle2 size={36} className="text-green-600" aria-hidden="true" />
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success-soft">
+        <CheckCircle2 size={36} className="text-success" aria-hidden="true" />
       </div>
 
       <h3 className="mt-5 font-display text-2xl font-bold text-ink">
@@ -70,7 +70,7 @@ export function SuccessCard({ id, orderNumber, totalPaise, items }: SuccessCardP
 
       <a
         href={`/order/${id}`}
-        className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-3.5 text-sm font-medium text-surface transition-all duration-200 hover:bg-sage-deep hover:translate-y-[-1px] shadow-sm hover:shadow-md cursor-pointer no-underline"
+        className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-3.5 text-sm font-medium text-surface transition-all duration-200 hover:bg-ink-hover hover:translate-y-[-1px] shadow-sm hover:shadow-md cursor-pointer no-underline"
       >
         Track My Order
         <ArrowRight size={16} />

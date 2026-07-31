@@ -10,7 +10,7 @@ const PRICE = "₹1,299";
 // Mirrors Button's `primary` + `sm` variants — anchors need hrefs so we
 // style them directly instead of wrapping a <button>.
 const selectButtonClassName =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 bg-ink text-surface hover:bg-sage-deep hover:translate-y-[-1px] shadow-sm hover:shadow-md px-4 py-2 text-sm";
+  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 bg-ink text-surface hover:bg-ink-hover hover:translate-y-[-1px] shadow-sm hover:shadow-md px-4 py-2 text-sm";
 
 export function FlavorSection() {
   return (

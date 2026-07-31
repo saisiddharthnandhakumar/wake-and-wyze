@@ -33,7 +33,7 @@ export function HeroSection() {
 
           {/* Copy */}
           <div className="order-2 lg:order-1">
-            <h1 className="font-display text-4xl font-bold tracking-tight text-balance text-ink sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-4xl font-light tracking-tight text-balance text-ink sm:text-5xl lg:text-6xl leading-[1.05]">
               {HERO.headline}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">

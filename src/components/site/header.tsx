@@ -35,7 +35,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a
             href="#hero"
@@ -45,9 +45,9 @@ export function Header() {
             <img
               src="/images/ww-logo.png"
               alt="Wake & Wyze"
-              width={60}
-              height={60}
-              className="h-11 w-auto"
+              width={72}
+              height={72}
+              className="h-14 w-auto"
             />
             <span className="sr-only">Wake &amp; Wyze</span>
           </a>
@@ -68,7 +68,7 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <a href="#preorder">
-              <Button variant="sage" size="sm">
+              <Button variant="primary" size="sm">
                 Pre-Order Now
               </Button>
             </a>
@@ -104,7 +104,7 @@ export function Header() {
             </a>
           ))}
           <a href="#preorder" className="mt-2" onClick={() => setMobileOpen(false)}>
-            <Button variant="sage" className="w-full">
+            <Button variant="primary" className="w-full">
               Pre-Order Now
             </Button>
           </a>

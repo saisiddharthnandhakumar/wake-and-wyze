@@ -3,12 +3,10 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { ProblemSection } from "@/components/sections/problem-section";
 import { SolutionSection } from "@/components/sections/solution-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
-import { HowItWorksSection } from "@/components/sections/how-it-works-section";
 import { ScienceSection } from "@/components/sections/science-section";
 import { WhyLionsManeSection } from "@/components/sections/why-lions-mane-section";
 import { TasteSection } from "@/components/sections/taste-section";
 import { FlavorSection } from "@/components/sections/flavor-section";
-import { SocialProofSection } from "@/components/sections/social-proof-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 
@@ -46,12 +44,10 @@ export default function HomePage() {
       <ProblemSection />
       <SolutionSection />
       <BenefitsSection />
-      <HowItWorksSection />
       <ScienceSection />
       <WhyLionsManeSection />
       <TasteSection />
       <FlavorSection />
-      <SocialProofSection />
       <FaqSection />
       <PreOrderSection />
       <FinalCtaSection />

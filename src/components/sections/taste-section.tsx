@@ -6,12 +6,8 @@ export function TasteSection() {
     <section id="taste" className="py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="text-center">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-sage">
-            {TASTE.eyebrow}
-          </p>
-          <h2 className="whitespace-pre-line font-display text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl lg:text-5xl">
-            {TASTE.headline}
-          </h2>
+          <p className="section-eyebrow">{TASTE.eyebrow}</p>
+          <h2 className="section-heading whitespace-pre-line">{TASTE.headline}</h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
             {TASTE.body}
           </p>

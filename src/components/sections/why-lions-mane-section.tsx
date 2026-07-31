@@ -11,12 +11,8 @@ export function WhyLionsManeSection() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — what it is / isn't */}
           <Reveal>
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-sage">
-              {WHY_LIONS_MANE.eyebrow}
-            </p>
-            <h2 className="whitespace-pre-line font-display text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl lg:text-5xl">
-              {WHY_LIONS_MANE.headline}
-            </h2>
+            <p className="section-eyebrow">{WHY_LIONS_MANE.eyebrow}</p>
+            <h2 className="section-heading whitespace-pre-line">{WHY_LIONS_MANE.headline}</h2>
             <p className="mt-5 leading-relaxed text-ink-muted">{WHY_LIONS_MANE.whatItIs}</p>
 
             <ul className="mt-6 space-y-3">
@@ -46,7 +42,7 @@ export function WhyLionsManeSection() {
                       <p className="text-xs uppercase tracking-[0.14em] text-ink-muted">
                         {item.period}
                       </p>
-                      <h3 className="mt-1 font-display text-lg font-bold tracking-tight text-ink">
+                      <h3 className="mt-1 font-display text-lg font-semibold tracking-tight text-ink">
                         {item.label}
                       </h3>
                       <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">

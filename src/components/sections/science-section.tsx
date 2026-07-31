@@ -1,51 +1,93 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SCIENCE } from "@/lib/content";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/reveal";
 
 export function ScienceSection() {
+  const studies = SCIENCE.studies;
+  const [active, setActive] = useState(0);
+
+  const prev = () => setActive((i) => (i === 0 ? studies.length - 1 : i - 1));
+  const next = () => setActive((i) => (i === studies.length - 1 ? 0 : i + 1));
+
   return (
     <section id="science" className="py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-sage">
-            {SCIENCE.eyebrow}
-          </p>
-          <h2 className="whitespace-pre-line font-display text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl lg:text-5xl">
-            {SCIENCE.headline}
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">{SCIENCE.subheadline}</p>
+          <p className="section-eyebrow">{SCIENCE.eyebrow}</p>
+          <h2 className="section-heading whitespace-pre-line">{SCIENCE.headline}</h2>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {SCIENCE.studies.map((study, index) => (
-            <Reveal key={study.id} delay={index * 100} className="h-full">
-              <Card className="flex h-full flex-col border-l-4 border-l-sage">
-                <span className="font-display text-3xl font-bold text-sage">
-                  {String(study.id).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 font-display text-xl font-bold tracking-tight text-ink">
-                  {study.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
-                  {study.summary}
-                </p>
-                <p className="mt-5 text-sm font-medium italic text-sage">{study.citation}</p>
-                <p className="mt-2 text-xs leading-relaxed text-ink-muted">{study.reference}</p>
-              </Card>
-            </Reveal>
-          ))}
+        {/* Carousel */}
+        <div className="mt-12 relative max-w-2xl mx-auto">
+          <div className="overflow-hidden rounded-2xl">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${active * 100}%)` }}
+            >
+              {studies.map((study) => (
+                <div key={study.id} className="w-full flex-shrink-0 px-2">
+                  <Card className="border-l-4 border-l-sage text-center py-8 px-6">
+                    <span className="font-display text-3xl font-bold text-sage">
+                      {String(study.id).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-ink">
+                      {study.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-muted max-w-md mx-auto">
+                      {study.summary}
+                    </p>
+                    <p className="mt-4 text-sm font-medium italic text-sage">
+                      {study.citation}
+                    </p>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation controls */}
+          <div className="mt-8 flex items-center justify-center gap-6">
+            <button
+              onClick={prev}
+              aria-label="Previous study"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-raised text-ink-muted transition-all hover:border-sage hover:text-sage hover:shadow-sm"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            <div className="flex items-center gap-2.5" role="tablist" aria-label="Study slides">
+              {studies.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  role="tab"
+                  aria-selected={i === active}
+                  aria-label={`Study ${i + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    i === active ? "w-7 bg-sage" : "w-2 bg-border hover:bg-ink-muted/30"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={next}
+              aria-label="Next study"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-raised text-ink-muted transition-all hover:border-sage hover:text-sage hover:shadow-sm"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
 
-        <Reveal delay={150} className="mt-12">
-          <p className="max-w-3xl text-xs leading-relaxed text-ink-muted">{SCIENCE.disclaimer}</p>
-          <ol className="mt-6 max-w-3xl space-y-2.5">
-            {SCIENCE.citations.map((citation, index) => (
-              <li key={citation} className="flex gap-3 text-xs leading-relaxed text-ink-muted">
-                <span className="shrink-0 font-semibold text-sage">{index + 1}.</span>
-                <span>{citation}</span>
-              </li>
-            ))}
-          </ol>
+        <Reveal delay={150} className="mt-10">
+          <p className="max-w-2xl mx-auto text-xs leading-relaxed text-ink-muted text-center">
+            {SCIENCE.disclaimer}
+          </p>
         </Reveal>
       </div>
     </section>

@@ -7,10 +7,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <a href="#hero" className="flex items-center gap-2.5 font-display font-bold text-lg text-surface no-underline mb-4">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-surface text-ink text-sm font-bold">
-                W&amp;
-              </span>
+            <a href="#hero" className="flex items-center gap-2.5 font-display font-semibold text-lg text-surface no-underline mb-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/ww-logo.png"
+                alt="Wake & Wyze"
+                width={36}
+                height={36}
+                className="h-9 w-auto"
+              />
               Wake &amp; Wyze
             </a>
             <p className="text-sm text-surface/60 leading-relaxed max-w-xs">

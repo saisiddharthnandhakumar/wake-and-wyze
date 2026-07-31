@@ -79,7 +79,7 @@ export function QrPanel({ orderNumber, totalPaise, onConfirm }: QrPanelProps) {
               alt="UPI payment QR code"
               width={224}
               height={224}
-              className="h-56 w-56 rounded-2xl border border-border bg-white object-contain p-2"
+              className="h-56 w-56 rounded-2xl border border-border bg-surface-raised object-contain p-2"
               onError={() => setQrError(true)}
             />
           )}
@@ -123,7 +123,7 @@ export function QrPanel({ orderNumber, totalPaise, onConfirm }: QrPanelProps) {
             spellCheck={false}
           />
           {error && (
-            <p role="alert" className="mt-2 text-left text-xs font-medium text-red-600">
+            <p role="alert" className="mt-2 text-left text-xs font-medium text-danger">
               {error}
             </p>
           )}

@@ -66,8 +66,8 @@ export function CouponInput({ couponCode, onChange, totalQuantity, onApplied }: 
           spellCheck={false}
           className={cn(
             "uppercase tracking-wide",
-            status === "success" && "border-green-600/60 focus-visible:ring-green-600",
-            status === "error" && "border-red-600/60 focus-visible:ring-red-600",
+            status === "success" && "border-success/60 focus-visible:ring-success",
+            status === "error" && "border-danger/60 focus-visible:ring-danger",
           )}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -90,13 +90,13 @@ export function CouponInput({ couponCode, onChange, totalQuantity, onApplied }: 
 
       <div className="mt-2 min-h-5" aria-live="polite">
         {status === "success" && lastApplied && (
-          <p className="flex items-center gap-1.5 text-xs font-medium text-green-700">
+          <p className="flex items-center gap-1.5 text-xs font-medium text-success">
             <CheckCircle2 size={14} className="shrink-0" />
             {COUPONS[lastApplied]?.discountPercent}% off applied!
           </p>
         )}
         {status === "error" && (
-          <p className="flex items-center gap-1.5 text-xs font-medium text-red-600">
+          <p className="flex items-center gap-1.5 text-xs font-medium text-danger">
             <XCircle size={14} className="shrink-0" />
             Invalid code
           </p>

@@ -35,7 +35,7 @@ const LABEL_CLASS = "block text-xs tracking-wider uppercase text-ink-muted mb-1.
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null;
-  return <p className="mt-1.5 text-xs font-medium text-red-600">{message}</p>;
+  return <p className="mt-1.5 text-xs font-medium text-danger">{message}</p>;
 }
 
 export function CheckoutForm({
@@ -165,7 +165,7 @@ export function CheckoutForm({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Rahul Sharma"
-          className={cn(errors.name && "border-red-600/60 focus-visible:ring-red-600")}
+          className={cn(errors.name && "border-danger/60 focus-visible:ring-danger")}
           aria-invalid={Boolean(errors.name)}
         />
         <FieldError message={errors.name} />
@@ -186,7 +186,7 @@ export function CheckoutForm({
           value={phone}
           onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
           placeholder="9876543210"
-          className={cn(errors.phone && "border-red-600/60 focus-visible:ring-red-600")}
+          className={cn(errors.phone && "border-danger/60 focus-visible:ring-danger")}
           aria-invalid={Boolean(errors.phone)}
         />
         <FieldError message={errors.phone} />
@@ -205,7 +205,7 @@ export function CheckoutForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className={cn(errors.email && "border-red-600/60 focus-visible:ring-red-600")}
+          className={cn(errors.email && "border-danger/60 focus-visible:ring-danger")}
           aria-invalid={Boolean(errors.email)}
         />
         <FieldError message={errors.email} />
@@ -223,7 +223,7 @@ export function CheckoutForm({
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           placeholder="House no., street, area, landmark"
-          className={cn(errors.address && "border-red-600/60 focus-visible:ring-red-600")}
+          className={cn(errors.address && "border-danger/60 focus-visible:ring-danger")}
           aria-invalid={Boolean(errors.address)}
         />
         <FieldError message={errors.address} />
@@ -241,7 +241,7 @@ export function CheckoutForm({
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Bengaluru"
-          className={cn(errors.city && "border-red-600/60 focus-visible:ring-red-600")}
+          className={cn(errors.city && "border-danger/60 focus-visible:ring-danger")}
           aria-invalid={Boolean(errors.city)}
         />
         <FieldError message={errors.city} />
@@ -258,7 +258,7 @@ export function CheckoutForm({
           autoComplete="address-level1"
           value={state}
           onChange={(e) => setState(e.target.value)}
-          className={cn(errors.state && "border-red-600/60 focus-visible:ring-red-600")}
+          className={cn(errors.state && "border-danger/60 focus-visible:ring-danger")}
           aria-invalid={Boolean(errors.state)}
         >
           <option value="" disabled>
@@ -289,7 +289,7 @@ export function CheckoutForm({
           placeholder="560001"
           className={cn(
             "max-w-full md:max-w-xs",
-            errors.pincode && "border-red-600/60 focus-visible:ring-red-600",
+            errors.pincode && "border-danger/60 focus-visible:ring-danger",
           )}
           aria-invalid={Boolean(errors.pincode)}
         />
@@ -300,7 +300,7 @@ export function CheckoutForm({
       {errors.items && (
         <p
           role="alert"
-          className="md:col-span-2 rounded-xl border border-red-600/30 bg-red-50 px-4 py-3 text-sm text-red-700"
+          className="md:col-span-2 rounded-xl border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-danger"
         >
           {errors.items}
         </p>
@@ -309,7 +309,7 @@ export function CheckoutForm({
       {submitError && !errors.items && (
         <p
           role="alert"
-          className="md:col-span-2 rounded-xl border border-red-600/30 bg-red-50 px-4 py-3 text-sm text-red-700"
+          className="md:col-span-2 rounded-xl border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-danger"
         >
           {submitError}
         </p>
@@ -336,7 +336,7 @@ export function CheckoutForm({
         </Button>
         <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-ink-muted">
           <Lock size={13} className="shrink-0" />
-          Your details are safe. You&apos;ll pay securely by UPI after this step.
+          Your details are safe. You&apos;ll complete your pre-order payment in the next step.
         </p>
       </div>
     </form>

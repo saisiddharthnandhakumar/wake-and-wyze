@@ -18,8 +18,8 @@ function StatusBadge({ status }: { status: string }) {
       label: "Awaiting Confirmation",
       className: "bg-bronze/10 text-bronze",
     },
-    paid: { label: "Confirmed", className: "bg-green-100 text-green-700" },
-    cancelled: { label: "Cancelled", className: "bg-red-100 text-red-600" },
+    paid: { label: "Confirmed", className: "bg-success-soft text-success" },
+    cancelled: { label: "Cancelled", className: "bg-danger-soft text-danger" },
   };
   const c = config[status] ?? config.pending;
   return (
@@ -102,8 +102,8 @@ export default async function OrderPage({ params }: Props) {
         </div>
 
         {order.paymentStatus === "paid" && (
-          <div className="mt-6 p-4 bg-green-50 border border-green-100 rounded-xl text-center">
-            <p className="text-green-700 text-sm font-medium">
+          <div className="mt-6 p-4 bg-success-soft border border-success/20 rounded-xl text-center">
+            <p className="text-success text-sm font-medium">
               Payment confirmed — your order is being processed. We&apos;ll notify you when it ships.
             </p>
           </div>

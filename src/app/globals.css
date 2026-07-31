@@ -1,22 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --app-surface: #F7F3EB;
-  --app-surface-raised: #FFFDF8;
+  /* Warm neutrals — espresso + cream */
+  --app-surface: #F6F1E7;
+  --app-surface-raised: #FDF9F1;
   --app-ink: #241811;
-  --app-ink-muted: #5C4F46;
-  --app-sage: #5F6E4E;
-  --app-sage-deep: #4A5A3C;
-  --app-sage-mist: #EDF0E7;
-  --app-bronze: #A8551F;
-  --app-border: #E8E3DA;
-  --app-border-light: #F0EBE2;
+  --app-ink-hover: #3A2A1D;
+  --app-ink-muted: #6B5746;
+  --app-border: #E6DFD3;
+  --app-border-light: #EFE9DE;
+
+  /* Accent — warm moss (single supporting green) */
+  --app-sage: #5C6A4B;
+  --app-sage-deep: #48543C;
+  --app-sage-mist: #EDEAE0;
+
+  /* Primary brand accent — roasted chestnut (deep copper, not orange) */
+  --app-bronze: #96552A;
+
+  /* Semantic — status colors that belong in the warm palette */
+  --app-success: #4F6B3A;
+  --app-success-soft: #E7EDDC;
+  --app-danger: #A8442A;
+  --app-danger-soft: #F6E4DE;
 }
 
 @theme inline {
   --color-surface: var(--app-surface);
   --color-surface-raised: var(--app-surface-raised);
   --color-ink: var(--app-ink);
+  --color-ink-hover: var(--app-ink-hover);
   --color-ink-muted: var(--app-ink-muted);
   --color-sage: var(--app-sage);
   --color-sage-deep: var(--app-sage-deep);
@@ -24,9 +37,12 @@
   --color-bronze: var(--app-bronze);
   --color-border: var(--app-border);
   --color-border-light: var(--app-border-light);
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
+  --color-success: var(--app-success);
+  --color-success-soft: var(--app-success-soft);
+  --color-danger: var(--app-danger);
+  --color-danger-soft: var(--app-danger-soft);
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -37,8 +53,8 @@
   body {
     background: var(--app-surface);
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(168, 85, 31, 0.06), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(95, 110, 78, 0.04), transparent);
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(150, 85, 42, 0.05), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(92, 106, 75, 0.03), transparent);
     color: var(--app-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -46,8 +62,9 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-serif);
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.01em;
   }
 
   ::selection {
@@ -67,8 +84,15 @@
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .section-eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-sage;
   }
+  .section-heading {
+    @apply font-display text-3xl font-light tracking-tight text-balance text-ink sm:text-4xl leading-tight;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
 }

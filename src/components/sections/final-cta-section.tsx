@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function FinalCtaSection() {
   return (
-    <section id="final-cta" className="bg-sage-mist py-20 lg:py-28">
+    <section id="final-cta" className="bg-ink py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <Reveal className="flex flex-col items-center text-center">
           <div className="relative mx-auto aspect-[4/3] w-full max-w-sm">
@@ -18,10 +18,10 @@ export function FinalCtaSection() {
             />
           </div>
 
-          <h2 className="mt-8 font-display text-3xl font-bold tracking-tight text-balance text-ink sm:text-4xl lg:text-5xl">
+          <h2 className="mt-8 font-display text-3xl font-light tracking-tight text-balance text-surface sm:text-4xl lg:text-5xl">
             {FINAL_CTA.headline}
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">{FINAL_CTA.subheadline}</p>
+          <p className="mt-5 text-lg leading-relaxed text-surface/70">{FINAL_CTA.subheadline}</p>
 
           <a href="#preorder" className="mt-10 inline-block">
             <Button variant="sage" size="xl">
@@ -29,7 +29,7 @@ export function FinalCtaSection() {
             </Button>
           </a>
 
-          <p className="mt-6 text-sm text-ink-muted">{FINAL_CTA.trustLine}</p>
+          <p className="mt-6 text-sm text-surface/50">{FINAL_CTA.trustLine}</p>
         </Reveal>
       </div>
     </section>

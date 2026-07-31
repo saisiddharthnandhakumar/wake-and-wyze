@@ -1,27 +1,15 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope, Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { AnalyticsScripts } from "@/components/site/analytics-scripts";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-  axes: ["opsz", "SOFT"],
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  weight: "variable",
 });
 
 export const metadata: Metadata = {
@@ -50,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable} ${inter.variable}`}>
+    <html lang="en" className={montserrat.variable}>
       <body className="min-h-screen bg-surface text-ink font-sans antialiased">
         <a
           href="#main-content"

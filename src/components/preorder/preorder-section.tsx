@@ -117,12 +117,12 @@ export function PreOrderSection() {
           <p className="text-xs tracking-wider uppercase text-sage-deep font-semibold">
             Pre-Order
           </p>
-          <h2 className="mt-2 font-display text-3xl lg:text-4xl font-bold text-ink text-balance">
+          <h2 className="mt-2 font-display text-3xl lg:text-4xl font-light text-ink text-balance">
             Build Your Box
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
-            Mix and match your favorite flavors. Max 10 bags per order — free delivery
-            on all pre-orders, pay securely by UPI.
+            Mix and match your favorite flavors. Up to 10 bags per order — free delivery
+            on all pre-orders.
           </p>
         </div>
 
