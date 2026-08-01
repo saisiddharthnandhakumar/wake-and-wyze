@@ -188,10 +188,6 @@ export const FAQS = {
       answer: "One 250g bag contains 30 servings, about one month for daily drinkers. Each serving is about 8–9 grams of instant coffee powder — just add hot water and stir. No brewing equipment needed.",
     },
     {
-      question: "Is it vegetarian?",
-      answer: "Yes. Wake & Wyze is 100% vegetarian. It contains premium coffee beans (brewed into instant coffee) and Lion's Mane mushroom extract, nothing else.",
-    },
-    {
       question: "Is it safe for daily use?",
       answer: "Lion's Mane is generally regarded as safe and is traditionally consumed as a food mushroom. Clinical trials using 1.8–3g/day reported no serious adverse events. As with any dietary change, consult your healthcare provider if you have mushroom allergies, are pregnant or breastfeeding, or are on medication.",
     },
@@ -213,7 +209,7 @@ export const FINAL_CTA = {
 // ---- ORDER NOTICE ----
 export const ORDER_NOTICE = {
   deliveryMessage:
-    "Since these are pre-orders, delivery may take a little longer than usual as we're preparing our first batch. Expect delivery within 7–10 business days.",
+    "Since these are pre-orders, delivery may take a little longer than usual. Expect delivery within 7–10 business days.",
 };
 
 // ---- FOOTER ----

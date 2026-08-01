@@ -103,7 +103,7 @@ export function CouponInput({ couponCode, onChange, totalQuantity, onApplied }: 
         )}
         {status === "idle" && (
           <p className="text-xs text-ink-muted">
-            Have a code? Enter it above. Hint: FOCUS10
+            Have a code? Enter it above.
           </p>
         )}
       </div>
