@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { formatINR } from "@/lib/order";
 import { FLAVORS } from "@/lib/constants";
 import { ORDER_NOTICE } from "@/lib/content";
@@ -12,20 +12,23 @@ interface OrderConfirmationParams {
 }
 
 /**
- * Send an order acknowledgement email after a pre-order is placed.
+ * Send a warm, personal thank-you email after the customer confirms payment
+ * on a pre-order.
  *
  * Fire-and-forget: callers should NOT await this — email failure must never
- * block order creation. Errors are logged here and swallowed.
+ * block the order flow. Errors are logged here and swallowed.
  */
 export async function sendOrderConfirmation(params: OrderConfirmationParams) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.RESEND_FROM_EMAIL;
+  const user = process.env.GMAIL_USER;
+  const appPassword = process.env.GMAIL_APP_PASSWORD;
 
-  // No credentials configured (e.g. local dev without .env values) — skip silently.
-  if (!apiKey || !fromEmail) {
-    console.warn("[email] RESEND_API_KEY or RESEND_FROM_EMAIL not set; skipping order confirmation email");
+  // No credentials configured (e.g. local dev without .env values) — skip.
+  if (!user || !appPassword) {
+    console.warn("[email] GMAIL_USER or GMAIL_APP_PASSWORD not set; skipping confirmation email");
     return;
   }
+
+  const firstName = params.name.split(" ")[0];
 
   const lineItems = params.items
     .map((item) => {
@@ -38,26 +41,37 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
     })
     .join("");
 
-  // Construct lazily — the Resend SDK throws if the key is missing at
-  // construction time, so we only build the client when we actually send.
-  const resend = new Resend(apiKey);
+  // Construct lazily so a missing config can't throw at import time.
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass: appPassword },
+  });
 
   try {
-    const { error } = await resend.emails.send({
-      from: `Wake & Wyze <${fromEmail}>`,
+    await transporter.sendMail({
+      from: `Wake & Wyze <${user}>`,
       to: params.email,
-      subject: `Your Wake & Wyze pre-order ${params.orderNumber} is confirmed`,
+      replyTo: user,
+      subject: `${firstName}, your Wake & Wyze order is in — thank you`,
       html: `
         <div style="background:#FAF9EF;padding:40px 16px;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
           <div style="max-width:520px;margin:0 auto;background:#FFFFFF;border:1px solid #EFEAE0;border-radius:16px;overflow:hidden;">
             <div style="padding:32px 32px 8px;text-align:center;">
-              <p style="margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#96552A;">Wake & Wyze</p>
-              <h1 style="margin:12px 0 0;font-size:22px;color:#241811;">Pre Order Confirmed</h1>
-              <p style="margin:8px 0 0;font-size:14px;color:#6B5746;">Hi ${params.name.split(" ")[0]}, thank you for your order!</p>
+              <p style="margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#96552A;">Wake &amp; Wyze</p>
+              <h1 style="margin:12px 0 0;font-size:22px;color:#241811;">Thank you, ${firstName}.</h1>
+              <p style="margin:12px 0 0;font-size:15px;line-height:1.7;color:#6B5746;">
+                We&rsquo;re genuinely grateful you chose Wake &amp; Wyze. As a small brand just
+                getting started, every single order means the world to us.
+              </p>
             </div>
 
-            <div style="padding:16px 32px;">
-              <table style="width:100%;border-collapse:collapse;">
+            <div style="padding:24px 32px 8px;">
+              <p style="margin:0;font-size:15px;line-height:1.7;color:#241811;">
+                You&rsquo;re part of our very first batch — and we&rsquo;re crafting it with the
+                care it deserves. Here&rsquo;s what you ordered:
+              </p>
+
+              <table style="width:100%;border-collapse:collapse;margin-top:16px;">
                 <tr>
                   <td style="padding:8px 0;color:#6B5746;font-size:14px;">Order Number</td>
                   <td style="padding:8px 0;color:#241811;font-size:14px;font-weight:600;text-align:right;">${params.orderNumber}</td>
@@ -70,33 +84,37 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
               </table>
             </div>
 
-            <div style="margin:8px 32px 32px;padding:14px 16px;background:#F6F1E7;border:1px solid #EFEAE0;border-radius:10px;text-align:center;">
+            <div style="margin:24px 32px 0;padding:14px 16px;background:#F6F1E7;border:1px solid #EFEAE0;border-radius:10px;text-align:center;">
               <p style="margin:0;font-size:13px;line-height:1.6;color:#6B5746;">
                 ${ORDER_NOTICE.deliveryMessage}
               </p>
             </div>
 
-            <div style="padding:0 32px 32px;text-align:center;">
-              <p style="margin:0;font-size:12px;color:#6B5746;">
-                We'll notify you by email &amp; SMS once your payment is verified.
+            <div style="padding:24px 32px 0;">
+              <p style="margin:0;font-size:14px;line-height:1.7;color:#6B5746;">
+                We&rsquo;ll email you the moment your order ships. If you have any questions at
+                all, just reply to this email — we read every single one.
+              </p>
+            </div>
+
+            <div style="padding:24px 32px 32px;text-align:center;">
+              <p style="margin:0;font-size:14px;color:#241811;font-style:italic;">
+                With gratitude,<br/>
+                The Wake &amp; Wyze Team
               </p>
             </div>
 
             <div style="padding:16px;background:#F6F1E7;text-align:center;">
               <p style="margin:0;font-size:11px;color:#8A6A4B;">
-                Wake & Wyze · Premium functional instant coffee<br/>
+                Wake &amp; Wyze · Premium functional instant coffee<br/>
                 Questions? Contact +91 95587 42935
               </p>
             </div>
           </div>
         </div>`,
     });
-
-    if (error) {
-      console.error("[email] Resend send failed:", error);
-    }
   } catch (err) {
-    // Never throw — a failed email must not fail the order.
-    console.error("[email] Unexpected error sending order confirmation:", err);
+    // Never throw — a failed email must not fail the payment confirmation.
+    console.error("[email] Failed to send order confirmation email:", err);
   }
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { logStatus } from "@/lib/order";
+import { sendOrderConfirmation } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -67,7 +68,10 @@ export async function PATCH(request: Request, context: RouteContext) {
   try {
     const { id } = await context.params;
 
-    const existing = await prisma.preOrder.findUnique({ where: { id } });
+    const existing = await prisma.preOrder.findUnique({
+      where: { id },
+      include: { items: { select: { flavor: true, quantity: true } } },
+    });
     if (!existing) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
@@ -85,6 +89,19 @@ export async function PATCH(request: Request, context: RouteContext) {
         paidAt: new Date(),
         statusLogJson: logStatus(existing.statusLogJson, "PAYMENT_SUBMITTED"),
       },
+    });
+
+    // Fire-and-forget thank-you email — never blocks the payment confirmation.
+    // The email utility swallows its own errors so this route is unaffected.
+    void sendOrderConfirmation({
+      email: existing.email,
+      name: existing.name,
+      orderNumber: existing.orderNumber,
+      totalPaise: existing.totalPaise,
+      items:
+        existing.items && existing.items.length > 0
+          ? existing.items.map((i) => ({ flavorId: i.flavor, quantity: i.quantity }))
+          : [{ flavorId: existing.flavor, quantity: existing.quantity }],
     });
 
     return NextResponse.json(toSafeOrder(updated));
