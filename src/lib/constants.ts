@@ -45,6 +45,7 @@ export const FLAVORS = [
 export const COUPONS: Record<string, { discountPercent: number; minQuantity: number }> = {
   FOCUS10: { discountPercent: 10, minQuantity: 1 },
   FOUNDER20: { discountPercent: 20, minQuantity: 2 },
+  EARLY20: { discountPercent: 20, minQuantity: 1 },
 };
 
 export const INDIAN_STATES = [
