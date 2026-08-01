@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { prisma } from "@/lib/db";
 import { logStatus } from "@/lib/order";
 import { sendOrderConfirmation } from "@/lib/email";
@@ -91,17 +91,21 @@ export async function PATCH(request: Request, context: RouteContext) {
       },
     });
 
-    // Fire-and-forget thank-you email — never blocks the payment confirmation.
-    // The email utility swallows its own errors so this route is unaffected.
-    void sendOrderConfirmation({
-      email: existing.email,
-      name: existing.name,
-      orderNumber: existing.orderNumber,
-      totalPaise: existing.totalPaise,
-      items:
-        existing.items && existing.items.length > 0
-          ? existing.items.map((i) => ({ flavorId: i.flavor, quantity: i.quantity }))
-          : [{ flavorId: existing.flavor, quantity: existing.quantity }],
+    // Send the thank-you email after the response is flushed. `after()` keeps
+    // the serverless function alive to finish background work — a plain
+    // fire-and-forget promise can be killed when the function returns on Vercel.
+    // Email failures are swallowed inside the utility and never affect the response.
+    after(() => {
+      void sendOrderConfirmation({
+        email: existing.email,
+        name: existing.name,
+        orderNumber: existing.orderNumber,
+        totalPaise: existing.totalPaise,
+        items:
+          existing.items && existing.items.length > 0
+            ? existing.items.map((i) => ({ flavorId: i.flavor, quantity: i.quantity }))
+            : [{ flavorId: existing.flavor, quantity: existing.quantity }],
+      });
     });
 
     return NextResponse.json(toSafeOrder(updated));

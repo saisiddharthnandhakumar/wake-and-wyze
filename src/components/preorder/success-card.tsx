@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { FLAVORS } from "@/lib/constants";
 import { ORDER_NOTICE } from "@/lib/content";
 import { formatINR } from "@/lib/order";
@@ -11,13 +11,12 @@ import { Card } from "@/components/ui/card";
 import type { Cart } from "@/lib/types";
 
 interface SuccessCardProps {
-  id: string;
   orderNumber: string;
   totalPaise: number;
   items: Cart;
 }
 
-export function SuccessCard({ id, orderNumber, totalPaise, items }: SuccessCardProps) {
+export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps) {
   useEffect(() => {
     trackEvent(AnalyticsEvents.PURCHASE, {
       items: cartToAnalyticsItems(items),
@@ -72,14 +71,6 @@ export function SuccessCard({ id, orderNumber, totalPaise, items }: SuccessCardP
       <p className="mx-auto mt-6 max-w-sm rounded-xl bg-bronze/5 border border-bronze/20 px-4 py-3 text-xs leading-relaxed text-ink-muted">
         {ORDER_NOTICE.deliveryMessage}
       </p>
-
-      <a
-        href={`/order/${id}`}
-        className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-3.5 text-sm font-medium text-surface transition-all duration-200 hover:bg-ink-hover hover:translate-y-[-1px] shadow-sm hover:shadow-md cursor-pointer no-underline"
-      >
-        Track My Order
-        <ArrowRight size={16} />
-      </a>
     </Card>
   );
 }

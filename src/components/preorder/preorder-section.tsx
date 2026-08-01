@@ -185,7 +185,6 @@ export function PreOrderSection() {
 
             {stage === "success" && orderResult && (
               <SuccessCard
-                id={orderResult.id}
                 orderNumber={orderResult.orderNumber}
                 totalPaise={orderResult.totalPaise}
                 items={orderResult.items}
