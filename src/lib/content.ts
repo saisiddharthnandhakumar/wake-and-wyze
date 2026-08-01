@@ -17,7 +17,7 @@ export const HERO = {
   headline: "A smarter cup of coffee.",
   subheadline:
     "Premium instant specialty coffee infused with Lion's Mane Mushroom Extract, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
-  primaryCta: "Pre Order Now: ₹1,299",
+  primaryCta: "Pre Order Now: ₹1,399",
   secondaryCta: "See the research",
   pulsingText: "WAKE & WYZE · FOCUS · CALM · SHARP · ",
   trustItems: [
@@ -202,7 +202,7 @@ export const FAQS = {
 export const FINAL_CTA = {
   headline: "Ready for better mornings?",
   subheadline: "Pre order now. First batches ship soon.",
-  cta: "Pre Order Now: ₹1,299",
+  cta: "Pre Order Now: ₹1,399",
   trustLine: "30 servings · Free delivery on all pre orders",
 };
 

@@ -47,7 +47,7 @@ export function canDecrement(cart: Cart, flavorId: string): boolean {
 
 /**
  * Convert cart items to the GA4 / Meta Pixel `items` array.
- * Prices are in currency units (e.g. 1299 for ₹1,299), not paise.
+ * Prices are in currency units (e.g. 1399 for ₹1,399), not paise.
  */
 export function cartToAnalyticsItems(cart: Cart) {
   return cart.map((item) => {

@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
 
-const PRICE = "₹1,299";
+const PRICE = "₹1,399";
 
 // Mirrors Button's `primary` + `sm` variants — anchors need hrefs so we
 // style them directly instead of wrapping a <button>.
