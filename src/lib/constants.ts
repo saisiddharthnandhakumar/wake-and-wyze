@@ -1,4 +1,4 @@
-export const PRICE_PAISE = 129900; // ₹1,299.00
+export const PRICE_PAISE = 139900; // ₹1,399.00
 export const CURRENCY = "INR";
 export const LOCALE = "en-IN";
 
