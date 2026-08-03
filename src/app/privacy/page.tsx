@@ -55,10 +55,10 @@ export default function PrivacyPage() {
         <p className="text-ink-muted text-sm leading-relaxed mb-4">
           For privacy-related inquiries, contact us at{" "}
           <a
-            href="mailto:hello@wakeandwyze.com"
+            href="mailto:wakewyze@gmail.com"
             className="text-sage underline transition-colors hover:text-sage-deep"
           >
-            hello@wakeandwyze.com
+            wakewyze@gmail.com
           </a>
           .
         </p>

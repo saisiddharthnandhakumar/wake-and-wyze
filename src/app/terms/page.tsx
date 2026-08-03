@@ -17,11 +17,27 @@ export default function TermsPage() {
         </p>
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">
-          Cancellation
+          Cancellation & Refunds
         </h2>
         <p className="text-ink-muted text-sm leading-relaxed mb-4">
-          You may cancel your pre order at any time before dispatch for a full refund. Once your
-          order has shipped, our standard return policy applies.
+          You may cancel your pre order at any time before dispatch for a full refund. Refunds
+          are processed within 5–7 business days to your original payment method.
+        </p>
+        <h3 className="font-display text-base font-semibold tracking-tight mt-6 mb-2">
+          Returns (After Dispatch)
+        </h3>
+        <p className="text-ink-muted text-sm leading-relaxed mb-4">
+          If your order has already been dispatched, you may return unopened and undamaged
+          products within 7 days of delivery. To initiate a return, contact us at{" "}
+          <a href="mailto:wakewyze@gmail.com" className="text-sage hover:text-sage-deep transition-colors">
+            wakewyze@gmail.com
+          </a>{" "}
+          or call{" "}
+          <a href="tel:+919558742935" className="text-sage hover:text-sage-deep transition-colors">
+            +91 95587 42935
+          </a>
+          . Return shipping costs are the customer&apos;s responsibility. Once we receive and inspect
+          the returned product, your refund will be processed within 5–7 business days.
         </p>
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">Payment</h2>
@@ -33,8 +49,9 @@ export default function TermsPage() {
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">Shipping</h2>
         <p className="text-ink-muted text-sm leading-relaxed mb-4">
-          We ship across India. Shipping is free on all pre orders. Delivery timelines depend on
-          your location and batch production schedules.
+          We ship across India. Shipping is free on all pre orders. Estimated delivery time is
+          7–10 business days from dispatch. Delivery timelines may vary slightly depending on
+          your location. You will receive tracking information via email once your order ships.
         </p>
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">

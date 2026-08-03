@@ -222,6 +222,8 @@ export const FOOTER = {
     { label: "Pre Order", href: "#preorder" },
   ],
   legal: [
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],
