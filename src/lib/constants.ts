@@ -5,8 +5,6 @@ export const LOCALE = "en-IN";
 export const SERVINGS_PER_BAG = 30;
 export const BAG_WEIGHT_GRAMS = 250;
 
-export const QR_IMAGE_PATH = "/qr/upi-qr.png";
-
 export const FLAVORS = [
   {
     id: "original",

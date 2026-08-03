@@ -18,12 +18,15 @@ interface SuccessCardProps {
 
 export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps) {
   useEffect(() => {
+    const key = `purchase-fired-${orderNumber}`;
+    if (typeof window !== "undefined" && sessionStorage.getItem(key)) return;
     trackEvent(AnalyticsEvents.PURCHASE, {
       items: cartToAnalyticsItems(items),
       value: totalPaise / 100,
       currency: "INR",
       transaction_id: orderNumber,
     });
+    try { sessionStorage.setItem(key, "1"); } catch { /* no-op */ }
   }, [totalPaise, orderNumber, items]);
 
   const lineItems = items.map((item) => {
@@ -53,7 +56,7 @@ export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps
         Pre Order Confirmed!
       </h3>
       <p className="mx-auto mt-2 max-w-sm text-sm text-ink-muted">
-        Payment pending verification, we&apos;ll confirm by SMS/email once verified.
+        Payment confirmed! Your order is being processed. We&apos;ll email you when it ships.
       </p>
 
       <dl className="mx-auto mt-8 max-w-sm divide-y divide-border-light rounded-xl border border-border bg-surface text-left">

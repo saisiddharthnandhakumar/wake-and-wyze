@@ -53,6 +53,11 @@ CREATE TABLE IF NOT EXISTS "PreOrder" (
   "pincode" TEXT NOT NULL,
   "paymentStatus" TEXT NOT NULL DEFAULT 'pending',
   "utrReference" TEXT,
+  "razorpayOrderId" TEXT,
+  "razorpayPaymentId" TEXT,
+  "razorpaySignature" TEXT,
+  "paymentMethod" TEXT,
+  "paymentErrorJson" TEXT,
   "statusLogJson" TEXT,
   "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "paidAt" DATETIME,
@@ -76,6 +81,18 @@ CREATE TABLE IF NOT EXISTS "PreOrderItem" (
 CREATE INDEX IF NOT EXISTS "PreOrderItem_orderId_idx" ON "PreOrderItem"("orderId");
 `;
 
+// Migration statements for existing databases that already have the table
+// but not the new columns. Each is idempotent — errors for "duplicate column"
+// or "already exists" are swallowed.
+const MIGRATIONS = [
+  `ALTER TABLE "PreOrder" ADD COLUMN "razorpayOrderId" TEXT`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "razorpayPaymentId" TEXT`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "razorpaySignature" TEXT`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "paymentMethod" TEXT`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "paymentErrorJson" TEXT`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "PreOrder_razorpayOrderId_key" ON "PreOrder"("razorpayOrderId")`,
+];
+
 // ---- Turso (production) ----
 const tursoUrl = process.env.TURSO_DATABASE_URL ?? "";
 const tursoToken = process.env.TURSO_AUTH_TOKEN ?? "";
@@ -89,6 +106,19 @@ if (isTursoConfigured(tursoUrl) && tursoToken && tursoToken !== "undefined" && t
       await client.execute(stmt + ";");
     }
     console.log("Turso database tables created/verified.");
+
+    // Run idempotent migrations (safe to run multiple times)
+    for (const sql of MIGRATIONS) {
+      try {
+        await client.execute(sql + ";");
+      } catch (err) {
+        const msg = err.message ?? String(err);
+        if (!msg.includes("duplicate column") && !msg.includes("already exists")) {
+          console.error(`Migration failed: ${sql} — ${msg}`);
+        }
+      }
+    }
+    console.log("Turso migrations complete.");
   } catch (err) {
     console.error("Turso setup failed:", err.message ?? err);
     process.exit(1);
@@ -105,5 +135,18 @@ mkdirSync(path.dirname(databasePath), { recursive: true });
 
 const db = new DatabaseSync(databasePath);
 db.exec(DDL);
+
+// Run idempotent migrations (safe to run multiple times)
+for (const sql of MIGRATIONS) {
+  try {
+    db.exec(sql);
+  } catch (err) {
+    const msg = err.message ?? String(err);
+    if (!msg.includes("duplicate column") && !msg.includes("already exists")) {
+      console.error(`Migration failed: ${sql} — ${msg}`);
+    }
+  }
+}
+
 db.close();
 console.log(`SQLite database ready at ${databasePath}`);

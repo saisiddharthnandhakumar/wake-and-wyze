@@ -91,6 +91,9 @@ export async function POST(request: Request) {
         orderNumber: order.orderNumber,
         totalPaise: order.totalPaise,
         items,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
       },
       { status: 201 },
     );

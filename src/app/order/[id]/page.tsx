@@ -20,6 +20,7 @@ function StatusBadge({ status }: { status: string }) {
       className: "bg-bronze/10 text-bronze",
     },
     paid: { label: "Confirmed", className: "bg-success-soft text-success" },
+    failed: { label: "Payment Failed", className: "bg-danger-soft text-danger" },
     cancelled: { label: "Cancelled", className: "bg-danger-soft text-danger" },
   };
   const c = config[status] ?? config.pending;
@@ -114,6 +115,14 @@ export default async function OrderPage({ params }: Props) {
           <div className="mt-6 p-4 bg-bronze/5 border border-bronze/20 rounded-xl text-center">
             <p className="text-bronze text-sm font-medium">
               Payment verification in progress. We&apos;ll confirm by SMS/email within 24 hours.
+            </p>
+          </div>
+        )}
+
+        {order.paymentStatus === "failed" && (
+          <div className="mt-6 p-4 bg-danger-soft border border-danger/20 rounded-xl text-center">
+            <p className="text-danger text-sm font-medium">
+              Your payment was declined. Please place a new order to try again with a different payment method.
             </p>
           </div>
         )}

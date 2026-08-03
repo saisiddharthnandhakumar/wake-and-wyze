@@ -9,11 +9,11 @@ import { FlavorPicker } from "@/components/preorder/flavor-picker";
 import { CouponInput } from "@/components/preorder/coupon-input";
 import { OrderSummary } from "@/components/preorder/order-summary";
 import { CheckoutForm } from "@/components/preorder/checkout-form";
-import { QrPanel } from "@/components/preorder/qr-panel";
+import { PaymentPanel } from "@/components/preorder/payment-panel";
 import { SuccessCard } from "@/components/preorder/success-card";
 import type { Cart } from "@/lib/types";
 
-type Stage = "form" | "qr" | "success";
+type Stage = "form" | "payment" | "success";
 
 interface OrderResult {
   id: string;
@@ -33,7 +33,7 @@ export function PreOrderSection() {
   const [orderResult, setOrderResult] = useState<OrderResult | null>(null);
   const stagePanelRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to the stage panel (qr / success) when it appears
+  // Auto-scroll to the stage panel (payment / success) when it appears
   useEffect(() => {
     if (stage !== "form" && stagePanelRef.current) {
       stagePanelRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -95,26 +95,15 @@ export function PreOrderSection() {
     items: Cart;
   }) => {
     setOrderResult(result);
-    setStage("qr");
+    setStage("payment");
   };
 
-  const handleConfirmPayment = async (utrReference: string) => {
-    if (!orderResult) return;
-
-    const res = await fetch(`/api/preorders/${orderResult.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ utrReference }),
-    });
-
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      throw new Error(
-        data?.error || "Could not confirm your payment. Please try again.",
-      );
-    }
-
+  const handlePaymentSuccess = () => {
     setStage("success");
+  };
+
+  const handleBackToEdit = () => {
+    setStage("form");
   };
 
   return (
@@ -184,11 +173,14 @@ export function PreOrderSection() {
                 </Card>
               )}
 
-              {stage === "qr" && orderResult && (
-                <QrPanel
+              {stage === "payment" && orderResult && (
+                <PaymentPanel
+                  orderId={orderResult.id}
                   orderNumber={orderResult.orderNumber}
                   totalPaise={orderResult.totalPaise}
-                  onConfirm={handleConfirmPayment}
+                  items={orderResult.items}
+                  onSuccess={handlePaymentSuccess}
+                  onEdit={handleBackToEdit}
                 />
               )}
 
