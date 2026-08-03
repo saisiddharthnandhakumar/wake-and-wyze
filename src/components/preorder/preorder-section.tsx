@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FLAVORS } from "@/lib/constants";
 import { computeOrderAmounts } from "@/lib/order";
 import { cartTotalQuantity, defaultCart, makeCartItem } from "@/lib/cart";
@@ -31,6 +31,14 @@ export function PreOrderSection() {
 
   const [stage, setStage] = useState<Stage>("form");
   const [orderResult, setOrderResult] = useState<OrderResult | null>(null);
+  const stagePanelRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to the stage panel (payment / success) when it appears
+  useEffect(() => {
+    if (stage !== "form" && stagePanelRef.current) {
+      stagePanelRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [stage]);
 
   // Read ?flavor= from the URL. The flavors section links to `#preorder?flavor=...`
   // (query inside the hash fragment), and the page can also be opened with a real
@@ -149,39 +157,41 @@ export function PreOrderSection() {
             )}
 
             {/* Stage panels */}
-            {stage === "form" && (
-              <Card className="p-5 lg:p-6">
-                <h3 className="font-display text-lg font-semibold text-ink mb-5">
-                  Delivery Details
-                </h3>
-                <CheckoutForm
-                  items={cart}
-                  totalPaise={totalPaise}
-                  discountPaise={discountPaise}
-                  couponCode={appliedCouponCode ?? ""}
-                  onSuccess={handleCheckoutSuccess}
+            <div ref={stagePanelRef}>
+              {stage === "form" && (
+                <Card className="p-5 lg:p-6">
+                  <h3 className="font-display text-lg font-semibold text-ink mb-5">
+                    Delivery Details
+                  </h3>
+                  <CheckoutForm
+                    items={cart}
+                    totalPaise={totalPaise}
+                    discountPaise={discountPaise}
+                    couponCode={appliedCouponCode ?? ""}
+                    onSuccess={handleCheckoutSuccess}
+                  />
+                </Card>
+              )}
+
+              {stage === "payment" && orderResult && (
+                <PaymentPanel
+                  orderId={orderResult.id}
+                  orderNumber={orderResult.orderNumber}
+                  totalPaise={orderResult.totalPaise}
+                  items={orderResult.items}
+                  onSuccess={handlePaymentSuccess}
+                  onEdit={handleBackToEdit}
                 />
-              </Card>
-            )}
+              )}
 
-            {stage === "payment" && orderResult && (
-              <PaymentPanel
-                orderId={orderResult.id}
-                orderNumber={orderResult.orderNumber}
-                totalPaise={orderResult.totalPaise}
-                items={orderResult.items}
-                onSuccess={handlePaymentSuccess}
-                onEdit={handleBackToEdit}
-              />
-            )}
-
-            {stage === "success" && orderResult && (
-              <SuccessCard
-                orderNumber={orderResult.orderNumber}
-                totalPaise={orderResult.totalPaise}
-                items={orderResult.items}
-              />
-            )}
+              {stage === "success" && orderResult && (
+                <SuccessCard
+                  orderNumber={orderResult.orderNumber}
+                  totalPaise={orderResult.totalPaise}
+                  items={orderResult.items}
+                />
+              )}
+            </div>
           </div>
 
           {/* Right — sticky order summary */}
