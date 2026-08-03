@@ -21,6 +21,8 @@ function toSafeOrder(order: {
   paymentStatus: string;
   createdAt: Date;
   paidAt: Date | null;
+  razorpayPaymentId?: string | null;
+  paymentMethod?: string | null;
   items?: PreOrderItemRow[];
 }) {
   // Use items relation when available, fall back to legacy denormalised columns
@@ -38,6 +40,8 @@ function toSafeOrder(order: {
     paymentStatus: order.paymentStatus,
     createdAt: order.createdAt,
     paidAt: order.paidAt,
+    razorpayPaymentId: order.razorpayPaymentId ?? null,
+    paymentMethod: order.paymentMethod ?? null,
     items,
   };
 }

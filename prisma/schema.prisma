@@ -25,6 +25,11 @@ model PreOrder {
   pincode        String
   paymentStatus  String          @default("pending")
   utrReference   String?
+  razorpayOrderId   String?       @unique
+  razorpayPaymentId String?
+  razorpaySignature String?
+  paymentMethod     String?
+  paymentErrorJson  String?
   statusLogJson  String?
   createdAt      DateTime        @default(now())
   paidAt         DateTime?

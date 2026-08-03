@@ -30,8 +30,9 @@ export default function PrivacyPage() {
           Payment Information
         </h2>
         <p className="text-ink-muted text-sm leading-relaxed mb-4">
-          Payments are processed via UPI. We do not store your UPI credentials or banking
-          information. Transaction reference numbers are stored for order verification purposes only.
+          Payments are processed securely via Razorpay, our PCI-DSS compliant payment partner.
+          We do not store your card details, UPI credentials, or banking information. Payment
+          transaction IDs are stored for order verification and audit purposes only.
         </p>
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">

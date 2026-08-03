@@ -26,9 +26,9 @@ export default function TermsPage() {
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">Payment</h2>
         <p className="text-ink-muted text-sm leading-relaxed mb-4">
-          Payment is collected at the time of pre order via UPI. Your order is confirmed once
-          payment verification is complete. We reserve the right to cancel orders where payment
-          cannot be verified.
+          Payment is collected at the time of pre order via UPI, credit/debit card, netbanking, or
+          wallet through our payment partner Razorpay. Your order is confirmed immediately upon
+          successful payment. We reserve the right to cancel orders where payment cannot be verified.
         </p>
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">Shipping</h2>
