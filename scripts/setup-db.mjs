@@ -67,7 +67,6 @@ CREATE TABLE IF NOT EXISTS "PreOrder" (
 CREATE INDEX IF NOT EXISTS "PreOrder_paymentStatus_idx" ON "PreOrder"("paymentStatus");
 CREATE INDEX IF NOT EXISTS "PreOrder_createdAt_idx" ON "PreOrder"("createdAt");
 CREATE INDEX IF NOT EXISTS "PreOrder_phone_idx" ON "PreOrder"("phone");
-CREATE UNIQUE INDEX IF NOT EXISTS "PreOrder_razorpayOrderId_key" ON "PreOrder"("razorpayOrderId");
 
 CREATE TABLE IF NOT EXISTS "PreOrderItem" (
   "id" TEXT NOT NULL PRIMARY KEY,
