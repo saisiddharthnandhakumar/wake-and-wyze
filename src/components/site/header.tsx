@@ -50,10 +50,10 @@ export function Header() {
             <img
               src="/images/ww-logo.png"
               alt="Wake & Wyze"
-              width={96}
-              height={96}
+              width={112}
+              height={112}
               className={cn(
-                "h-20 w-auto",
+                "h-28 w-auto",
                 // invert works in modern browsers; -webkit-filter covers older Safari/iOS
                 darkOverlay && "invert [-webkit-filter:invert(100%)]",
               )}

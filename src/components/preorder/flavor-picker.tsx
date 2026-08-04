@@ -61,10 +61,10 @@ export function FlavorPicker({ cart, onChange }: FlavorPickerProps) {
               <img
                 src={flavor.image}
                 alt=""
-                width={48}
-                height={48}
+                width={96}
+                height={96}
                 loading="lazy"
-                className="h-12 w-12 rounded-lg object-cover border border-border-light bg-surface-raised shrink-0"
+                className="h-24 w-24 rounded-lg object-cover border border-border-light bg-surface-raised shrink-0"
               />
               <div className="flex-1 min-w-0">
                 <p className="truncate font-display text-sm font-semibold text-ink leading-snug">
