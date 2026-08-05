@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { formatINR } from "@/lib/order";
 import { FLAVORS } from "@/lib/constants";
+import { formatFlavorString } from "@/lib/cart";
 import { ORDER_NOTICE } from "@/lib/content";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -53,7 +54,7 @@ export default async function OrderPage({ params }: Props) {
       : [
           {
             flavorId: order.flavor,
-            name: FLAVORS.find((f) => f.id === order.flavor)?.name ?? order.flavor,
+            name: formatFlavorString(order.flavor),
             quantity: order.quantity,
           },
         ];

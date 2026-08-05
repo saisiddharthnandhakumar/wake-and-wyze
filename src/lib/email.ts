@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { formatINR } from "@/lib/order";
 import { FLAVORS } from "@/lib/constants";
+import { formatFlavorString } from "@/lib/cart";
 import { ORDER_NOTICE } from "@/lib/content";
 
 interface OrderConfirmationParams {
@@ -32,7 +33,7 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
 
   const lineItems = params.items
     .map((item) => {
-      const name = FLAVORS.find((f) => f.id === item.flavorId)?.name ?? item.flavorId;
+      const name = formatFlavorString(item.flavorId);
       return `
         <tr>
           <td style="padding:8px 0;border-bottom:1px solid #EFEAE0;color:#6B5746;font-size:14px;">${name}</td>

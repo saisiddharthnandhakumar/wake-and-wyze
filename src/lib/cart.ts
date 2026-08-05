@@ -61,13 +61,32 @@ export function cartToAnalyticsItems(cart: Cart) {
   });
 }
 
+/** Delimiter used to join multiple flavor IDs in the denormalised snapshot. */
+const FLAVOR_DELIMITER = ",";
+
 /**
- * The denormalised single-flavor snapshot for PreOrder.flavor.
+ * The denormalised flavor snapshot for PreOrder.flavor.
  * Returns the flavor id when the cart has exactly one distinct flavor,
- * otherwise "mixed".
+ * otherwise a comma-joined list of all distinct flavor IDs (e.g. "hazelnut,vanilla").
  */
 export function snapshotFlavor(cart: Cart): string {
-  return cart.length === 1 ? cart[0].flavorId : "mixed";
+  return cart.length === 1
+    ? cart[0].flavorId
+    : cart.map((i) => i.flavorId).join(FLAVOR_DELIMITER);
+}
+
+/**
+ * Format a raw flavor string (single ID or delimiter-joined IDs) into
+ * human-readable display names.
+ *
+ *   "hazelnut"           → "Roasted Hazelnut"
+ *   "hazelnut,vanilla"   → "Roasted Hazelnut, Vanilla"
+ */
+export function formatFlavorString(raw: string): string {
+  return raw
+    .split(FLAVOR_DELIMITER)
+    .map((id) => FLAVORS.find((f) => f.id === id)?.name ?? id)
+    .join(", ");
 }
 
 /**
