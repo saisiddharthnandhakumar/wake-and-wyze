@@ -1,6 +1,5 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { formatINR } from "@/lib/order";
-import { FLAVORS } from "@/lib/constants";
 import { formatFlavorString } from "@/lib/cart";
 import { ORDER_NOTICE } from "@/lib/content";
 
@@ -20,12 +19,13 @@ interface OrderConfirmationParams {
  * block the order flow. Errors are logged here and swallowed.
  */
 export async function sendOrderConfirmation(params: OrderConfirmationParams) {
-  const user = process.env.GMAIL_USER;
-  const appPassword = process.env.GMAIL_APP_PASSWORD;
+  const apiKey = process.env.RESEND_API_KEY;
 
-  // No credentials configured (e.g. local dev without .env values) — skip.
-  if (!user || !appPassword) {
-    console.warn("[email] GMAIL_USER or GMAIL_APP_PASSWORD not set; skipping confirmation email");
+  // No API key configured (e.g. local dev without .env values) — skip.
+  if (!apiKey) {
+    console.warn(
+      "[email] RESEND_API_KEY not set; skipping confirmation email",
+    );
     return;
   }
 
@@ -42,17 +42,13 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
     })
     .join("");
 
-  // Construct lazily so a missing config can't throw at import time.
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: { user, pass: appPassword },
-  });
+  const resend = new Resend(apiKey);
 
   try {
-    await transporter.sendMail({
-      from: `Wake & Wyze <${user}>`,
+    await resend.emails.send({
+      from: "Wake & Wyze <hello@mail.wakeandwyze.com>",
       to: params.email,
-      replyTo: user,
+      replyTo: "contact@wakeandwyze.com",
       subject: `${firstName}, your Wake & Wyze order is in — thank you`,
       html: `
         <div style="background:#FAF9EF;padding:40px 16px;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
@@ -93,8 +89,9 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
 
             <div style="padding:24px 32px 0;">
               <p style="margin:0;font-size:14px;line-height:1.7;color:#6B5746;">
-                We&rsquo;ll email you the moment your order ships. If you have any questions at
-                all, just reply to this email — we read every single one.
+                If you have any questions, reach out to us at
+                <a href="mailto:contact@wakeandwyze.com" style="color:#96552A;text-decoration:underline;">contact@wakeandwyze.com</a>
+                &mdash; we read every single one.
               </p>
             </div>
 

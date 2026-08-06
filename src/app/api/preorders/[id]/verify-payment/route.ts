@@ -1,7 +1,7 @@
 import { NextResponse, after } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
-import { getRazorpay, verifyPaymentSignature } from "@/lib/razorpay";
+import { getRazorpay, verifyPaymentSignature, createRazorpayCustomerAndInvoice } from "@/lib/razorpay";
 import { logStatus } from "@/lib/order";
 import { sendOrderConfirmation } from "@/lib/email";
 
@@ -145,6 +145,21 @@ export async function POST(request: Request, context: RouteContext) {
                   quantity: i.quantity,
                 }))
               : [{ flavorId: order.flavor, quantity: order.quantity }],
+        });
+        void createRazorpayCustomerAndInvoice({
+          id: order.id,
+          orderNumber: order.orderNumber,
+          email: order.email,
+          name: order.name,
+          phone: order.phone,
+          totalPaise: order.totalPaise,
+          flavor: order.flavor,
+          quantity: order.quantity,
+          paidAt: order.paidAt,
+          createdAt: order.createdAt,
+          utrReference: order.utrReference,
+          razorpayOrderId: order.razorpayOrderId,
+          razorpayPaymentId: razorpayPaymentId,
         });
       });
     }
