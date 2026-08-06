@@ -9,6 +9,7 @@
     "lint": "eslint",
     "db:generate": "prisma generate",
     "db:setup": "node --no-warnings scripts/setup-db.mjs",
+    "db:backfill-razorpay": "node --no-warnings scripts/backfill-razorpay.mjs",
     "postinstall": "prisma generate && node --no-warnings scripts/setup-db.mjs",
     "vercel-build": "prisma generate && next build"
   },

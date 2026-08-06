@@ -111,6 +111,7 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                 <th className="px-4 py-3">Flavors</th>
                 <th className="px-4 py-3 text-right">Total</th>
                 <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">Razorpay</th>
                 <th className="px-4 py-3">Date</th>
               </tr>
             </thead>
@@ -146,6 +147,25 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                     </td>
                     <td className="px-4 py-3">
                       <StatusBadge status={order.paymentStatus} />
+                    </td>
+                    <td className="px-4 py-3">
+                      {order.razorpayInvoiceId ? (
+                        <a
+                          href={`https://dashboard.razorpay.com/app/invoices/${order.razorpayInvoiceId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-mono text-blue-600 hover:underline"
+                          title={`Customer: ${order.razorpayCustomerId ?? "—"}\nInvoice: ${order.razorpayInvoiceId}`}
+                        >
+                          {order.razorpayInvoiceId.slice(0, 18)}…
+                        </a>
+                      ) : order.paymentStatus === "paid" ? (
+                        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800">
+                          Not synced
+                        </span>
+                      ) : (
+                        <span className="text-xs text-gray-300">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-xs text-gray-400 whitespace-nowrap">
                       {new Date(order.createdAt).toLocaleDateString("en-IN", {

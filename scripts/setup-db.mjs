@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS "PreOrder" (
   "razorpaySignature" TEXT,
   "paymentMethod" TEXT,
   "paymentErrorJson" TEXT,
+  "razorpayCustomerId" TEXT,
+  "razorpayInvoiceId" TEXT,
   "statusLogJson" TEXT,
   "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "paidAt" DATETIME,
@@ -91,6 +93,10 @@ const MIGRATIONS = [
   `ALTER TABLE "PreOrder" ADD COLUMN "paymentMethod" TEXT`,
   `ALTER TABLE "PreOrder" ADD COLUMN "paymentErrorJson" TEXT`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "PreOrder_razorpayOrderId_key" ON "PreOrder"("razorpayOrderId")`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "razorpayCustomerId" TEXT`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "razorpayInvoiceId" TEXT`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "PreOrder_razorpayInvoiceId_key" ON "PreOrder"("razorpayInvoiceId")`,
+  `CREATE INDEX IF NOT EXISTS "PreOrder_razorpayCustomerId_idx" ON "PreOrder"("razorpayCustomerId")`,
 ];
 
 // ---- Turso (production) ----

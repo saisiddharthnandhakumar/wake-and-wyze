@@ -25,12 +25,14 @@ model PreOrder {
   pincode        String
   paymentStatus  String          @default("pending")
   utrReference   String?
-  razorpayOrderId   String?       @unique
-  razorpayPaymentId String?
-  razorpaySignature String?
-  paymentMethod     String?
-  paymentErrorJson  String?
-  statusLogJson  String?
+  razorpayOrderId    String?       @unique
+  razorpayPaymentId  String?
+  razorpaySignature  String?
+  paymentMethod      String?
+  paymentErrorJson   String?
+  razorpayCustomerId String?
+  razorpayInvoiceId  String?        @unique
+  statusLogJson      String?
   createdAt      DateTime        @default(now())
   paidAt         DateTime?
   updatedAt      DateTime        @updatedAt
@@ -39,6 +41,7 @@ model PreOrder {
   @@index([paymentStatus])
   @@index([createdAt])
   @@index([phone])
+  @@index([razorpayCustomerId])
 }
 
 model PreOrderItem {
