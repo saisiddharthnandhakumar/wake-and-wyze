@@ -402,7 +402,7 @@ Every interaction — from landing page to opening the pouch — reinforces qual
 
 ### Science Section
 **Headline:** "Backed by research. Not marketing."
-- **Study 1:** "Improve attention within 60 minutes" — Docherty et al., 2023 (n=127)
+- **Study 1:** "Improve attention within 60 minutes" — Docherty et al., 2023 (n=41) — https://pubmed.ncbi.nlm.nih.gov/38004235/
 - **Study 2:** "Cognitive improvement with daily use" — Mori et al., 2009
 - **Study 3:** "Supports brain cell growth" — Contato et al., 2025 (PMC/NIH review)
 

@@ -128,7 +128,8 @@ export const SCIENCE = {
       title: "Improve attention within 60 minutes",
       summary:
         "A single dose improved performance on cognitive tasks within one hour in a double blind, placebo controlled trial.",
-      citation: "Docherty et al., 2023 (n=127)",
+      citation: "Docherty et al., 2023 (n=41)",
+      citationUrl: "https://pubmed.ncbi.nlm.nih.gov/38004235/",
     },
     {
       id: 2,
@@ -136,6 +137,7 @@ export const SCIENCE = {
       summary:
         "Daily supplementation significantly improved cognitive function scores over 16 weeks in adults with mild cognitive impairment.",
       citation: "Mori et al., 2009",
+      citationUrl: "",
     },
     {
       id: 3,
@@ -143,6 +145,7 @@ export const SCIENCE = {
       summary:
         "Bioactive compounds in Lion's Mane stimulate proteins that support neuron growth, survival, and brain plasticity.",
       citation: "Contato et al., 2025 (PMC/NIH review)",
+      citationUrl: "",
     },
   ],
 };

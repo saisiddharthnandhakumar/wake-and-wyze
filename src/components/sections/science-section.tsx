@@ -73,9 +73,20 @@ export function ScienceSection() {
                     <p className="mt-3 text-sm leading-relaxed text-ink-muted max-w-md mx-auto">
                       {study.summary}
                     </p>
-                    <p className="mt-4 text-sm font-medium italic text-sage">
-                      {study.citation}
-                    </p>
+                    {study.citationUrl ? (
+                      <a
+                        href={study.citationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-block text-sm font-medium italic text-sage underline-offset-2 hover:underline"
+                      >
+                        {study.citation}
+                      </a>
+                    ) : (
+                      <p className="mt-4 text-sm font-medium italic text-sage">
+                        {study.citation}
+                      </p>
+                    )}
                   </Card>
                 </div>
               ))}
