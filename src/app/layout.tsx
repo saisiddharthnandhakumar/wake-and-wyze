@@ -6,6 +6,7 @@ import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { AnalyticsScripts } from "@/components/site/analytics-scripts";
 import { GradientBackground } from "@/components/ui/pipo";
+import { CurrencyProvider } from "@/components/currency/currency-provider";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -57,9 +58,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
+        <CurrencyProvider>
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </CurrencyProvider>
         <AnalyticsScripts />
         <Analytics />
         <SpeedInsights />

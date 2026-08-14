@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { FLAVORS } from "@/lib/constants";
 import { ORDER_NOTICE } from "@/lib/content";
-import { formatINR } from "@/lib/order";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { cartToAnalyticsItems } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { Card } from "@/components/ui/card";
@@ -17,6 +18,8 @@ interface SuccessCardProps {
 }
 
 export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps) {
+  const { currency } = useCurrency();
+
   useEffect(() => {
     const key = `purchase-fired-${orderNumber}`;
     if (typeof window !== "undefined" && sessionStorage.getItem(key)) return;
@@ -43,7 +46,7 @@ export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps
       label: li.name,
       value: `${li.quantity} bag${li.quantity > 1 ? "s" : ""}`,
     })),
-    { label: "Amount Paid", value: formatINR(totalPaise) },
+    { label: "Amount Paid", value: formatPrice(totalPaise, currency) },
   ];
 
   return (

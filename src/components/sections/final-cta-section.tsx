@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { FINAL_CTA } from "@/lib/content";
+import { PRICE_PAISE } from "@/lib/constants";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 
 export function FinalCtaSection() {
+  const { currency } = useCurrency();
   return (
     <section id="final-cta" className="min-h-dvh flex flex-col justify-center bg-ink py-16 lg:py-20">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
@@ -25,7 +31,7 @@ export function FinalCtaSection() {
 
           <a href="#preorder" className="mt-10 inline-block">
             <Button variant="sage" size="xl">
-              {FINAL_CTA.cta}
+              {`${FINAL_CTA.cta}: ${formatPrice(PRICE_PAISE, currency)}`}
             </Button>
           </a>
 

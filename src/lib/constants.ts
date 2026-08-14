@@ -2,6 +2,11 @@ export const PRICE_PAISE = 139900; // ₹1,399.00
 export const CURRENCY = "INR";
 export const LOCALE = "en-IN";
 
+// Display-only USD price per bag (rounded up to the nearest whole dollar).
+// Checkout still charges INR via Razorpay; this only affects what customers see.
+export const USD_PRICE = 18;
+export type Currency = "INR" | "USD";
+
 export const SERVINGS_PER_BAG = 30;
 export const BAG_WEIGHT_GRAMS = 250;
 

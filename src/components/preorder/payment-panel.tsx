@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, CheckCircle, Loader2, RefreshCw, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { formatINR } from "@/lib/order";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { loadRazorpayScript } from "@/lib/razorpay-checkout";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { cartToAnalyticsItems } from "@/lib/cart";
@@ -52,6 +53,7 @@ export function PaymentPanel({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [rzpOrderData, setRzpOrderData] = useState<RazorpayOrderData | null>(null);
   const checkpointFiredRef = useRef(false);
+  const { currency } = useCurrency();
 
   // Fetch (or create) the Razorpay order on mount
   useEffect(() => {
@@ -235,7 +237,7 @@ export function PaymentPanel({
       ? "Verifying your payment…"
       : state === "opening"
         ? "Opening payment form…"
-        : `Pay ${formatINR(totalPaise)}`;
+        : `Pay ${formatPrice(totalPaise, currency)}`;
 
     return (
       <Card className="p-6 lg:p-8">
@@ -247,7 +249,7 @@ export function PaymentPanel({
             Complete Your Payment
           </h3>
           <p className="mt-2 text-sm text-ink-muted">
-            {`Order ${orderNumber} · ${formatINR(totalPaise)}`}
+            {`Order ${orderNumber} · ${formatPrice(totalPaise, currency)}`}
           </p>
         </div>
 

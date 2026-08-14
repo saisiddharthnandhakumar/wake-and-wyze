@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/lib/content";
 import { Button } from "@/components/ui/button";
+import { CurrencyToggle } from "@/components/currency/currency-toggle";
 
 export function Header() {
   const pathname = usePathname();
@@ -79,8 +80,9 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
+          {/* Desktop currency toggle + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <CurrencyToggle onDark={darkOverlay} />
             <a href="#preorder">
               <Button
                 variant={darkOverlay ? "hero-outline" : "primary"}
@@ -124,6 +126,9 @@ export function Header() {
               {link.label}
             </a>
           ))}
+          <div className="mt-2">
+            <CurrencyToggle />
+          </div>
           <a href="#preorder" className="mt-2" onClick={() => setMobileOpen(false)}>
             <Button variant="primary" className="w-full">
               Pre Order Now

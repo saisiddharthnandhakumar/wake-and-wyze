@@ -1,4 +1,4 @@
-import { PRICE_PAISE, COUPONS } from "./constants";
+import { PRICE_PAISE, USD_PRICE, COUPONS, type Currency } from "./constants";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -17,6 +17,31 @@ export function formatINR(paise: number): string {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(paise / 100);
+}
+
+/**
+ * Convert paise to a display-only USD amount, rounded UP to the nearest whole
+ * dollar (per the "round up to the highest dollar" requirement).
+ */
+export function usdDollars(paise: number): number {
+  return Math.ceil((paise * USD_PRICE) / PRICE_PAISE);
+}
+
+export function formatUsdDollars(dollars: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(dollars);
+}
+
+export function formatUSD(paise: number): string {
+  return formatUsdDollars(usdDollars(paise));
+}
+
+export function formatPrice(paise: number, currency: Currency): string {
+  return currency === "USD" ? formatUSD(paise) : formatINR(paise);
 }
 
 /**

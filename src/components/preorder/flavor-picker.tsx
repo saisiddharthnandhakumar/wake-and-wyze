@@ -3,7 +3,8 @@
 import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FLAVORS, PRICE_PAISE } from "@/lib/constants";
-import { formatINR } from "@/lib/order";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { getItemQuantity, canIncrement, canDecrement, makeCartItem } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import type { Cart } from "@/lib/types";
@@ -14,6 +15,8 @@ interface FlavorPickerProps {
 }
 
 export function FlavorPicker({ cart, onChange }: FlavorPickerProps) {
+  const { currency } = useCurrency();
+
   const handleIncrement = (flavorId: string) => {
     if (!canIncrement(cart, flavorId)) return;
     const next = getItemQuantity(cart, flavorId) + 1;
@@ -82,7 +85,7 @@ export function FlavorPicker({ cart, onChange }: FlavorPickerProps) {
             {/* Quantity stepper + price row */}
             <div className="mt-3 flex items-center justify-between gap-2">
               <span className="font-display text-sm font-bold text-ink tabular-nums">
-                {formatINR(PRICE_PAISE)}
+                {formatPrice(PRICE_PAISE, currency)}
               </span>
 
               <div className="flex items-center gap-1" role="group" aria-label={`Quantity for ${flavor.name}`}>

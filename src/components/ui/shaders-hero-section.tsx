@@ -3,6 +3,9 @@
 import { PulsingBorder, MeshGradient } from "@paper-design/shaders-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { HERO } from "@/lib/content";
+import { PRICE_PAISE } from "@/lib/constants";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { Button } from "@/components/ui/button";
 
 // ── SVG Filters ──────────────────────────────────────────────────────────────
@@ -180,6 +183,7 @@ function PulsingCircle() {
 // ── Hero Content ─────────────────────────────────────────────────────────────
 
 function HeroContent() {
+  const { currency } = useCurrency();
   return (
     <div className="text-left">
       {/* Eyebrow badge with glass effect */}
@@ -209,7 +213,7 @@ function HeroContent() {
       <div className="mt-8 flex flex-col gap-4 sm:flex-row">
         <a href="#preorder" className="inline-block">
           <Button variant="hero-filled" size="lg">
-            {HERO.primaryCta}
+            {`${HERO.primaryCta}: ${formatPrice(PRICE_PAISE, currency)}`}
           </Button>
         </a>
         <a href="#science" className="inline-block">

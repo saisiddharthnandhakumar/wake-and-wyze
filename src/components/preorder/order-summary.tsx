@@ -2,7 +2,8 @@
 
 import { ShieldCheck, Truck } from "lucide-react";
 import { FLAVORS, PRICE_PAISE } from "@/lib/constants";
-import { formatINR } from "@/lib/order";
+import { formatPrice, formatUsdDollars, usdDollars } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { cartTotalQuantity } from "@/lib/cart";
 import { Card } from "@/components/ui/card";
 import type { Cart } from "@/lib/types";
@@ -14,8 +15,16 @@ interface OrderSummaryProps {
 }
 
 export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryProps) {
+  const { currency } = useCurrency();
   const subtotalPaise = totalPaise + discountPaise;
   const unitPricePaise = PRICE_PAISE;
+
+  // USD: derive the discount as (subtotal − total) in whole dollars so the
+  // "Subtotal − Discount = Total" rows reconcile (independent ceil can drift $1).
+  const discountLabel =
+    currency === "USD"
+      ? formatUsdDollars(usdDollars(subtotalPaise) - usdDollars(totalPaise))
+      : formatPrice(discountPaise, currency);
 
   const lineItems = items.map((item) => {
     const flavor = FLAVORS.find((f) => f.id === item.flavorId);
@@ -57,7 +66,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
                   {item.name}
                 </span>
                 <span className="text-sm font-medium text-ink tabular-nums whitespace-nowrap">
-                  {item.quantity} × {formatINR(unitPricePaise)}
+                  {item.quantity} × {formatPrice(unitPricePaise, currency)}
                 </span>
               </li>
             ))}
@@ -71,7 +80,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
                 Subtotal ({cartTotalQuantity(items)} bag{cartTotalQuantity(items) !== 1 ? "s" : ""})
               </dt>
               <dd className="text-sm font-medium text-ink tabular-nums">
-                {formatINR(subtotalPaise)}
+                {formatPrice(subtotalPaise, currency)}
               </dd>
             </div>
 
@@ -79,7 +88,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
               <div className="flex items-center justify-between gap-4">
                 <dt className="text-sm text-success">Discount</dt>
                 <dd className="text-sm font-medium text-success tabular-nums">
-                  − {formatINR(discountPaise)}
+                  − {discountLabel}
                 </dd>
               </div>
             )}
@@ -92,7 +101,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
       <div className="flex items-baseline justify-between gap-4">
         <span className="font-display font-semibold text-ink">Total</span>
         <span className="font-display text-2xl font-bold text-ink tabular-nums">
-          {isEmpty ? "—" : formatINR(totalPaise)}
+          {isEmpty ? "—" : formatPrice(totalPaise, currency)}
         </span>
       </div>
 

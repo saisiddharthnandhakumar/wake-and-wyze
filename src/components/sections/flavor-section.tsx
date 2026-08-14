@@ -1,11 +1,13 @@
+"use client";
+
 import Image from "next/image";
-import { FLAVORS } from "@/lib/constants";
+import { FLAVORS, PRICE_PAISE } from "@/lib/constants";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
-
-const PRICE = "₹1,399";
 
 // Mirrors Button's `primary` + `sm` variants — anchors need hrefs so we
 // style them directly instead of wrapping a <button>.
@@ -13,6 +15,7 @@ const selectButtonClassName =
   "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 bg-ink text-surface hover:bg-ink-hover hover:translate-y-[-1px] shadow-sm hover:shadow-md px-4 py-2 text-sm";
 
 export function FlavorSection() {
+  const { currency } = useCurrency();
   return (
     <section id="flavors" className="min-h-dvh flex flex-col justify-center py-14 lg:py-16">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
@@ -61,7 +64,9 @@ export function FlavorSection() {
                   </p>
 
                   <div className="mt-4 flex items-center justify-between gap-4">
-                    <span className="font-display text-lg font-bold text-ink">{PRICE}</span>
+                    <span className="font-display text-lg font-bold text-ink tabular-nums">
+                      {formatPrice(PRICE_PAISE, currency)}
+                    </span>
                     <a
                       href="#preorder"
                       className={selectButtonClassName}

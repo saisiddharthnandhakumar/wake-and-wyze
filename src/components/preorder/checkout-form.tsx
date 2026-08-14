@@ -6,7 +6,8 @@ import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { INDIAN_STATES } from "@/lib/constants";
 import { preOrderSchema } from "@/lib/validators";
-import { formatINR } from "@/lib/order";
+import { formatPrice } from "@/lib/order";
+import { useCurrency } from "@/components/currency/currency-provider";
 import { cartToAnalyticsItems, cartTotalQuantity } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
@@ -58,6 +59,7 @@ export function CheckoutForm({
   const [submitting, setSubmitting] = useState(false);
   const checkoutStartedRef = useRef(false);
   const totalQuantity = cartTotalQuantity(items);
+  const { currency } = useCurrency();
 
   const handleFirstFocus = () => {
     if (checkoutStartedRef.current) return;
@@ -331,7 +333,7 @@ export function CheckoutForm({
           ) : !canSubmit ? (
             "Add at least one bag to continue"
           ) : (
-            `Place Pre Order: ${formatINR(totalPaise)}`
+            `Place Pre Order: ${formatPrice(totalPaise, currency)}`
           )}
         </Button>
         <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-ink-muted">
