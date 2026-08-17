@@ -2,6 +2,7 @@
 
 import { PulsingBorder, MeshGradient } from "@paper-design/shaders-react";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { HERO } from "@/lib/content";
 import { PRICE_PAISE } from "@/lib/constants";
 import { formatPrice } from "@/lib/order";
@@ -241,6 +242,29 @@ function HeroContent() {
   );
 }
 
+// ── Hero Product Image ───────────────────────────────────────────────────────
+
+function HeroProductImage() {
+  return (
+    <div className="relative mx-auto w-[90%] sm:w-[78%] md:w-[70%] lg:w-full">
+      {/* Subtle ground shadow to seat the composition on the scene */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-1/2 h-10 w-2/3 -translate-x-1/2 rounded-full bg-black/30 blur-xl lg:bg-black/25"
+      />
+      <div className="relative aspect-[1310/1200] w-full">
+        <Image
+          src="/images/transparent-hero.png"
+          alt="Wake & Wyze specialty coffee pouch and cup with Lion's Mane mushroom, steam, coffee beans, and wooden tray"
+          fill
+          sizes="(max-width: 639px) 85vw, (max-width: 1023px) 70vw, 40vw"
+          className="object-contain"
+        />
+      </div>
+    </div>
+  );
+}
+
 // ── Composed Hero Section ────────────────────────────────────────────────────
 
 export function HeroSection() {
@@ -253,7 +277,10 @@ export function HeroSection() {
     >
       <ShaderBackground simplified={Boolean(shouldReduce)}>
         <div className="relative z-10 mx-auto max-w-[1200px] px-6 lg:px-8 pt-24 pb-16 lg:pt-28 lg:pb-20 min-h-dvh flex flex-col justify-center">
-          <HeroContent />
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.9fr)] lg:gap-12">
+            <HeroContent />
+            <HeroProductImage />
+          </div>
         </div>
 
         <PulsingCircle />
