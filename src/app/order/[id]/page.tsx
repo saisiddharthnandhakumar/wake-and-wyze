@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/db";
 import { formatINR } from "@/lib/order";
-import { FLAVORS } from "@/lib/constants";
-import { formatFlavorString } from "@/lib/cart";
+import { formatFlavorString, getSku } from "@/lib/cart";
 import { ORDER_NOTICE } from "@/lib/content";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -47,8 +46,10 @@ export default async function OrderPage({ params }: Props) {
   const lineItems =
     order.items && order.items.length > 0
       ? order.items.map((item) => ({
-          flavorId: item.flavor,
-          name: FLAVORS.find((f) => f.id === item.flavor)?.name ?? item.flavor,
+          flavorId: item.sku ?? item.flavor,
+          name: item.sku
+            ? getSku(item.sku)?.name ?? formatFlavorString(item.flavor)
+            : formatFlavorString(item.flavor),
           quantity: item.quantity,
         }))
       : [
@@ -80,7 +81,7 @@ export default async function OrderPage({ params }: Props) {
             >
               <span className="text-ink-muted">{item.name}</span>
               <span className="font-medium">
-                {item.quantity} bag{item.quantity > 1 ? "s" : ""}
+                {item.quantity} pack{item.quantity > 1 ? "s" : ""}
               </span>
             </div>
           ))}

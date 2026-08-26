@@ -6,9 +6,17 @@
 
 // ---- NAVIGATION ----
 export const NAV_LINKS = [
+  { label: "Shop", href: "/shop" },
   { label: "Science", href: "#science" },
   { label: "Flavors", href: "#flavors" },
   { label: "FAQ", href: "#faq" },
+] as const;
+
+// ---- TICKER BANNER ----
+export const TICKER_MESSAGES = [
+  "Best sellers back in stock",
+  "New 50g packs available now",
+  "Free shipping on 2+ packs",
 ] as const;
 
 // ---- HERO ----
@@ -24,7 +32,7 @@ export const HERO = {
     "30 servings / 250g",
     "No added sugar",
     "Under 10 calories",
-    "Free delivery",
+    "Free shipping on 2+ packs",
   ],
 };
 
@@ -206,7 +214,7 @@ export const FINAL_CTA = {
   headline: "Ready for better mornings?",
   subheadline: "Pre order now. First batches ship soon.",
   cta: "Pre Order Now",
-  trustLine: "30 servings · Free delivery on all pre orders",
+  trustLine: "30 servings · Free shipping on 2+ packs",
 };
 
 // ---- ORDER NOTICE ----
@@ -219,6 +227,7 @@ export const ORDER_NOTICE = {
 export const FOOTER = {
   brandLine: "Premium functional coffee for sustained energy, sharper focus, and calmer mornings.",
   links: [
+    { label: "Shop", href: "/shop" },
     { label: "The Science", href: "#science" },
     { label: "Flavors", href: "#flavors" },
     { label: "FAQ", href: "#faq" },

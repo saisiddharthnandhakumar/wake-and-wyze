@@ -1,24 +1,24 @@
 import { z } from "zod";
-import { FLAVORS, COUPONS } from "./constants";
+import { SKUS, COUPONS } from "./constants";
 import { MAX_PER_ITEM, MAX_TOTAL } from "./cart";
 
-const flavorIds = FLAVORS.map((f) => f.id) as [string, ...string[]];
+const skuIds = SKUS.map((s) => s.id) as [string, ...string[]];
 
 export const preOrderSchema = z.object({
   items: z
     .array(
       z.object({
-        flavorId: z.enum(flavorIds, { message: "Please select a valid flavor" }),
+        skuId: z.enum(skuIds, { message: "Please select a valid item" }),
         quantity: z
           .number()
           .int()
-          .min(1, "Minimum 1 bag per flavor")
-          .max(MAX_PER_ITEM, `Maximum ${MAX_PER_ITEM} bags per flavor`),
+          .min(1, "Minimum 1 per item")
+          .max(MAX_PER_ITEM, `Maximum ${MAX_PER_ITEM} per item`),
       }),
     )
-    .min(1, "Add at least one bag")
+    .min(1, "Add at least one item")
     .refine((items) => items.reduce((s, i) => s + i.quantity, 0) <= MAX_TOTAL, {
-      message: `Maximum ${MAX_TOTAL} bags total`,
+      message: `Maximum ${MAX_TOTAL} items total`,
       path: ["items"],
     }),
   name: z.string().min(2, "Name is required").max(100),

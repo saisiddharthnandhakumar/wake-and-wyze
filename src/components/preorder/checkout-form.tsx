@@ -87,7 +87,7 @@ export function CheckoutForm({
     setSubmitError(null);
 
     const result = preOrderSchema.safeParse({
-      items: items.map((i) => ({ flavorId: i.flavorId, quantity: i.quantity })),
+      items: items.map((i) => ({ skuId: i.skuId, quantity: i.quantity })),
       name,
       phone,
       email,

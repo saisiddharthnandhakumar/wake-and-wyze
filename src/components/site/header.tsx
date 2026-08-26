@@ -2,16 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { CurrencyToggle } from "@/components/currency/currency-toggle";
+import { TickerBanner } from "@/components/site/ticker-banner";
+import { useCart } from "@/components/cart/cart-provider";
 
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { itemCount, setIsCartOpen } = useCart();
 
   const isHome = pathname === "/";
   const darkOverlay = isHome && !scrolled;
@@ -40,6 +43,7 @@ export function Header() {
           : "bg-transparent",
       )}
     >
+      <TickerBanner />
       <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -80,8 +84,24 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop currency toggle + CTA */}
+          {/* Desktop cart + currency toggle + CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+              aria-label="Open cart"
+              className={cn(
+                "relative rounded-full p-2 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage",
+                darkOverlay ? "text-surface hover:bg-surface/10" : "text-ink hover:bg-sage-mist",
+              )}
+            >
+              <ShoppingBag size={20} />
+              {itemCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-bronze px-1 text-[10px] font-bold text-white">
+                  {itemCount}
+                </span>
+              )}
+            </button>
             <CurrencyToggle onDark={darkOverlay} />
             <a href="#preorder">
               <Button
@@ -93,18 +113,36 @@ export function Header() {
             </a>
           </div>
 
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden p-2 cursor-pointer"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
+          {/* Mobile cart + toggle */}
+          <div className="md:hidden flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+              aria-label="Open cart"
+              className={cn(
+                "relative rounded-full p-2 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage",
+                darkOverlay ? "text-surface" : "text-ink",
+              )}
+            >
+              <ShoppingBag size={22} />
+              {itemCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-bronze px-1 text-[10px] font-bold text-white">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+            <button
+              className="p-2 cursor-pointer"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
             {mobileOpen ? (
               <X size={22} className="text-ink" />
             ) : (
               <Menu size={22} className={darkOverlay ? "text-surface" : "text-ink"} />
             )}
-          </button>
+            </button>
+          </div>
         </div>
       </div>
 

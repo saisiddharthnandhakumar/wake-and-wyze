@@ -1,4 +1,6 @@
-import { PRICE_PAISE, USD_PRICE, COUPONS, type Currency } from "./constants";
+import { PRICE_PAISE, USD_PRICE, COUPONS, SHIPPING_CHARGED_PAISE, type Currency } from "./constants";
+import { getSku, cartTotalQuantity } from "./cart";
+import type { Cart } from "./types";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -45,14 +47,42 @@ export function formatPrice(paise: number, currency: Currency): string {
 }
 
 /**
- * Compute order amounts from total quantity (sum of all cart items).
- * All items share the same unit price; the coupon applies to the total.
+ * Compute the shipping fee for a cart.
+ *
+ * Rule: ₹100 only when the cart is exactly one 50g pack and nothing else.
+ * Any other combination (a second 50g, a 250g pack, or the bundle) ships free.
  */
-export function computeOrderAmounts(totalQuantity: number, couponCode?: string | null) {
-  const unitPricePaise = PRICE_PAISE;
-  const subtotalPaise = unitPricePaise * totalQuantity;
-  let discountPaise = 0;
+export function computeShippingPaise(items: { skuId: string; quantity: number }[]): number {
+  const single50g =
+    items.length === 1 &&
+    items[0].quantity === 1 &&
+    getSku(items[0].skuId)?.weightGrams === 50;
+  return single50g ? SHIPPING_CHARGED_PAISE : 0;
+}
 
+/** Free-shipping nudge: how many more packs until shipping is free. */
+export function freeShippingNudge(items: { skuId: string; quantity: number }[]) {
+  const shippingPaise = computeShippingPaise(items);
+  return {
+    shippingPaise,
+    remainingPacks: shippingPaise > 0 ? 1 : 0,
+    savePaise: shippingPaise,
+  };
+}
+
+/**
+ * Compute order amounts from the cart's line items.
+ * Each SKU carries its own price; the coupon % applies to the subtotal
+ * (before shipping); shipping is added last.
+ */
+export function computeOrderAmounts(items: Cart, couponCode?: string | null) {
+  const subtotalPaise = items.reduce(
+    (sum, item) => sum + (getSku(item.skuId)?.pricePaise ?? 0) * item.quantity,
+    0,
+  );
+  const totalQuantity = cartTotalQuantity(items);
+
+  let discountPaise = 0;
   if (couponCode) {
     const coupon = COUPONS[couponCode.toUpperCase()];
     if (coupon && totalQuantity >= coupon.minQuantity) {
@@ -60,8 +90,9 @@ export function computeOrderAmounts(totalQuantity: number, couponCode?: string |
     }
   }
 
-  const totalPaise = subtotalPaise - discountPaise;
-  return { unitPricePaise, subtotalPaise, discountPaise, totalPaise };
+  const shippingPaise = computeShippingPaise(items);
+  const totalPaise = subtotalPaise - discountPaise + shippingPaise;
+  return { subtotalPaise, discountPaise, shippingPaise, totalPaise };
 }
 
 export function logStatus(currentLog: string | null, newStatus: string): string {

@@ -1,9 +1,11 @@
-import type { FLAVORS } from "@/lib/constants";
+import type { FLAVORS, SKUS } from "@/lib/constants";
 
 export type FlavorId = (typeof FLAVORS)[number]["id"];
+export type SkuId = (typeof SKUS)[number]["id"];
+export type Sku = (typeof SKUS)[number];
 
 export interface CartItem {
-  flavorId: FlavorId;
+  skuId: SkuId;
   quantity: number;
 }
 

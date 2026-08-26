@@ -45,6 +45,121 @@ export const FLAVORS = [
   },
 ] as const;
 
+// Shipping fee charged only when the cart contains exactly one 50g pack
+// (and nothing else). Free shipping in every other case.
+export const SHIPPING_CHARGED_PAISE = 10000; // ₹100
+
+// Purchasable units. FLAVORS above holds flavor metadata; SKUS is the actual
+// catalog (4 flavors × 250g, 4 flavors × 50g, and one 2-pack bundle).
+// `flavorIds` has length 1 for single-flavor packs and 2 for the bundle.
+export const SKUS = [
+  // 250g packs — ₹1,399
+  {
+    id: "original-250",
+    flavorIds: ["original"],
+    name: "Original Blend · 250g",
+    sizeLabel: "250g",
+    weightGrams: 250,
+    servings: 30,
+    pricePaise: 139900,
+    image: "/images/original-blend.png",
+    badge: null,
+  },
+  {
+    id: "hazelnut-250",
+    flavorIds: ["hazelnut"],
+    name: "Roasted Hazelnut · 250g",
+    sizeLabel: "250g",
+    weightGrams: 250,
+    servings: 30,
+    pricePaise: 139900,
+    image: "/images/roasted-hazelnut.png",
+    badge: "Most Popular",
+  },
+  {
+    id: "vanilla-250",
+    flavorIds: ["vanilla"],
+    name: "Vanilla · 250g",
+    sizeLabel: "250g",
+    weightGrams: 250,
+    servings: 30,
+    pricePaise: 139900,
+    image: "/images/vanilla.png",
+    badge: null,
+  },
+  {
+    id: "caramel-250",
+    flavorIds: ["caramel"],
+    name: "Caramel · 250g",
+    sizeLabel: "250g",
+    weightGrams: 250,
+    servings: 30,
+    pricePaise: 139900,
+    image: "/images/caramel.png",
+    badge: null,
+  },
+  // 50g packs — ₹299
+  {
+    id: "original-50",
+    flavorIds: ["original"],
+    name: "Original Blend · 50g",
+    sizeLabel: "50g",
+    weightGrams: 50,
+    servings: 6,
+    pricePaise: 29900,
+    image: "/images/original-blend.png",
+    badge: "New · 50g",
+  },
+  {
+    id: "hazelnut-50",
+    flavorIds: ["hazelnut"],
+    name: "Roasted Hazelnut · 50g",
+    sizeLabel: "50g",
+    weightGrams: 50,
+    servings: 6,
+    pricePaise: 29900,
+    image: "/images/roasted-hazelnut.png",
+    badge: "New · 50g",
+  },
+  {
+    id: "vanilla-50",
+    flavorIds: ["vanilla"],
+    name: "Vanilla · 50g",
+    sizeLabel: "50g",
+    weightGrams: 50,
+    servings: 6,
+    pricePaise: 29900,
+    image: "/images/vanilla.png",
+    badge: "New · 50g",
+  },
+  {
+    id: "caramel-50",
+    flavorIds: ["caramel"],
+    name: "Caramel · 50g",
+    sizeLabel: "50g",
+    weightGrams: 50,
+    servings: 6,
+    pricePaise: 29900,
+    image: "/images/caramel.png",
+    badge: "New · 50g",
+  },
+  // Bundle — one SKU that ships two 250g packs
+  {
+    id: "duo-vanilla-hazelnut",
+    flavorIds: ["vanilla", "hazelnut"],
+    name: "Vanilla + Hazelnut Duo",
+    sizeLabel: "2 × 250g",
+    weightGrams: 500,
+    servings: 60,
+    pricePaise: 279800,
+    image: "/images/all-4-sku.jpeg",
+    badge: "Bundle",
+  },
+] as const;
+
+// Featured SKUs shown in the "Best Sellers" section under the hero.
+export const BEST_SELLERS = ["hazelnut-250", "vanilla-250", "duo-vanilla-hazelnut"] as const;
+
 export const COUPONS: Record<string, { discountPercent: number; minQuantity: number }> = {
   FOCUS10: { discountPercent: 10, minQuantity: 1 },
   FOUNDER20: { discountPercent: 20, minQuantity: 2 },

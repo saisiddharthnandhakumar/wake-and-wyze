@@ -1,39 +1,45 @@
 "use client";
 
 import { ShieldCheck, Truck } from "lucide-react";
-import { FLAVORS, PRICE_PAISE } from "@/lib/constants";
 import { formatPrice, formatUsdDollars, usdDollars } from "@/lib/order";
 import { useCurrency } from "@/components/currency/currency-provider";
-import { cartTotalQuantity } from "@/lib/cart";
+import { cartTotalQuantity, getSku } from "@/lib/cart";
 import { Card } from "@/components/ui/card";
 import type { Cart } from "@/lib/types";
 
 interface OrderSummaryProps {
   items: Cart;
+  subtotalPaise: number;
   discountPaise: number;
+  shippingPaise: number;
   totalPaise: number;
 }
 
-export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryProps) {
+export function OrderSummary({
+  items,
+  subtotalPaise,
+  discountPaise,
+  shippingPaise,
+  totalPaise,
+}: OrderSummaryProps) {
   const { currency } = useCurrency();
-  const subtotalPaise = totalPaise + discountPaise;
-  const unitPricePaise = PRICE_PAISE;
 
-  // USD: derive the discount as (subtotal − total) in whole dollars so the
-  // "Subtotal − Discount = Total" rows reconcile (independent ceil can drift $1).
+  // USD: derive the discount as (subtotal − discounted subtotal) in whole dollars
+  // so the "Subtotal − Discount = Total" rows reconcile (independent ceil can drift $1).
   const discountLabel =
     currency === "USD"
-      ? formatUsdDollars(usdDollars(subtotalPaise) - usdDollars(totalPaise))
+      ? formatUsdDollars(usdDollars(subtotalPaise) - usdDollars(subtotalPaise - discountPaise))
       : formatPrice(discountPaise, currency);
 
   const lineItems = items.map((item) => {
-    const flavor = FLAVORS.find((f) => f.id === item.flavorId);
+    const sku = getSku(item.skuId);
     return {
-      flavorId: item.flavorId,
-      name: flavor?.name ?? item.flavorId,
+      skuId: item.skuId,
+      name: sku?.name ?? item.skuId,
+      sizeLabel: sku?.sizeLabel,
       quantity: item.quantity,
-      subtotal: unitPricePaise * item.quantity,
-      image: flavor?.image,
+      unitPricePaise: sku?.pricePaise ?? 0,
+      image: sku?.image,
     };
   });
 
@@ -44,13 +50,13 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
       <h3 className="font-display text-lg font-semibold text-ink mb-5">Order Summary</h3>
 
       {isEmpty ? (
-        <p className="text-sm text-ink-muted py-2">No flavors selected yet.</p>
+        <p className="text-sm text-ink-muted py-2">No items selected yet.</p>
       ) : (
         <>
           {/* Line items */}
           <ul className="space-y-3">
             {lineItems.map((item) => (
-              <li key={item.flavorId} className="flex items-center gap-3">
+              <li key={item.skuId} className="flex items-center gap-3">
                 {item.image && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -64,9 +70,12 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
                 )}
                 <span className="flex-1 text-sm text-ink leading-snug">
                   {item.name}
+                  {item.sizeLabel && (
+                    <span className="block text-xs text-ink-muted">{item.sizeLabel}</span>
+                  )}
                 </span>
                 <span className="text-sm font-medium text-ink tabular-nums whitespace-nowrap">
-                  {item.quantity} × {formatPrice(unitPricePaise, currency)}
+                  {item.quantity} × {formatPrice(item.unitPricePaise, currency)}
                 </span>
               </li>
             ))}
@@ -77,7 +86,7 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
           <dl className="space-y-2">
             <div className="flex items-center justify-between gap-4">
               <dt className="text-sm text-ink-muted">
-                Subtotal ({cartTotalQuantity(items)} bag{cartTotalQuantity(items) !== 1 ? "s" : ""})
+                Subtotal ({cartTotalQuantity(items)} pack{cartTotalQuantity(items) !== 1 ? "s" : ""})
               </dt>
               <dd className="text-sm font-medium text-ink tabular-nums">
                 {formatPrice(subtotalPaise, currency)}
@@ -92,6 +101,13 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
                 </dd>
               </div>
             )}
+
+            <div className="flex items-center justify-between gap-4">
+              <dt className="text-sm text-ink-muted">Shipping</dt>
+              <dd className="text-sm font-medium text-ink tabular-nums">
+                {shippingPaise > 0 ? formatPrice(shippingPaise, currency) : "Free"}
+              </dd>
+            </div>
           </dl>
         </>
       )}
@@ -108,7 +124,9 @@ export function OrderSummary({ items, discountPaise, totalPaise }: OrderSummaryP
       <div className="mt-6 space-y-2.5 border-t border-border-light pt-5">
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <Truck size={14} className="shrink-0 text-sage" />
-          Free delivery on all pre orders
+          {shippingPaise > 0
+            ? "Add another pack to unlock free shipping"
+            : "Free shipping unlocked"}
         </p>
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <ShieldCheck size={14} className="shrink-0 text-sage" />

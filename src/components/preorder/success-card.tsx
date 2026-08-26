@@ -2,11 +2,10 @@
 
 import { useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
-import { FLAVORS } from "@/lib/constants";
 import { ORDER_NOTICE } from "@/lib/content";
 import { formatPrice } from "@/lib/order";
 import { useCurrency } from "@/components/currency/currency-provider";
-import { cartToAnalyticsItems } from "@/lib/cart";
+import { cartToAnalyticsItems, getSku } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { Card } from "@/components/ui/card";
 import type { Cart } from "@/lib/types";
@@ -33,9 +32,9 @@ export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps
   }, [totalPaise, orderNumber, items]);
 
   const lineItems = items.map((item) => {
-    const flavor = FLAVORS.find((f) => f.id === item.flavorId);
+    const sku = getSku(item.skuId);
     return {
-      name: flavor?.name ?? item.flavorId,
+      name: sku?.name ?? item.skuId,
       quantity: item.quantity,
     };
   });
@@ -44,7 +43,7 @@ export function SuccessCard({ orderNumber, totalPaise, items }: SuccessCardProps
     { label: "Order Number", value: orderNumber },
     ...lineItems.map((li) => ({
       label: li.name,
-      value: `${li.quantity} bag${li.quantity > 1 ? "s" : ""}`,
+      value: `${li.quantity} pack${li.quantity > 1 ? "s" : ""}`,
     })),
     { label: "Amount Paid", value: formatPrice(totalPaise, currency) },
   ];

@@ -52,7 +52,7 @@ export async function GET(_request: Request, context: RouteContext) {
 
     const order = await prisma.preOrder.findUnique({
       where: { id },
-      include: { items: { select: { flavor: true, quantity: true } } },
+      include: { items: { select: { flavor: true, sku: true, quantity: true } } },
     });
     if (!order) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
@@ -74,7 +74,7 @@ export async function PATCH(request: Request, context: RouteContext) {
 
     const existing = await prisma.preOrder.findUnique({
       where: { id },
-      include: { items: { select: { flavor: true, quantity: true } } },
+      include: { items: { select: { flavor: true, sku: true, quantity: true } } },
     });
     if (!existing) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
@@ -105,10 +105,15 @@ export async function PATCH(request: Request, context: RouteContext) {
         name: existing.name,
         orderNumber: existing.orderNumber,
         totalPaise: existing.totalPaise,
+        shippingPaise: existing.shippingPaise,
         items:
           existing.items && existing.items.length > 0
-            ? existing.items.map((i) => ({ flavorId: i.flavor, quantity: i.quantity }))
-            : [{ flavorId: existing.flavor, quantity: existing.quantity }],
+            ? existing.items.map((i) => ({
+                skuId: i.sku,
+                flavorId: i.flavor,
+                quantity: i.quantity,
+              }))
+            : [{ skuId: null, flavorId: existing.flavor, quantity: existing.quantity }],
       });
     });
 

@@ -39,9 +39,10 @@ CREATE TABLE IF NOT EXISTS "PreOrder" (
   "orderNumber" TEXT NOT NULL UNIQUE,
   "flavor" TEXT NOT NULL,
   "quantity" INTEGER NOT NULL,
-  "unitPricePaise" INTEGER NOT NULL DEFAULT 129900,
+  "unitPricePaise" INTEGER NOT NULL DEFAULT 139900,
   "subtotalPaise" INTEGER NOT NULL,
   "discountPaise" INTEGER NOT NULL DEFAULT 0,
+  "shippingPaise" INTEGER NOT NULL DEFAULT 0,
   "totalPaise" INTEGER NOT NULL,
   "couponCode" TEXT,
   "name" TEXT NOT NULL,
@@ -74,8 +75,9 @@ CREATE TABLE IF NOT EXISTS "PreOrderItem" (
   "id" TEXT NOT NULL PRIMARY KEY,
   "orderId" TEXT NOT NULL,
   "flavor" TEXT NOT NULL,
+  "sku" TEXT,
   "quantity" INTEGER NOT NULL,
-  "unitPricePaise" INTEGER NOT NULL DEFAULT 129900,
+  "unitPricePaise" INTEGER NOT NULL DEFAULT 139900,
   "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY ("orderId") REFERENCES "PreOrder"("id") ON DELETE CASCADE
 );
@@ -97,6 +99,8 @@ const MIGRATIONS = [
   `ALTER TABLE "PreOrder" ADD COLUMN "razorpayInvoiceId" TEXT`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "PreOrder_razorpayInvoiceId_key" ON "PreOrder"("razorpayInvoiceId")`,
   `CREATE INDEX IF NOT EXISTS "PreOrder_razorpayCustomerId_idx" ON "PreOrder"("razorpayCustomerId")`,
+  `ALTER TABLE "PreOrder" ADD COLUMN "shippingPaise" INTEGER NOT NULL DEFAULT 0`,
+  `ALTER TABLE "PreOrderItem" ADD COLUMN "sku" TEXT`,
 ];
 
 // ---- Turso (production) ----

@@ -59,7 +59,7 @@ export async function POST(request: Request) {
   // 4. Find the PreOrder by razorpayOrderId
   const order = await prisma.preOrder.findUnique({
     where: { razorpayOrderId },
-    include: { items: { select: { flavor: true, quantity: true } } },
+    include: { items: { select: { flavor: true, sku: true, quantity: true } } },
   });
 
   if (!order) {
@@ -93,13 +93,15 @@ export async function POST(request: Request) {
           name: order.name,
           orderNumber: order.orderNumber,
           totalPaise: order.totalPaise,
+          shippingPaise: order.shippingPaise,
           items:
             order.items && order.items.length > 0
               ? order.items.map((i) => ({
+                  skuId: i.sku,
                   flavorId: i.flavor,
                   quantity: i.quantity,
                 }))
-              : [{ flavorId: order.flavor, quantity: order.quantity }],
+              : [{ skuId: null, flavorId: order.flavor, quantity: order.quantity }],
         });
         void createRazorpayCustomerAndInvoice({
           id: order.id,

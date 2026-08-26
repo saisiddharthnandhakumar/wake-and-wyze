@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/hero-section";
+import { BestSellersSection } from "@/components/sections/best-sellers-section";
 import { ProblemSection } from "@/components/sections/problem-section";
 import { SolutionSection } from "@/components/sections/solution-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
@@ -40,6 +41,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <BestSellersSection />
       <ProblemSection />
       <SolutionSection />
       <BenefitsSection />

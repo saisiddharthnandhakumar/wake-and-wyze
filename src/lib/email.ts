@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import { formatINR } from "@/lib/order";
-import { formatFlavorString } from "@/lib/cart";
+import { formatFlavorString, skuName } from "@/lib/cart";
 import { ORDER_NOTICE } from "@/lib/content";
 
 interface OrderConfirmationParams {
@@ -8,7 +8,8 @@ interface OrderConfirmationParams {
   name: string;
   orderNumber: string;
   totalPaise: number;
-  items: Array<{ flavorId: string; quantity: number }>;
+  shippingPaise?: number;
+  items: Array<{ skuId?: string | null; flavorId?: string | null; quantity: number }>;
 }
 
 /**
@@ -33,14 +34,24 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
 
   const lineItems = params.items
     .map((item) => {
-      const name = formatFlavorString(item.flavorId);
+      const name = item.skuId
+        ? skuName(item.skuId)
+        : formatFlavorString(item.flavorId ?? "");
       return `
         <tr>
           <td style="padding:8px 0;border-bottom:1px solid #EFEAE0;color:#6B5746;font-size:14px;">${name}</td>
-          <td style="padding:8px 0;border-bottom:1px solid #EFEAE0;color:#6B5746;font-size:14px;text-align:right;">${item.quantity} bag${item.quantity > 1 ? "s" : ""}</td>
+          <td style="padding:8px 0;border-bottom:1px solid #EFEAE0;color:#6B5746;font-size:14px;text-align:right;">${item.quantity} pack${item.quantity > 1 ? "s" : ""}</td>
         </tr>`;
     })
     .join("");
+
+  const shippingRow = params.shippingPaise
+    ? `
+        <tr>
+          <td style="padding:8px 0;border-bottom:1px solid #EFEAE0;color:#6B5746;font-size:14px;">Shipping</td>
+          <td style="padding:8px 0;border-bottom:1px solid #EFEAE0;color:#6B5746;font-size:14px;text-align:right;">${formatINR(params.shippingPaise)}</td>
+        </tr>`
+    : "";
 
   const resend = new Resend(apiKey);
 
@@ -74,6 +85,7 @@ export async function sendOrderConfirmation(params: OrderConfirmationParams) {
                   <td style="padding:8px 0;color:#241811;font-size:14px;font-weight:600;text-align:right;">${params.orderNumber}</td>
                 </tr>
                 ${lineItems}
+                ${shippingRow}
                 <tr>
                   <td style="padding:10px 0;color:#6B5746;font-size:14px;font-weight:600;">Amount Paid</td>
                   <td style="padding:10px 0;color:#241811;font-size:16px;font-weight:700;text-align:right;">${formatINR(params.totalPaise)}</td>

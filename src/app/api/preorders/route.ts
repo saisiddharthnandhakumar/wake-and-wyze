@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { preOrderSchema, validateCoupon } from "@/lib/validators";
 import { computeOrderAmounts, generateOrderNumber, logStatus } from "@/lib/order";
-import { snapshotFlavor, makeCartItem } from "@/lib/cart";
+import { snapshotFlavor, makeCartItem, getSku, cartTotalQuantity } from "@/lib/cart";
 import type { Cart } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -29,7 +29,8 @@ export async function POST(request: Request) {
     const data = parsed.data;
     const couponCode = data.couponCode?.trim().toUpperCase() || null;
 
-    const totalQuantity = data.items.reduce((sum, i) => sum + i.quantity, 0);
+    const items: Cart = data.items.map((i) => makeCartItem(i.skuId, i.quantity));
+    const totalQuantity = cartTotalQuantity(items);
 
     if (couponCode && !validateCoupon(couponCode, totalQuantity)) {
       return NextResponse.json(
@@ -41,13 +42,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const { unitPricePaise, subtotalPaise, discountPaise, totalPaise } =
-      computeOrderAmounts(totalQuantity, couponCode);
+    // Amounts recomputed server-side (never trust the client's totals).
+    const { subtotalPaise, discountPaise, shippingPaise, totalPaise } =
+      computeOrderAmounts(items, couponCode);
+
+    // Vestigial — keep writing the first SKU's unit price for legacy display.
+    const unitPricePaise = getSku(items[0].skuId)?.pricePaise ?? 0;
 
     const orderNumber = generateOrderNumber();
     const statusLog = logStatus(null, "ORDER_PLACED");
-
-    const items: Cart = data.items.map((i) => makeCartItem(i.flavorId, i.quantity));
 
     // Create order + line items atomically
     const order = await prisma.$transaction(async (tx) => {
@@ -59,6 +62,7 @@ export async function POST(request: Request) {
           unitPricePaise,
           subtotalPaise,
           discountPaise,
+          shippingPaise,
           totalPaise,
           couponCode,
           name: data.name,
@@ -74,11 +78,12 @@ export async function POST(request: Request) {
       });
 
       await tx.preOrderItem.createMany({
-        data: data.items.map((item) => ({
+        data: items.map((item) => ({
           orderId: created.id,
-          flavor: item.flavorId,
+          sku: item.skuId,
+          flavor: snapshotFlavor([item]),
           quantity: item.quantity,
-          unitPricePaise,
+          unitPricePaise: getSku(item.skuId)?.pricePaise ?? 0,
         })),
       });
 

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db";
 import { formatINR } from "@/lib/order";
-import { formatFlavorString } from "@/lib/cart";
+import { formatFlavorString, getSku } from "@/lib/cart";
 
 export const dynamic = "force-dynamic";
 
@@ -64,7 +64,7 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
 
   // --- Fetch orders ---
   const orders = await prisma.preOrder.findMany({
-    include: { items: { select: { flavor: true, quantity: true } } },
+    include: { items: { select: { flavor: true, sku: true, quantity: true } } },
     orderBy: { createdAt: "desc" },
   });
 
@@ -120,7 +120,7 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                 const lineItems =
                   order.items && order.items.length > 0
                     ? order.items
-                    : [{ flavor: order.flavor, quantity: order.quantity }];
+                    : [{ flavor: order.flavor, sku: null, quantity: order.quantity }];
 
                 return (
                   <tr key={order.id} className="hover:bg-gray-50/50">
@@ -137,7 +137,7 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                         {lineItems.map((item, i) => (
                           <div key={i} className="text-gray-700">
                             <span className="font-medium">{item.quantity}×</span>{" "}
-                            {formatFlavorString(item.flavor)}
+                            {item.sku ? getSku(item.sku)?.name : formatFlavorString(item.flavor)}
                           </div>
                         ))}
                       </div>

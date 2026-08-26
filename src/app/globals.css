@@ -48,7 +48,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 120px;
   }
 
   /* Scroll-snap only on tall viewports — on short screens sections exceed the
@@ -112,4 +112,10 @@
 
 @utility text-balance {
   text-wrap: balance;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }

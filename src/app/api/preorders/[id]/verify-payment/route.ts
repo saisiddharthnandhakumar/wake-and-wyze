@@ -44,7 +44,7 @@ export async function POST(request: Request, context: RouteContext) {
     // Load the order with items (needed for email)
     const order = await prisma.preOrder.findUnique({
       where: { id },
-      include: { items: { select: { flavor: true, quantity: true } } },
+      include: { items: { select: { flavor: true, sku: true, quantity: true } } },
     });
 
     if (!order) {
@@ -138,13 +138,15 @@ export async function POST(request: Request, context: RouteContext) {
           name: order.name,
           orderNumber: order.orderNumber,
           totalPaise: order.totalPaise,
+          shippingPaise: order.shippingPaise,
           items:
             order.items && order.items.length > 0
               ? order.items.map((i) => ({
+                  skuId: i.sku,
                   flavorId: i.flavor,
                   quantity: i.quantity,
                 }))
-              : [{ flavorId: order.flavor, quantity: order.quantity }],
+              : [{ skuId: null, flavorId: order.flavor, quantity: order.quantity }],
         });
         void createRazorpayCustomerAndInvoice({
           id: order.id,

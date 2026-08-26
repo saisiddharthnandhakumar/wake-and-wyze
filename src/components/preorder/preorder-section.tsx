@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FLAVORS } from "@/lib/constants";
 import { computeOrderAmounts } from "@/lib/order";
-import { cartTotalQuantity, defaultCart, makeCartItem } from "@/lib/cart";
+import { cartTotalQuantity, getItemQuantity, skuForFlavor } from "@/lib/cart";
+import { useCart } from "@/components/cart/cart-provider";
 import { Card } from "@/components/ui/card";
 import { FlavorPicker } from "@/components/preorder/flavor-picker";
 import { CouponInput } from "@/components/preorder/coupon-input";
@@ -25,7 +26,7 @@ interface OrderResult {
 const SECTION_LABEL_CLASS = "block text-xs tracking-wider uppercase text-ink-muted mb-3";
 
 export function PreOrderSection() {
-  const [cart, setCart] = useState<Cart>(defaultCart);
+  const { cart, addItem } = useCart();
   const [couponCode, setCouponCode] = useState("");
   const [appliedCouponCode, setAppliedCouponCode] = useState<string | null>(null);
 
@@ -56,23 +57,22 @@ export function PreOrderSection() {
       }
       const flavorParam = params.get("flavor");
       if (flavorParam && FLAVORS.some((f) => f.id === flavorParam)) {
-        setCart((prev) => {
-          const existing = prev.find((i) => i.flavorId === flavorParam);
-          if (existing) return prev;
-          // Add the flavor at qty 1 instead of replacing the cart
-          return [...prev, makeCartItem(flavorParam, 1)];
-        });
+        const skuId = skuForFlavor(flavorParam);
+        // Add the 250g SKU at qty 1, only if not already in the cart.
+        if (getItemQuantity(cart, skuId) === 0) {
+          addItem(skuId);
+        }
       }
     };
 
     readFlavorFromUrl();
     window.addEventListener("hashchange", readFlavorFromUrl);
     return () => window.removeEventListener("hashchange", readFlavorFromUrl);
-  }, []);
+  }, [cart, addItem]);
 
   const totalQuantity = cartTotalQuantity(cart);
-  const { discountPaise, totalPaise } = computeOrderAmounts(
-    totalQuantity,
+  const { subtotalPaise, discountPaise, shippingPaise, totalPaise } = computeOrderAmounts(
+    cart,
     appliedCouponCode,
   );
 
@@ -82,10 +82,6 @@ export function PreOrderSection() {
     } else {
       setAppliedCouponCode(null);
     }
-  };
-
-  const handleUpdateCart = (newCart: Cart) => {
-    setCart(newCart);
   };
 
   const handleCheckoutSuccess = (result: {
@@ -118,8 +114,8 @@ export function PreOrderSection() {
             Build Your Box
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
-            Mix and match your favorite flavors. Up to 10 bags per order, free delivery
-            on all pre orders.
+            Mix and match your favorite blends. Free shipping on 2+ packs — a single
+            50g trial pack ships for ₹100.
           </p>
         </div>
 
@@ -133,10 +129,10 @@ export function PreOrderSection() {
                   <span className={SECTION_LABEL_CLASS}>
                     Step 1: Choose Your Flavors
                   </span>
-                  <FlavorPicker cart={cart} onChange={handleUpdateCart} />
+                  <FlavorPicker />
                   <p className="mt-3 text-xs text-ink-muted">
                     {totalQuantity > 0
-                      ? `${totalQuantity} of 10 bag${totalQuantity !== 1 ? "s" : ""} selected, each bag = 30 servings`
+                      ? `${totalQuantity} of 10 pack${totalQuantity !== 1 ? "s" : ""} selected`
                       : "Select at least one flavor to continue"}
                   </p>
                 </div>
@@ -198,7 +194,9 @@ export function PreOrderSection() {
           <aside className="md:sticky md:top-28">
             <OrderSummary
               items={cart}
+              subtotalPaise={subtotalPaise}
               discountPaise={discountPaise}
+              shippingPaise={shippingPaise}
               totalPaise={totalPaise}
             />
           </aside>

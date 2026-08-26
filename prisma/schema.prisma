@@ -11,9 +11,10 @@ model PreOrder {
   orderNumber    String          @unique
   flavor         String
   quantity       Int
-  unitPricePaise Int             @default(129900)
+  unitPricePaise Int             @default(139900)
   subtotalPaise  Int
   discountPaise  Int             @default(0)
+  shippingPaise  Int             @default(0)
   totalPaise     Int
   couponCode     String?
   name           String
@@ -48,8 +49,9 @@ model PreOrderItem {
   id             String   @id @default(cuid())
   orderId        String
   flavor         String
+  sku            String?
   quantity       Int
-  unitPricePaise Int      @default(129900)
+  unitPricePaise Int      @default(139900)
   createdAt      DateTime @default(now())
   order          PreOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
