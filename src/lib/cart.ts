@@ -64,6 +64,18 @@ export function canDecrement(cart: Cart, skuId: string): boolean {
 }
 
 /**
+ * A lone 50g trial pack (one line item, quantity 1) is not orderable — 50g
+ * packs require a 2-pack minimum. Single 250g packs and the bundle are fine.
+ */
+export function isLone50g(items: { skuId: string; quantity: number }[]): boolean {
+  return (
+    items.length === 1 &&
+    items[0].quantity === 1 &&
+    getSku(items[0].skuId)?.weightGrams === 50
+  );
+}
+
+/**
  * Convert cart items to the GA4 / Meta Pixel `items` array.
  * Prices are in currency units (e.g. 299 for ₹299), not paise.
  */

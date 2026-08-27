@@ -45,10 +45,6 @@ export const FLAVORS = [
   },
 ] as const;
 
-// Shipping fee charged only when the cart contains exactly one 50g pack
-// (and nothing else). Free shipping in every other case.
-export const SHIPPING_CHARGED_PAISE = 10000; // ₹100
-
 // Purchasable units. FLAVORS above holds flavor metadata; SKUS is the actual
 // catalog (4 flavors × 250g, 4 flavors × 50g, and one 2-pack bundle).
 // `flavorIds` has length 1 for single-flavor packs and 2 for the bundle.

@@ -8,7 +8,7 @@ import { INDIAN_STATES } from "@/lib/constants";
 import { preOrderSchema } from "@/lib/validators";
 import { formatPrice } from "@/lib/order";
 import { useCurrency } from "@/components/currency/currency-provider";
-import { cartToAnalyticsItems, cartTotalQuantity } from "@/lib/cart";
+import { cartToAnalyticsItems, cartTotalQuantity, isLone50g } from "@/lib/cart";
 import { AnalyticsEvents, trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -146,7 +146,8 @@ export function CheckoutForm({
     }
   };
 
-  const canSubmit = totalQuantity > 0;
+  const lone50g = isLone50g(items);
+  const canSubmit = totalQuantity > 0 && !lone50g;
 
   return (
     <form
@@ -330,6 +331,8 @@ export function CheckoutForm({
               <Loader2 size={18} className="animate-spin" />
               Placing your pre order…
             </>
+          ) : lone50g ? (
+            "Add a second pack to continue"
           ) : !canSubmit ? (
             "Add at least one bag to continue"
           ) : (

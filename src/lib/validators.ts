@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { SKUS, COUPONS } from "./constants";
-import { MAX_PER_ITEM, MAX_TOTAL } from "./cart";
+import { MAX_PER_ITEM, MAX_TOTAL, isLone50g } from "./cart";
 
 const skuIds = SKUS.map((s) => s.id) as [string, ...string[]];
 
@@ -19,6 +19,10 @@ export const preOrderSchema = z.object({
     .min(1, "Add at least one item")
     .refine((items) => items.reduce((s, i) => s + i.quantity, 0) <= MAX_TOTAL, {
       message: `Maximum ${MAX_TOTAL} items total`,
+      path: ["items"],
+    })
+    .refine((items) => !isLone50g(items), {
+      message: "50g packs require a minimum of 2 per order — add another pack",
       path: ["items"],
     }),
   name: z.string().min(2, "Name is required").max(100),

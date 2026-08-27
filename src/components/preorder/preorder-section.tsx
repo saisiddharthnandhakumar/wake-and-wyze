@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FLAVORS } from "@/lib/constants";
 import { computeOrderAmounts } from "@/lib/order";
-import { cartTotalQuantity, getItemQuantity, skuForFlavor } from "@/lib/cart";
+import { cartTotalQuantity, getItemQuantity, skuForFlavor, isLone50g } from "@/lib/cart";
 import { useCart } from "@/components/cart/cart-provider";
 import { Card } from "@/components/ui/card";
 import { FlavorPicker } from "@/components/preorder/flavor-picker";
@@ -114,8 +114,8 @@ export function PreOrderSection() {
             Build Your Box
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
-            Mix and match your favorite blends. Free shipping on 2+ packs — a single
-            50g trial pack ships for ₹100.
+            Mix and match your favorite blends. Free shipping on every order — 50g
+            trial packs are sold in a minimum of 2.
           </p>
         </div>
 
@@ -131,9 +131,11 @@ export function PreOrderSection() {
                   </span>
                   <FlavorPicker />
                   <p className="mt-3 text-xs text-ink-muted">
-                    {totalQuantity > 0
-                      ? `${totalQuantity} of 10 pack${totalQuantity !== 1 ? "s" : ""} selected`
-                      : "Select at least one flavor to continue"}
+                    {isLone50g(cart)
+                      ? "Add a second pack — 50g packs require a minimum of 2"
+                      : totalQuantity > 0
+                        ? `${totalQuantity} of 10 pack${totalQuantity !== 1 ? "s" : ""} selected`
+                        : "Select at least one flavor to continue"}
                   </p>
                 </div>
 

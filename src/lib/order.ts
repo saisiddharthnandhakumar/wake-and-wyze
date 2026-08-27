@@ -1,4 +1,4 @@
-import { PRICE_PAISE, USD_PRICE, COUPONS, SHIPPING_CHARGED_PAISE, type Currency } from "./constants";
+import { PRICE_PAISE, USD_PRICE, COUPONS, type Currency } from "./constants";
 import { getSku, cartTotalQuantity } from "./cart";
 import type { Cart } from "./types";
 
@@ -47,33 +47,10 @@ export function formatPrice(paise: number, currency: Currency): string {
 }
 
 /**
- * Compute the shipping fee for a cart.
- *
- * Rule: ₹100 only when the cart is exactly one 50g pack and nothing else.
- * Any other combination (a second 50g, a 250g pack, or the bundle) ships free.
- */
-export function computeShippingPaise(items: { skuId: string; quantity: number }[]): number {
-  const single50g =
-    items.length === 1 &&
-    items[0].quantity === 1 &&
-    getSku(items[0].skuId)?.weightGrams === 50;
-  return single50g ? SHIPPING_CHARGED_PAISE : 0;
-}
-
-/** Free-shipping nudge: how many more packs until shipping is free. */
-export function freeShippingNudge(items: { skuId: string; quantity: number }[]) {
-  const shippingPaise = computeShippingPaise(items);
-  return {
-    shippingPaise,
-    remainingPacks: shippingPaise > 0 ? 1 : 0,
-    savePaise: shippingPaise,
-  };
-}
-
-/**
  * Compute order amounts from the cart's line items.
  * Each SKU carries its own price; the coupon % applies to the subtotal
- * (before shipping); shipping is added last.
+ * (before shipping). Shipping is always free — a lone 50g trial pack is
+ * blocked at checkout (2-pack minimum) rather than charged.
  */
 export function computeOrderAmounts(items: Cart, couponCode?: string | null) {
   const subtotalPaise = items.reduce(
@@ -90,7 +67,7 @@ export function computeOrderAmounts(items: Cart, couponCode?: string | null) {
     }
   }
 
-  const shippingPaise = computeShippingPaise(items);
+  const shippingPaise = 0;
   const totalPaise = subtotalPaise - discountPaise + shippingPaise;
   return { subtotalPaise, discountPaise, shippingPaise, totalPaise };
 }

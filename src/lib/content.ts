@@ -16,7 +16,7 @@ export const NAV_LINKS = [
 export const TICKER_MESSAGES = [
   "Best sellers back in stock",
   "New 50g packs available now",
-  "Free shipping on 2+ packs",
+  "Free shipping on all orders",
 ] as const;
 
 // ---- HERO ----
@@ -32,7 +32,7 @@ export const HERO = {
     "30 servings / 250g",
     "No added sugar",
     "Under 10 calories",
-    "Free shipping on 2+ packs",
+    "Free shipping on all orders",
   ],
 };
 
@@ -214,7 +214,7 @@ export const FINAL_CTA = {
   headline: "Ready for better mornings?",
   subheadline: "Pre order now. First batches ship soon.",
   cta: "Pre Order Now",
-  trustLine: "30 servings · Free shipping on 2+ packs",
+  trustLine: "30 servings · Free shipping",
 };
 
 // ---- ORDER NOTICE ----

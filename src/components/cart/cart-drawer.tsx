@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Minus, Plus, ShoppingBag, Trash2, Truck, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { formatPrice, computeOrderAmounts, freeShippingNudge } from "@/lib/order";
-import { getSku, skuName, cartTotalQuantity } from "@/lib/cart";
+import { formatPrice, computeOrderAmounts } from "@/lib/order";
+import { getSku, skuName, cartTotalQuantity, isLone50g } from "@/lib/cart";
 import { useCurrency } from "@/components/currency/currency-provider";
 import { useCart } from "@/components/cart/cart-provider";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,7 @@ export function CartDrawer() {
   if (!isCartOpen) return null;
 
   const { subtotalPaise, shippingPaise, totalPaise } = computeOrderAmounts(cart);
-  const nudge = freeShippingNudge(cart);
+  const lone50g = isLone50g(cart);
   const totalQuantity = cartTotalQuantity(cart);
   const isEmpty = cart.length === 0;
 
@@ -93,27 +93,24 @@ export function CartDrawer() {
           </div>
         ) : (
           <>
-            {/* Free shipping nudge */}
+            {/* Minimum-order nudge */}
             <div className="border-b border-border bg-sage-mist/50 px-6 py-3">
-              {nudge.shippingPaise > 0 ? (
+              {lone50g ? (
                 <>
                   <div className="flex items-center gap-2 text-sm">
                     <Truck size={16} className="shrink-0 text-bronze" />
                     <span className="text-ink">
-                      Add 1 more pack for <strong>free shipping</strong>
+                      Add <strong>1 more pack</strong> to place your order
                     </span>
                   </div>
-                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                    <div className="h-full w-1/2 rounded-full bg-bronze" />
-                  </div>
                   <p className="mt-1.5 text-xs text-ink-muted">
-                    You&apos;re ₹{nudge.savePaise / 100} away — add another pack to unlock it.
+                    50g trial packs require a minimum of 2 packs per order.
                   </p>
                 </>
               ) : (
                 <div className="flex items-center gap-2 text-sm text-success">
                   <Truck size={16} className="shrink-0" />
-                  <span className="font-medium">You&apos;ve unlocked free shipping</span>
+                  <span className="font-medium">Free shipping on this order</span>
                 </div>
               )}
             </div>
@@ -215,8 +212,14 @@ export function CartDrawer() {
                 </div>
               </dl>
 
-              <Button variant="bronze" size="lg" className="mt-4 w-full" onClick={handleCheckout}>
-                Checkout
+              <Button
+                variant="bronze"
+                size="lg"
+                className="mt-4 w-full"
+                onClick={handleCheckout}
+                disabled={lone50g}
+              >
+                {lone50g ? "Add 1 more pack to checkout" : "Checkout"}
               </Button>
               <button
                 type="button"

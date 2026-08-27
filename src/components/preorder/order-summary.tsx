@@ -3,7 +3,7 @@
 import { ShieldCheck, Truck } from "lucide-react";
 import { formatPrice, formatUsdDollars, usdDollars } from "@/lib/order";
 import { useCurrency } from "@/components/currency/currency-provider";
-import { cartTotalQuantity, getSku } from "@/lib/cart";
+import { cartTotalQuantity, getSku, isLone50g } from "@/lib/cart";
 import { Card } from "@/components/ui/card";
 import type { Cart } from "@/lib/types";
 
@@ -44,6 +44,7 @@ export function OrderSummary({
   });
 
   const isEmpty = items.length === 0;
+  const lone50g = isLone50g(items);
 
   return (
     <Card className="p-6 lg:p-7">
@@ -124,9 +125,9 @@ export function OrderSummary({
       <div className="mt-6 space-y-2.5 border-t border-border-light pt-5">
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <Truck size={14} className="shrink-0 text-sage" />
-          {shippingPaise > 0
-            ? "Add another pack to unlock free shipping"
-            : "Free shipping unlocked"}
+          {lone50g
+            ? "Add a second pack to place your order"
+            : "Free shipping on this order"}
         </p>
         <p className="flex items-center gap-2 text-xs text-ink-muted">
           <ShieldCheck size={14} className="shrink-0 text-sage" />

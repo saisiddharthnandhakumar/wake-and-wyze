@@ -4,7 +4,7 @@ import { ShopGrid } from "@/components/shop/shop-grid";
 export const metadata: Metadata = {
   title: "Shop | Wake & Wyze",
   description:
-    "Shop Wake & Wyze functional coffee. Four flavors in 250g and 50g trial packs, plus the Vanilla + Hazelnut Duo. Free shipping on 2+ packs.",
+    "Shop Wake & Wyze functional coffee. Four flavors in 250g and 50g trial packs, plus the Vanilla + Hazelnut Duo. Free shipping on all orders.",
 };
 
 export default function ShopPage() {
