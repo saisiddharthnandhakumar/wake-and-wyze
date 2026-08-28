@@ -177,6 +177,19 @@ export const WHY_LIONS_MANE = {
   ],
 };
 
+// ---- SOURCING / ORIGIN ----
+export const ORIGIN = {
+  eyebrow: "Single Origin · Chikkamagaluru",
+  headline: "Where Indian coffee began.",
+  body: "Our Robusta comes from Chikkamagaluru, Karnataka — the hills where Indian coffee was first planted in the 17th century. Grown at elevation in the Western Ghats, shade-grown under native trees, and small-batch roasted into instant crystals for a full body and a clean, low-acid finish.",
+  specs: [
+    { label: "Region", value: "Chikkamagaluru, Karnataka" },
+    { label: "Altitude", value: "High elevation · Western Ghats" },
+    { label: "Variety", value: "100% Robusta" },
+    { label: "Roast", value: "Dark · small-batch" },
+  ],
+};
+
 // ---- FAQ ----
 export const FAQS = {
   eyebrow: "FAQ",
@@ -205,6 +218,10 @@ export const FAQS = {
     {
       question: "Is this 'mushroom coffee'?",
       answer: "We prefer 'functional coffee.' Wake & Wyze is specialty coffee first, crafted for taste and your morning ritual. Lion's Mane is the functional ingredient that makes it better than regular coffee. It's coffee, upgraded.",
+    },
+    {
+      question: "Where is your coffee sourced from?",
+      answer: "Our Robusta is single-origin, from Chikkamagaluru, Karnataka — the region where Indian coffee was first planted in the 17th century. It's grown at elevation in the Western Ghats, shade-grown under native trees, then small-batch roasted for our dark-roast profile. No blends, no hidden origins.",
     },
   ],
 };

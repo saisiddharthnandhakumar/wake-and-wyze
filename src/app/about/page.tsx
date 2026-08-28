@@ -35,11 +35,26 @@ export default function AboutPage() {
         </p>
 
         <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">
+          Where Our Coffee Comes From
+        </h2>
+        <p className="text-ink-muted text-sm leading-relaxed mb-4">
+          Our Robusta is single-origin from Chikkamagaluru, Karnataka — the region where Indian
+          coffee began. In the 17th century, coffee was first planted in the Baba Budan Giri hills,
+          and Chikkamagaluru has grown it ever since.
+        </p>
+        <p className="text-ink-muted text-sm leading-relaxed mb-4">
+          The beans grow at elevation in the Western Ghats, shade-grown under native forest trees
+          and rain-fed by the southwest monsoon — conditions that give Robusta its signature full
+          body and clean, low-acid finish. We keep it simple: one origin, small-batch roasted, no
+          blends.
+        </p>
+
+        <h2 className="font-display text-xl font-semibold tracking-tight mt-10 mb-3">
           Our Promise
         </h2>
         <ul className="list-disc pl-5 space-y-2 text-ink-muted text-sm mb-4">
           <li className="leading-relaxed">
-            <strong>Quality first:</strong> 100% Robusta coffee, small-batch roasted. Lion&apos;s Mane
+            <strong>Quality first:</strong> single-origin Robusta from Chikkamagaluru, Karnataka — small-batch roasted. Lion&apos;s Mane
             from fruiting bodies only — no mycelium filler.
           </li>
           <li className="leading-relaxed">

@@ -49,7 +49,7 @@ Instead of relying on multiple cups throughout the day, Wake & Wyze creates a sm
 | Servings per bag | 30 (approx. one month for daily drinkers) |
 | Bag weight | 250g |
 | Serving size | ~8–9g instant coffee powder per serving |
-| Coffee type | Dark roast, 100% Robusta, small-batch roasted |
+| Coffee type | Dark roast, 100% Robusta, single-origin (Chikkamagaluru), small-batch roasted |
 | Lion's Mane dose | 1000mg per serving (100% fruiting body extract) |
 | Caffeine | ~80–100mg per cup |
 | Calories | Under 10 calories per serving |
