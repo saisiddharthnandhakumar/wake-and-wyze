@@ -92,12 +92,20 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
               Revenue: {formatINR(totalRevenue)}
             </p>
           </div>
-          <a
-            href={`/admin/orders?key=${key}`}
-            className="text-xs text-blue-600 hover:underline self-start"
-          >
-            Refresh
-          </a>
+          <div className="flex items-center gap-4 self-start">
+            <a
+              href={`/api/admin/orders/export?key=${key}`}
+              className="text-xs text-blue-600 hover:underline"
+            >
+              Export CSV
+            </a>
+            <a
+              href={`/admin/orders?key=${key}`}
+              className="text-xs text-blue-600 hover:underline"
+            >
+              Refresh
+            </a>
+          </div>
         </div>
 
         {/* Table */}
@@ -108,6 +116,7 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                 <th className="px-4 py-3">Order #</th>
                 <th className="px-4 py-3">Customer</th>
                 <th className="px-4 py-3">Phone</th>
+                <th className="px-4 py-3">Address</th>
                 <th className="px-4 py-3">Flavors</th>
                 <th className="px-4 py-3 text-right">Total</th>
                 <th className="px-4 py-3">Status</th>
@@ -129,9 +138,15 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                     </td>
                     <td className="px-4 py-3">
                       <div className="font-medium text-gray-900">{order.name}</div>
-                      <div className="text-xs text-gray-400">{order.city}</div>
+                      <div className="text-xs text-gray-400">{order.email}</div>
                     </td>
                     <td className="px-4 py-3 text-gray-600">{order.phone}</td>
+                    <td className="px-4 py-3 text-gray-600">
+                      <div>{order.address}</div>
+                      <div className="text-xs text-gray-400">
+                        {order.city}, {order.state} — {order.pincode}
+                      </div>
+                    </td>
                     <td className="px-4 py-3">
                       <div className="space-y-0.5">
                         {lineItems.map((item, i) => (
