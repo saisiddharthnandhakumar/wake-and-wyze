@@ -77,7 +77,7 @@ export function isLone50g(items: { skuId: string; quantity: number }[]): boolean
 
 /**
  * Convert cart items to the GA4 / Meta Pixel `items` array.
- * Prices are in currency units (e.g. 299 for ₹299), not paise.
+ * Prices are in currency units (e.g. 399 for ₹399), not paise.
  */
 export function cartToAnalyticsItems(cart: Cart) {
   return cart.map((item) => {
