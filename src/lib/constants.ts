@@ -4,7 +4,7 @@ export const LOCALE = "en-IN";
 
 // Display-only USD price per bag (rounded up to the nearest whole dollar).
 // Checkout still charges INR via Razorpay; this only affects what customers see.
-export const USD_PRICE = 18;
+export const USD_PRICE = 20;
 export type Currency = "INR" | "USD";
 
 export const SERVINGS_PER_BAG = 30;
