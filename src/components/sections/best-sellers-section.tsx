@@ -74,8 +74,8 @@ export function BestSellersSection() {
                       <span className="font-display text-lg font-bold text-ink tabular-nums">
                         {formatPrice(sku.pricePaise, currency)}
                       </span>
-                      <Button variant="bronze" size="sm" onClick={() => handleAdd(sku.id)}>
-                        Add to Cart
+                      <Button variant="secondary" size="sm" disabled className="cursor-not-allowed opacity-60">
+                        Out of Stock
                       </Button>
                     </div>
                   </div>

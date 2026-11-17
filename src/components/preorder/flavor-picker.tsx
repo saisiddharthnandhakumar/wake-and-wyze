@@ -41,8 +41,8 @@ function FlavorPickerCard({ flavor }: { flavor: Flavor }) {
   const pricePaise = selectedSku?.pricePaise ?? 0;
   const qty = skuId ? getItemQuantity(cart, skuId) : 0;
   const hasSelection = qty > 0;
-  const canAdd = skuId ? canIncrement(cart, skuId) : false;
-  const canRemove = skuId ? canDecrement(cart, skuId) : false;
+  const canAdd = false;
+  const canRemove = false;
 
   const handleIncrement = () => {
     if (!skuId || !canIncrement(cart, skuId)) return;
@@ -128,51 +128,9 @@ function FlavorPickerCard({ flavor }: { flavor: Flavor }) {
           {formatPrice(pricePaise, currency)}
         </span>
 
-        <div className="flex items-center gap-1" role="group" aria-label={`Quantity for ${flavor.name}`}>
-          <button
-            type="button"
-            onClick={handleDecrement}
-            disabled={!canRemove}
-            aria-label={`Remove one ${flavor.name}`}
-            aria-disabled={!canRemove}
-            className={cn(
-              "flex h-10 w-10 items-center justify-center rounded-full border transition-colors",
-              canRemove
-                ? "border-border bg-surface text-ink hover:border-sage hover:bg-sage-mist cursor-pointer"
-                : "border-border bg-surface text-ink-muted/30 cursor-not-allowed",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2",
-            )}
-          >
-            <Minus size={16} />
-          </button>
-
-          <span
-            className={cn(
-              "w-7 text-center font-display text-base font-semibold tabular-nums",
-              hasSelection ? "text-ink" : "text-ink-muted/40",
-            )}
-            aria-live="polite"
-          >
-            {qty}
-          </span>
-
-          <button
-            type="button"
-            onClick={handleIncrement}
-            disabled={!canAdd}
-            aria-label={`Add one ${flavor.name}`}
-            aria-disabled={!canAdd}
-            className={cn(
-              "flex h-10 w-10 items-center justify-center rounded-full border transition-colors",
-              canAdd
-                ? "border-border bg-surface text-ink hover:border-sage hover:bg-sage-mist cursor-pointer"
-                : "border-border bg-surface text-ink-muted/30 cursor-not-allowed",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2",
-            )}
-          >
-            <Plus size={16} />
-          </button>
-        </div>
+        <span className="rounded-full bg-border/60 px-3 py-1 text-xs font-semibold text-ink-muted cursor-not-allowed">
+          Out of Stock
+        </span>
       </div>
 
       {/* Selected indicator */}

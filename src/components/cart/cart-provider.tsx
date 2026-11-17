@@ -15,6 +15,7 @@ import {
   getItemQuantity,
   setItemQuantity as setItemQuantityPure,
 } from "@/lib/cart";
+import { ORDERS_PAUSED } from "@/lib/constants";
 import type { Cart, SkuId } from "@/lib/types";
 
 const STORAGE_KEY = "ww-cart";
@@ -91,6 +92,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Hydrate from localStorage once, after mount.
   useEffect(() => {
+    if (ORDERS_PAUSED) {
+      // Orders are closed: discard any cart persisted before the shutdown.
+      try {
+        window.localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // best-effort
+      }
+      return;
+    }
     const stored = readStoredCart();
     if (stored) emit(stored);
   }, []);
@@ -106,6 +116,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addItem = useCallback(
     (skuId: SkuId, quantity = 1) => {
+      if (ORDERS_PAUSED) return; // all products are sold out
       persist(setItemQuantityPure(current, skuId, getItemQuantity(current, skuId) + quantity));
     },
     [persist],
@@ -113,6 +124,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const setItemQuantity = useCallback(
     (skuId: SkuId, quantity: number) => {
+      // While paused, quantities may only go down (removal), never up.
+      if (ORDERS_PAUSED && quantity > getItemQuantity(current, skuId)) return;
       persist(setItemQuantityPure(current, skuId, quantity));
     },
     [persist],

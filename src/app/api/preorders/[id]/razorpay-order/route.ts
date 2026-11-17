@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getRazorpay } from "@/lib/razorpay";
 import { logStatus } from "@/lib/order";
+import { ORDERS_PAUSED } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
@@ -13,6 +14,13 @@ type RouteContext = { params: Promise<{ id: string }> };
  * returns the same Razorpay order rather than creating duplicates.
  */
 export async function POST(_request: Request, context: RouteContext) {
+  if (ORDERS_PAUSED) {
+    return NextResponse.json(
+      { error: "Orders are currently closed. All coffees are out of stock." },
+      { status: 400 },
+    );
+  }
+
   try {
     const { id } = await context.params;
 

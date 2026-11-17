@@ -14,9 +14,9 @@ export const NAV_LINKS = [
 
 // ---- TICKER BANNER ----
 export const TICKER_MESSAGES = [
-  "Best sellers back in stock",
-  "New 50g packs available now",
-  "Free shipping on all orders",
+  "All blends currently out of stock",
+  "Orders temporarily closed",
+  "Thank you for the overwhelming support",
 ] as const;
 
 // ---- HERO ----
@@ -25,14 +25,14 @@ export const HERO = {
   headline: "A smarter cup of coffee.",
   subheadline:
     "Premium instant specialty coffee infused with Lion's Mane Mushroom Extract, sustained energy, sharper focus, and a calmer caffeine experience. In every cup.",
-  primaryCta: "Pre Order Now",
+  primaryCta: "Sold Out",
   secondaryCta: "See the research",
   pulsingText: "WAKE & WYZE · FOCUS · CALM · SHARP · ",
   trustItems: [
     "30 servings / 250g",
     "No added sugar",
     "Under 10 calories",
-    "Free shipping on all orders",
+    "Orders currently closed",
   ],
 };
 
@@ -229,9 +229,9 @@ export const FAQS = {
 // ---- FINAL CTA ----
 export const FINAL_CTA = {
   headline: "Ready for better mornings?",
-  subheadline: "Pre order now. First batches ship soon.",
-  cta: "Pre Order Now",
-  trustLine: "30 servings · Free shipping",
+  subheadline: "All blends are currently sold out. We are not accepting new orders at this time. Thank you for your support!",
+  cta: "Sold Out",
+  trustLine: "30 servings · Orders closed",
 };
 
 // ---- ORDER NOTICE ----

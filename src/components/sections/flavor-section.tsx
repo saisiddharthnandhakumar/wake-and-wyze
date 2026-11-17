@@ -67,12 +67,9 @@ export function FlavorSection() {
                     <span className="font-display text-lg font-bold text-ink tabular-nums">
                       {formatPrice(PRICE_PAISE, currency)}
                     </span>
-                    <a
-                      href="#preorder"
-                      className={selectButtonClassName}
-                    >
-                      Select
-                    </a>
+                    <span className="inline-flex items-center justify-center rounded-full font-medium bg-border/60 text-ink-muted/70 px-4 py-2 text-sm cursor-not-allowed">
+                      Out of Stock
+                    </span>
                   </div>
                 </div>
               </Card>

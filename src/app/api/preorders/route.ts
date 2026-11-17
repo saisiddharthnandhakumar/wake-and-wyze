@@ -8,6 +8,13 @@ import type { Cart } from "@/lib/types";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  return NextResponse.json(
+    { error: "Orders are currently closed. All coffees are out of stock." },
+    { status: 400 },
+  );
+}
+
+export async function DISABLED_POST(request: Request) {
   try {
     const body = await request.json().catch(() => null);
 

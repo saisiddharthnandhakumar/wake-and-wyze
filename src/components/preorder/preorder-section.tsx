@@ -108,14 +108,26 @@ export function PreOrderSection() {
         {/* Section heading */}
         <div className="text-center mb-8 lg:mb-10">
           <p className="text-xs tracking-wider uppercase text-sage-deep font-semibold">
-            Pre Order
+            Orders Closed
           </p>
           <h2 className="mt-2 font-display text-3xl lg:text-4xl font-light text-ink text-balance">
-            Build Your Box
+            All Blends Are Currently Sold Out
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
-            Mix and match your favorite blends. Free shipping on every order — 50g
-            trial packs are sold in a minimum of 2.
+            We are not accepting any new orders at this time. Thank you for your support!
+          </p>
+        </div>
+
+        {/* Orders Closed Announcement Banner */}
+        <div className="mx-auto mb-10 max-w-2xl rounded-2xl border border-bronze/30 bg-surface p-6 sm:p-8 text-center shadow-sm">
+          <span className="inline-block rounded-full bg-bronze/10 border border-bronze/30 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-bronze mb-3">
+            Status: Out of Stock
+          </span>
+          <h3 className="font-display text-2xl font-bold text-ink">
+            Current Batches Sold Out
+          </h3>
+          <p className="mt-3 text-sm sm:text-base leading-relaxed text-ink-muted">
+            Every blend is currently out of stock. We have paused all incoming orders. If you have an existing order, it is being processed and dispatched as scheduled.
           </p>
         </div>
 
@@ -130,19 +142,15 @@ export function PreOrderSection() {
                     Step 1: Choose Your Flavors
                   </span>
                   <FlavorPicker />
-                  <p className="mt-3 text-xs text-ink-muted">
-                    {isLone50g(cart)
-                      ? "Add a second pack — 50g packs require a minimum of 2"
-                      : totalQuantity > 0
-                        ? `${totalQuantity} of 10 pack${totalQuantity !== 1 ? "s" : ""} selected`
-                        : "Select at least one flavor to continue"}
+                  <p className="mt-3 text-xs font-medium text-bronze">
+                    All blends are currently out of stock.
                   </p>
                 </div>
 
                 <div className="my-6 h-px bg-border" />
 
                 {/* Step 2 — Coupon */}
-                <div>
+                <div className="opacity-50 pointer-events-none">
                   <span className={SECTION_LABEL_CLASS}>Promo Code</span>
                   <CouponInput
                     couponCode={couponCode}
@@ -157,17 +165,13 @@ export function PreOrderSection() {
             {/* Stage panels */}
             <div ref={stagePanelRef}>
               {stage === "form" && (
-                <Card className="p-5 lg:p-6">
-                  <h3 className="font-display text-lg font-semibold text-ink mb-5">
-                    Delivery Details
+                <Card className="p-5 lg:p-8 text-center">
+                  <h3 className="font-display text-lg font-semibold text-ink mb-2">
+                    Checkout Unavailable
                   </h3>
-                  <CheckoutForm
-                    items={cart}
-                    totalPaise={totalPaise}
-                    discountPaise={discountPaise}
-                    couponCode={appliedCouponCode ?? ""}
-                    onSuccess={handleCheckoutSuccess}
-                  />
+                  <p className="text-sm text-ink-muted max-w-md mx-auto">
+                    We are not accepting any new orders right now. Thank you for your interest in Wake & Wyze!
+                  </p>
                 </Card>
               )}
 

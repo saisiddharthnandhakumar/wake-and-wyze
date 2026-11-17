@@ -215,11 +215,10 @@ export function CartDrawer() {
               <Button
                 variant="bronze"
                 size="lg"
-                className="mt-4 w-full"
-                onClick={handleCheckout}
-                disabled={lone50g}
+                className="mt-4 w-full opacity-60 cursor-not-allowed"
+                disabled
               >
-                {lone50g ? "Add 1 more pack to checkout" : "Checkout"}
+                Orders Closed — Out of Stock
               </Button>
               <button
                 type="button"

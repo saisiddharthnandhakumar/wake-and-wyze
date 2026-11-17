@@ -98,39 +98,27 @@ export function FlavorProductCard({ flavor, skus }: FlavorProductCardProps) {
           <div className="flex items-center gap-1" role="group" aria-label={`Quantity for ${flavor.name}`}>
             <button
               type="button"
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              disabled={qty <= 1}
+              disabled
               aria-label="Decrease quantity"
-              className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-full border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2",
-                qty <= 1
-                  ? "border-border text-ink-muted/30 cursor-not-allowed"
-                  : "border-border text-ink hover:border-sage hover:bg-sage-mist",
-              )}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink-muted/30 cursor-not-allowed"
             >
               <Minus size={15} />
             </button>
-            <span className="w-7 text-center font-display text-base font-semibold tabular-nums" aria-live="polite">
-              {qty}
+            <span className="w-7 text-center font-display text-base font-semibold tabular-nums text-ink-muted" aria-live="polite">
+              0
             </span>
             <button
               type="button"
-              onClick={() => setQty((q) => Math.min(10, q + 1))}
-              disabled={qty >= 10}
+              disabled
               aria-label="Increase quantity"
-              className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-full border transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2",
-                qty >= 10
-                  ? "border-border text-ink-muted/30 cursor-not-allowed"
-                  : "border-border text-ink hover:border-sage hover:bg-sage-mist",
-              )}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink-muted/30 cursor-not-allowed"
             >
               <Plus size={15} />
             </button>
           </div>
 
-          <Button variant="bronze" size="sm" onClick={handleAdd}>
-            Add to Cart
+          <Button variant="secondary" size="sm" disabled className="cursor-not-allowed opacity-60">
+            Out of Stock
           </Button>
         </div>
 
@@ -185,8 +173,8 @@ export function BundleProductCard({ skuId }: { skuId: SkuId }) {
           <span className="font-display text-lg font-bold text-ink tabular-nums">
             {formatPrice(sku.pricePaise, currency)}
           </span>
-          <Button variant="bronze" size="sm" onClick={handleAdd}>
-            Add to Cart
+          <Button variant="secondary" size="sm" disabled className="cursor-not-allowed opacity-60">
+            Out of Stock
           </Button>
         </div>
       </div>

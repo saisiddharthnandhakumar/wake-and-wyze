@@ -2,6 +2,9 @@ export const PRICE_PAISE = 139900; // ₹1,399.00
 export const CURRENCY = "INR";
 export const LOCALE = "en-IN";
 
+export const ORDERS_PAUSED = true;
+export const ALL_OUT_OF_STOCK = true;
+
 // Display-only USD price per bag (rounded up to the nearest whole dollar).
 // Checkout still charges INR via Razorpay; this only affects what customers see.
 export const USD_PRICE = 20;
@@ -17,7 +20,7 @@ export const FLAVORS = [
     notes: "Dark cocoa · Toasted oak",
     description: "Our signature instant pour. Deep, clean, and balanced, the everyday ritual perfected.",
     image: "/images/original-blend.png",
-    badge: null,
+    badge: "Out of Stock",
   },
   {
     id: "hazelnut",
@@ -25,7 +28,7 @@ export const FLAVORS = [
     notes: "Roasted nut · Bitter cacao",
     description: "Bold instant roast with a warm, nutty finish. Built for those who take it black.",
     image: "/images/roasted-hazelnut.png",
-    badge: "Most Popular",
+    badge: "Out of Stock",
   },
   {
     id: "vanilla",
@@ -33,7 +36,7 @@ export const FLAVORS = [
     notes: "Bourbon vanilla · Cream",
     description: "Soft, rounded, and aromatic instant blend. A gentler cup for long, quiet mornings.",
     image: "/images/vanilla.png",
-    badge: null,
+    badge: "Out of Stock",
   },
   {
     id: "caramel",
@@ -41,7 +44,7 @@ export const FLAVORS = [
     notes: "Burnt sugar · Warm butter",
     description: "Slow-cooked caramel notes folded into instant robusta.",
     image: "/images/caramel.png",
-    badge: null,
+    badge: "Out of Stock",
   },
 ] as const;
 
@@ -59,7 +62,7 @@ export const SKUS = [
     servings: 30,
     pricePaise: 139900,
     image: "/images/original-blend.png",
-    badge: null,
+    badge: "Out of Stock",
   },
   {
     id: "hazelnut-250",
@@ -70,7 +73,7 @@ export const SKUS = [
     servings: 30,
     pricePaise: 139900,
     image: "/images/roasted-hazelnut.png",
-    badge: "Most Popular",
+    badge: "Out of Stock",
   },
   {
     id: "vanilla-250",
@@ -81,7 +84,7 @@ export const SKUS = [
     servings: 30,
     pricePaise: 139900,
     image: "/images/vanilla.png",
-    badge: null,
+    badge: "Out of Stock",
   },
   {
     id: "caramel-250",
@@ -92,7 +95,7 @@ export const SKUS = [
     servings: 30,
     pricePaise: 139900,
     image: "/images/caramel.png",
-    badge: null,
+    badge: "Out of Stock",
   },
   // 50g packs — ₹399
   {
@@ -104,7 +107,7 @@ export const SKUS = [
     servings: 6,
     pricePaise: 39900,
     image: "/images/original-blend.png",
-    badge: "New · 50g",
+    badge: "Out of Stock",
   },
   {
     id: "hazelnut-50",
@@ -115,7 +118,7 @@ export const SKUS = [
     servings: 6,
     pricePaise: 39900,
     image: "/images/roasted-hazelnut.png",
-    badge: "New · 50g",
+    badge: "Out of Stock",
   },
   {
     id: "vanilla-50",
@@ -126,7 +129,7 @@ export const SKUS = [
     servings: 6,
     pricePaise: 39900,
     image: "/images/vanilla.png",
-    badge: "New · 50g",
+    badge: "Out of Stock",
   },
   {
     id: "caramel-50",
@@ -137,7 +140,7 @@ export const SKUS = [
     servings: 6,
     pricePaise: 39900,
     image: "/images/caramel.png",
-    badge: "New · 50g",
+    badge: "Out of Stock",
   },
   // Bundle — one SKU that ships two 250g packs
   {
@@ -149,7 +152,7 @@ export const SKUS = [
     servings: 60,
     pricePaise: 279800,
     image: "/images/all-4-sku.jpeg",
-    badge: "Bundle",
+    badge: "Out of Stock",
   },
 ] as const;
 
